@@ -1,16 +1,349 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="refresh" content="300"><title>KalshiBot Daily</title><style>:root{color-scheme:light dark}body{margin:0;padding:20px;background:#f6f7f9;color:#1c2733;font:14px/1.5 ui-monospace,"Cascadia Mono",Consolas,monospace}@media (prefers-color-scheme:dark){body{background:#14181d;color:#d5dce3}.card{background:#1c2229!important;border-color:#2b333c!important}.hd{color:#8fa3b5!important}}.card{background:#fff;border:1px solid #dde3e9;border-radius:10px;padding:18px 20px;max-width:720px;margin:0 auto}.hd{font-size:12px;letter-spacing:.08em;color:#5b6b7a;text-transform:uppercase;margin-bottom:10px}pre{margin:0;white-space:pre-wrap;word-break:break-word}.warn{color:#c0392b;font-weight:600}.pos{color:#1e7e46}.notes{margin-top:12px;padding-top:10px;border-top:1px solid #dde3e9;font-size:13px}.stamp{max-width:720px;margin:8px auto 0;font-size:11px;color:#8fa3b5;text-align:right}</style></head><body><div class="card"><div class="hd">KalshiBot &middot; morning digest</div><pre>KALSHIBOT DAILY SUMMARY  2026-08-08 05:01Z
-EQUITY $823.13 (cash $696.46)  <span class="warn">day -2.60</span> vs start 825.73
-POSITIONS (6):
-  KXETH-26AUG0817-B1920  -146
-  KXRANKLISTGOOGLESEARCH-26DEC-DON  -43
-  KXRANKLISTGOOGLESEARCH-26DEC-TAY  -10.75
-  KXRANKLISTGOOGLESEARCH-26DEC-BAD  -43
-  KXCPICORE-26JUL-T0.0  -154
-  KXCPI-26JUL-T-0.1  -35
-FILLS 24h: maker:1 ($34.96)  crypto:1 ($30.66)
-CLOSES 24h: no_thesis:1
-<span class="warn">WARN 24h: XMARKET_SLUG_MISMATCH:2</span>
-gate-skips 24h: CORRELATION_CAP:176  HELD_BUCKET_SKIP:30
-REPORTS: arb: 40 findings, 0.0h old | xmkt: 72 findings, 0.0h old | sports: 0 findings, 1.0h old
-         macro: 2 findings, 0.0h old | crypto: 4 findings, 0.0h old | gas: 2 findings, 0.0h old
-POSTURE: dry_run=False | crypto=LIVE(t_df=5 cap$75) | macro=LIVE cap$15 | gas=shadow | arb=shadow | weather=retired | maker=on</pre><div class="notes">&#9888; WARN tags present in last 24h - see WARN line above</div></div><div class="stamp">rendered 2026-08-08 05:23Z &middot; source 0.4h old at render</div></body></html>
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="300">
+<title>KalshiBot — Dashboard</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page:#f9f9f7; --surface:#fcfcfb;
+    --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
+    --grid:#e1e0d9; --baseline:#c3c2b7; --ring:rgba(11,11,11,0.10);
+    --s1:#2a78d6; --s2:#eb6834;
+    --pos:#2a78d6; --neg:#e34948;
+    --good-text:#006300; --crit:#d03b3b; --warn:#fab219;
+    --track:#cde2fb;
+    --live-bg:#e3f0e3; --live-tx:#006300;
+    --shadow-bg:#fdf3d9; --shadow-tx:#8a6100;
+    --res-bg:#e5eefb;  --res-tx:#1b5fb0;
+    --ret-bg:#ececea;  --ret-tx:#6b6a66;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --page:#0d0d0d; --surface:#1a1a19;
+      --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+      --grid:#2c2c2a; --baseline:#383835; --ring:rgba(255,255,255,0.10);
+      --s1:#3987e5; --s2:#d95926;
+      --pos:#3987e5; --neg:#e66767;
+      --good-text:#0ca30c;
+      --track:#184f95;
+      --live-bg:#123312; --live-tx:#5fd35f;
+      --shadow-bg:#3a2f0d; --shadow-tx:#f2c14e;
+      --res-bg:#12253f;  --res-tx:#6aa5ec;
+      --ret-bg:#262624;  --ret-tx:#a09e97;
+    }
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--page); color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:14px; line-height:1.45; padding:20px;
+  }
+  h1 { font-size:20px; font-weight:650; margin:0 0 2px; }
+  .sub { color:var(--ink-2); font-size:12.5px; margin-bottom:18px; }
+  h2 { font-size:15px; font-weight:600; margin:0 0 2px; }
+  .card-sub { color:var(--ink-2); font-size:12px; margin-bottom:12px; }
+  .card {
+    background:var(--surface); border:1px solid var(--ring);
+    border-radius:10px; padding:16px 18px; margin-bottom:16px;
+  }
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(148px,1fr)); gap:12px; margin-bottom:16px; }
+  .tile { background:var(--surface); border:1px solid var(--ring); border-radius:10px; padding:12px 14px; }
+  .tile .lbl { color:var(--ink-2); font-size:12px; }
+  .tile .val { font-size:26px; font-weight:600; margin-top:2px; }
+  .tile .d { font-size:12px; color:var(--muted); margin-top:2px; }
+  .neg-v { color:var(--crit); } .pos-v { color:var(--good-text); }
+  table { border-collapse:collapse; width:100%; font-size:12.5px; }
+  th { text-align:left; color:var(--muted); font-weight:500; border-bottom:1px solid var(--grid); padding:4px 8px 4px 0; white-space:nowrap; }
+  td { padding:5px 8px 5px 0; border-bottom:1px solid var(--grid); vertical-align:top; }
+  td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  tr:last-child td { border-bottom:none; }
+  .mono { font-family:ui-monospace,Consolas,monospace; font-size:11.5px; }
+  .pill { display:inline-block; font-size:10.5px; padding:1px 7px; border-radius:99px; border:1px solid var(--ring); color:var(--ink-2); white-space:nowrap; }
+  .st { display:inline-block; font-size:10.5px; font-weight:600; padding:2px 9px; border-radius:99px; white-space:nowrap; letter-spacing:.02em; }
+  .st-live   { background:var(--live-bg);   color:var(--live-tx); }
+  .st-shadow { background:var(--shadow-bg); color:var(--shadow-tx); }
+  .st-res    { background:var(--res-bg);    color:var(--res-tx); }
+  .st-ret    { background:var(--ret-bg);    color:var(--ret-tx); }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:900px){ .grid2 { grid-template-columns:1fr; } }
+  svg text { font-family:inherit; }
+  .legend { display:flex; gap:16px; font-size:12px; color:var(--ink-2); margin:2px 0 8px; }
+  .legend .k { display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:5px; vertical-align:-1px; }
+  .meter { height:14px; border-radius:7px; background:var(--track); overflow:hidden; position:relative; }
+  .meter > div { height:100%; background:var(--s1); border-radius:7px 0 0 7px; }
+  .tick { position:absolute; top:-4px; width:2px; height:22px; background:var(--ink-2); }
+  #tip { position:fixed; pointer-events:none; background:var(--surface); color:var(--ink);
+         border:1px solid var(--ring); border-radius:8px; padding:7px 10px; font-size:12px;
+         box-shadow:0 4px 14px rgba(0,0,0,.15); display:none; z-index:10; max-width:320px; }
+  details summary { cursor:pointer; color:var(--ink-2); font-size:12.5px; margin-top:8px; }
+  .note { color:var(--muted); font-size:11.5px; margin-top:10px; }
+  .flag-help { color:var(--good-text); font-weight:600; }
+  .flag-warn { color:var(--crit); font-weight:600; }
+  .divider { margin:26px 0 14px; color:var(--muted); font-size:11.5px; text-transform:uppercase; letter-spacing:.08em; border-bottom:1px solid var(--grid); padding-bottom:4px; }
+</style>
+</head>
+<body>
+<div id="tip"></div>
+
+<h1>KalshiBot — Dashboard <span style="font-size:12px;font-weight:400;margin-left:10px"><a href="digest.html" style="color:var(--s1)">morning digest →</a></span></h1>
+<div class="sub" id="sub"></div>
+
+<!-- ============ 1. EXECUTIVE SUMMARY: strategy scoreboard ============ -->
+<div class="card">
+  <h2>Strategies — where the bot is hunting an edge</h2>
+  <div class="card-sub">Every edge being worked — Kalshi bot strategies AND the sportsbook program — with its one-line thesis, current stage, and returns ("YTD" = life-to-date this year; bot live 2026-07-21, sportsbook program 2026-07-26).</div>
+  <div style="overflow-x:auto"><table id="stratTable">
+    <thead><tr><th>Market / strategy</th><th>Edge thesis</th><th>Status</th><th class="num">YTD return</th></tr></thead>
+    <tbody></tbody>
+  </table></div>
+  <div class="note" id="stratNote"></div>
+</div>
+
+<!-- ============ 2. OPEN POSITIONS ============ -->
+<div class="card">
+  <h2>Open positions</h2>
+  <div style="overflow-x:auto"><table id="openTable">
+    <thead><tr><th>Market</th><th>Position</th><th class="num">Cost basis</th><th class="num">Live edge</th><th class="num">Unrealized</th><th>Thesis / exit plan</th></tr></thead>
+    <tbody></tbody>
+  </table></div>
+</div>
+
+<!-- ============ 3. RECENT TRANSACTIONS ============ -->
+<div class="card">
+  <h2>Last 20 transactions</h2>
+  <div class="card-sub">Most recent first. All fills are IOC limit orders; "buy NO @ p" is executed as sell-YES at 1−p.</div>
+  <div style="overflow-x:auto"><table id="txTable">
+    <thead><tr><th>When (UTC)</th><th>Market</th><th>Action</th><th class="num">Qty</th><th class="num">Price</th><th>Why</th></tr></thead>
+    <tbody></tbody>
+  </table></div>
+</div>
+
+<div class="divider">Detail — performance, filters &amp; validation</div>
+
+<div class="kpis" id="kpis"></div>
+
+<div class="card">
+  <h2>Position history &amp; realized P&amp;L</h2>
+  <div class="card-sub">Every live fill, grouped into position episodes. Bars show realized P&amp;L per closed/settled episode.</div>
+  <div id="pnlChart"></div>
+  <details><summary>All episodes (table)</summary>
+  <div style="overflow-x:auto"><table id="posTable">
+    <thead><tr><th>Market</th><th>Side</th><th class="num">Size</th><th class="num">Entry</th><th>Exit</th><th class="num">P&amp;L</th><th>Source</th></tr></thead>
+    <tbody></tbody>
+  </table></div></details>
+  <div class="note">External rows are pre-bot manual positions the bot closed — entry cost pre-dates the ledger, so their P&amp;L is unknowable and they're excluded from totals. * = open position, mark-to-market.</div>
+</div>
+
+<div class="grid2">
+<div class="card">
+  <h2>Considered but skipped — latest cycle</h2>
+  <div class="card-sub" id="skipLatestSub"></div>
+  <div style="overflow-x:auto"><table id="skipTable">
+    <thead><tr><th>Candidate</th><th class="num">Edge</th><th>Why skipped</th></tr></thead>
+    <tbody></tbody>
+  </table></div>
+</div>
+<div class="card">
+  <h2>Skip reasons — all history</h2>
+  <div class="card-sub" id="skipHistSub"></div>
+  <div id="skipChart"></div>
+  <div class="note" id="skipNote"></div>
+</div>
+</div>
+
+<div class="card">
+  <h2>Shadow environment vs live</h2>
+  <div class="card-sub">Every logged signal scored against actual settlements, as if bought 1 contract at ask (fees included). Weather / crypto / macro are shadow-only strategies; xmarket is live-gated.</div>
+  <div class="legend"><span><span class="k" style="background:var(--s1)"></span>Model-predicted win rate</span><span><span class="k" style="background:var(--s2)"></span>Realized win rate</span></div>
+  <div id="shadowChart"></div>
+  <div style="overflow-x:auto; margin-top:10px"><table id="shadowTable">
+    <thead><tr><th>Source</th><th class="num">Signals</th><th class="num">Settled</th><th class="num">Predicted</th><th class="num">Realized</th><th class="num">Brier</th><th class="num">P&amp;L / contract</th><th>Verdict</th></tr></thead>
+    <tbody></tbody>
+  </table></div>
+  <div class="note" id="filterNote"></div>
+</div>
+
+
+<div class="note" id="genNote"></div>
+
+<script>
+const DATA = {"sub": "Auto-generated <b>2026-08-08 05:35Z</b> · equity <b>$823.13</b> (cash $696.46) day -2.60 vs start $825.73 · live since 2026-07-21 · net deposits $490 · regenerates every bot cycle (~hourly); page self-refreshes every 5 min.", "strategies": [{"name": "Internal arbitrage", "sub": "baskets, crossed books, ladder dominance", "thesis": "Sets of mutually-exclusive Kalshi contracts priced to pay out more than they cost — a riskless lock when every leg fills.", "st": "shadow", "ytd": -10.89, "ytdNote": "4 closed (1W-3L) · moved to shadow after partial-fill episodes; unwind path fixed, screener still runs every cycle (as of 8/8)"}, {"name": "Cross-market vs Polymarket", "sub": "“xmarket” — whitelist-gated", "thesis": "Buy Kalshi when a rules-verified, whitelisted event trades ≥3c cheaper than Polymarket after fees.", "st": "live", "ytd": -14.1, "ytdNote": "11 closed (3W-8L) · TIME whitelist-removal exits drove the early loss; maker execution now handles entries where possible (as of 8/8)"}, {"name": "Sports vs sportsbook consensus", "sub": "game winners + 15-min news bursts", "thesis": "Kalshi game-winner prices vs devigged Pinnacle/median book fair value; bursts hunt slow repricing on pregame injury news.", "st": "live", "ytd": 58.3, "ytdNote": "2 closed (2W-0L) · burst challenge retired 8/4 (decision made); burst trading and tagging continue"}, {"name": "Crypto — BTC/ETH buckets", "sub": "Student-t vol model (v2), v3 blend in shadow", "thesis": "Variance-matched Student-t (df=5) from realized hourly vol vs Kalshi price buckets; edge hunted in mispriced tails.", "st": "live", "ytd": 28.19, "ytdNote": "13 closed (9W-4L) · live under stake cap; v2 tail-shape shipped 8/6, v3 blended-vol logging in shadow since 8/7"}, {"name": "CPI — monthly inflation ladders", "sub": "Cleveland Fed nowcast", "thesis": "Nowcast ± its error history vs Kalshi's ‘above X%’ CPI ladders inside 12 days of release.", "st": "live", "ytdS": "—", "ytdNote": "LIVE 8/4 on offline walk-forward validation only — $15 probation cap until settled live signals exist"}, {"name": "Gas prices — AAA national average", "sub": "sigma-scaled drift model", "thesis": "AAA national gas-price scrape vs Kalshi gas ladders; damped drift + horizon-scaled sigma prices each bucket.", "st": "shadow", "ytdS": "—", "ytdNote": "shadow — accruing signals toward the standard go-live bar (≥40 settled, realized ≥ predicted, positive net)"}, {"name": "Sportsbook promo conversion", "sub": "6 Ohio books · manual execution", "thesis": "Claim bonus bets / profit boosts at one book and hedge the opposite side at another (or on Kalshi) — locks 50–75% of promo face value regardless of outcome.", "st": "live", "ytd": 25.0, "ytdNote": "manual program — this dashboard can't see its ledger; last recorded +$25 (7/27). Promo-sweep scheduled task is currently paused"}, {"name": "Kalshi vs sportsbook two-sided arb", "sub": "per-book lines, detector to build", "thesis": "When Kalshi and a book price opposite sides of the same game under $1 combined, take both and lock the spread — true riskless arb, alerted for manual execution.", "st": "research", "ytdS": "—", "ytdNote": "detector build queued: reuses Odds API per-book lines the sports scanner already fetches"}, {"name": "Weather — daily high temp", "sub": "NWS-anchored ensemble, 7 cities", "thesis": "Shift an 82-member forecast ensemble onto the NWS point forecast; fair value = member mass in each temperature bucket.", "st": "retired", "ytdS": "—", "ytdNote": "RETIRED 8/4 at n=342 settled: realized 14pp under predicted at ~5 SE — structural overconfidence, not sample size. Revival requires a horizon-dependent-sigma rebuild scored on new signals"}, {"name": "Retail-bias harvesting", "sub": "calibration study → strategy #7", "thesis": "Measure the crowd's standing mispricings across ~140k settled markets — trade the bias if it clears fees.", "st": "retired", "ytdS": "—", "ytdNote": "collector finished (90,932 processed); hypothesis #7 tested and killed — “measure the wager, not the statistic”"}, {"name": "Situational-bias backlog", "sub": "16 pre-registered hypotheses", "thesis": "Snow-game totals, bullpen fatigue, Kalshi retail clock &amp; 13 more — each must beat closing lines out-of-sample before shadow mode.", "st": "research", "ytdS": "—", "ytdNote": "6 of 16 hypotheses dead so far; “would the closing line stay wrong” is the bar"}, {"name": "Full-field basket sell", "sub": "screener kept as tripwire", "thesis": "Sell every leg of a mutually-exclusive field when combined NO prices lock a profit — verdict: fields pinned at the fee boundary, no edge.", "st": "retired", "ytdS": "—", "ytdNote": "tested 7/25, dead on arrival; screener still watches hourly for free"}], "stratNote": "Numbers on this page are computed live from the ledger every cycle; the thesis and note text is curated in dashboard_content.json (edit there). Maker-side execution (post_only resting quotes, near-zero fees) is enabled and its fills are included in episode P&L. Shadow rows show model P&L per 1-contract signal — no real money at risk.", "open": [{"mkt": "KXRANKLISTGOOGLESEARCH-26DEC-BAD", "full": "", "pos": "NO × 43", "basis": "0.84", "edge": "8.1c entry", "unreal": -0.4, "plan": "Whitelist-gated Polymarket-gap entry — closer exits on 2-cycle edge decay or whitelist break."}, {"mkt": "KXCPI-26JUL-T-0.1", "full": "", "pos": "NO × 35", "basis": "0.09", "edge": "6.7c entry", "unreal": 0.5, "plan": "CPI nowcast-band entry under the $15 probation cap — held to release/settlement."}, {"mkt": "KXCPICORE-26JUL-T0.0", "full": "", "pos": "NO × 154", "basis": "0.09", "edge": "6.7c entry", "unreal": -7.04, "plan": "CPI nowcast-band entry under the $15 probation cap — held to release/settlement."}, {"mkt": "KXRANKLISTGOOGLESEARCH-26DEC-DON", "full": "", "pos": "NO × 43", "basis": "0.87", "edge": "5.5c entry", "unreal": 0.86, "plan": "Whitelist-gated Polymarket-gap entry — closer exits on 2-cycle edge decay or whitelist break."}, {"mkt": "KXETH-26AUG0817-B1920", "full": "", "pos": "NO × 146", "basis": "0.21", "edge": "13.0c entry", "unreal": -11.91, "plan": "Vol-model entry under the live stake cap — held to settlement (short-dated buckets), correlation-capped 1/underlying/day."}], "tx": [{"ts": "08-08 04:01", "mkt": "KXETH-26AUG0817-B1920", "act": "Buy NO", "qty": 146.0, "px": "0.21", "why": "crypto edge=0.1297 conf=1.0 requoted"}, {"ts": "08-08 04:01", "mkt": "KXRANKLISTGOOGLESE…26DEC-TAY", "act": "Buy NO", "qty": 38.0, "px": "0.92", "why": "xmarket edge=0.041 conf=1.0 maker"}, {"ts": "08-08 04:01", "mkt": "KXRANKLISTGOOGLESE…26DEC-TAY", "act": "Buy YES (close)", "qty": 27.2, "px": "0.07", "why": "CLOSE:no_thesis"}, {"ts": "08-05 23:00", "mkt": "KXRANKLISTGOOGLESE…26DEC-DON", "act": "Buy NO", "qty": 43.0, "px": "0.87", "why": "xmarket edge=0.0552 conf=1.0 maker"}, {"ts": "08-05 18:00", "mkt": "KXRANKLISTGOOGLESE…26DEC-DON", "act": "Buy YES (close)", "qty": 39.0, "px": "0.10", "why": "CLOSE:edge_decay"}, {"ts": "08-05 07:00", "mkt": "KXETH-26AUG0517-B1870", "act": "Buy YES", "qty": 38.0, "px": "0.50", "why": "crypto edge=0.0502 conf=1.0 requoted"}, {"ts": "08-04 15:01", "mkt": "KXCPICORE-26JUL-T0.0", "act": "Buy NO", "qty": 154.0, "px": "0.09", "why": "macro edge=0.0667 conf=1.0 requoted"}, {"ts": "08-04 14:29", "mkt": "KXCPI-26JUL-T-0.1", "act": "Buy NO", "qty": 35.0, "px": "0.09", "why": "macro edge=0.0667 conf=1.0 requoted"}, {"ts": "08-04 09:01", "mkt": "KXETH-26AUG0417-B1860", "act": "Buy YES", "qty": 1.0, "px": "0.49", "why": "crypto edge=0.0516 conf=1.0 requoted"}, {"ts": "08-02 23:00", "mkt": "KXBTCD-26AUG0317-T62249.99", "act": "Buy YES", "qty": 11.0, "px": "0.84", "why": "crypto edge=0.0796 conf=1.0 requoted"}, {"ts": "08-02 23:00", "mkt": "KXETH-26AUG0317-B1870", "act": "Buy YES", "qty": 1.0, "px": "0.33", "why": "crypto edge=0.13 conf=1.0 requoted"}, {"ts": "08-02 21:01", "mkt": "KXBTCD-26AUG0717-T60999.99", "act": "Buy YES", "qty": 11.0, "px": "0.86", "why": "crypto edge=0.0536 conf=1.0 requoted"}, {"ts": "08-02 21:01", "mkt": "KXETHD-26AUG0717-T1769.99", "act": "Buy YES", "qty": 11.0, "px": "0.87", "why": "crypto edge=0.0685 conf=1.0 requoted"}, {"ts": "08-02 11:01", "mkt": "KXRANKLISTGOOGLESE…26DEC-ERL", "act": "Buy YES (close)", "qty": 0.7, "px": "0.09", "why": "CLOSE:edge_decay"}, {"ts": "08-02 10:00", "mkt": "KXRANKLISTGOOGLESE…26DEC-ERL", "act": "Buy YES (close)", "qty": 19.1, "px": "0.09", "why": "CLOSE:edge_decay"}, {"ts": "08-02 09:01", "mkt": "KXRANKLISTGOOGLESE…26DEC-ERL", "act": "Buy YES (close)", "qty": 22.2, "px": "0.09", "why": "CLOSE:edge_decay"}, {"ts": "08-02 07:01", "mkt": "KXRANKLISTGOOGLESE…26DEC-ERL", "act": "Buy NO", "qty": 42.0, "px": "0.91", "why": "xmarket edge=0.0581 conf=0.833 maker"}, {"ts": "07-31 16:00", "mkt": "KXWHUNDREDMATCH-26…REMAN-TRE", "act": "Buy YES (unwind)", "qty": 33.0, "px": "0.91", "why": "ARB_UNWIND"}, {"ts": "07-31 16:00", "mkt": "KXWHUNDREDMATCH-26…REMAN-TRE", "act": "Buy NO", "qty": 33.0, "px": "0.10", "why": "arb:no_basket edge=0.04"}, {"ts": "07-31 14:01", "mkt": "KXRANKLISTGOOGLESE…26DEC-DON", "act": "Buy NO", "qty": 3.7, "px": "0.87", "why": "xmarket edge=0.0575 conf=1.0 maker"}], "kpis": {"realized": 61.51, "winRate": 0.5, "wins": 15, "closed": 30, "openUnreal": -18.0, "openCount": 5, "fees": 18.18, "avgEdge": 5.7, "equity": 823.13, "equityDay": "day -2.60 vs start $825.73"}, "episodes": [{"t": "KXRANKLISTGOOGLESE…26DEC-DON", "full": "KXRANKLISTGOOGLESEARCH-26DEC-DON", "side": "no", "size": 13.0, "entry": 0.85, "exit": "closed @ 0.86", "pnl": -0.09, "src": "xmarket", "st": "closed"}, {"t": "KXRANKLISTGOOGLESE…26DEC-BAD", "full": "KXRANKLISTGOOGLESEARCH-26DEC-BAD", "side": "no", "size": 13.0, "entry": 0.82, "exit": "closed @ 0.84", "pnl": 0.0, "src": "xmarket", "st": "closed"}, {"t": "KXF1-26-LH", "full": "KXF1-26-LH", "side": "no", "size": 13.0, "entry": 0.85, "exit": "closed @ 0.85", "pnl": -0.23, "src": "xmarket", "st": "closed"}, {"t": "KXRANKLISTGOOGLESE…26DEC-ERL", "full": "KXRANKLISTGOOGLESEARCH-26DEC-ERL", "side": "yes", "size": 80.0, "entry": 0.04, "exit": "closed @ 0.06", "pnl": 1.08, "src": "xmarket", "st": "closed"}, {"t": "KXTIME-26-MAR", "full": "KXTIME-26-MAR", "side": "yes", "size": 201.0, "entry": 0.05, "exit": "closed @ 0.02", "pnl": -6.22, "src": "xmarket", "st": "closed"}, {"t": "KXTIME-26-BAD", "full": "KXTIME-26-BAD", "side": "yes", "size": 199.0, "entry": 0.04, "exit": "closed @ 0.03", "pnl": -2.91, "src": "xmarket", "st": "closed"}, {"t": "KXCLUBFGAME-26JUL22NAPARE-ARE", "full": "KXCLUBFGAME-26JUL22NAPARE-ARE", "side": "no", "size": 18.0, "entry": 0.66, "exit": "settled YES (LOSS)", "pnl": -12.16, "src": "arb:no_basket", "st": "settled"}, {"t": "KXTIME-26-ALY", "full": "KXTIME-26-ALY", "side": "yes", "size": 242.0, "entry": 0.04, "exit": "closed @ 0.03", "pnl": -3.99, "src": "xmarket", "st": "closed"}, {"t": "KXTIME-26-JP", "full": "KXTIME-26-JP", "side": "yes", "size": 116.0, "entry": 0.05, "exit": "closed @ 0.04", "pnl": -1.84, "src": "xmarket", "st": "closed"}, {"t": "KXRANKLISTGOOGLESE…26DEC-ERL #2", "full": "KXRANKLISTGOOGLESEARCH-26DEC-ERL", "side": "yes", "size": 65.0, "entry": 0.07, "exit": "closed @ 0.07", "pnl": -0.59, "src": "xmarket", "st": "closed"}, {"t": "KXRANKLISTGOOGLESE…26DEC-BAD #2", "full": "KXRANKLISTGOOGLESEARCH-26DEC-BAD", "side": "no", "size": 43.0, "entry": 0.84, "exit": "open (mark 0.16)", "pnl": -0.4, "src": "xmarket", "st": "open"}, {"t": "KXCLUBFGAME-26JUL24LINFAV-LIN", "full": "KXCLUBFGAME-26JUL24LINFAV-LIN", "side": "no", "size": 17.0, "entry": 0.82, "exit": "settled NO (WIN)", "pnl": 2.82, "src": "arb:no_basket", "st": "settled"}, {"t": "KXMLBGAME-26JUL281…LECIN-CLE", "full": "KXMLBGAME-26JUL281910CLECIN-CLE", "side": "no", "size": 58.0, "entry": 0.48, "exit": "settled NO (WIN)", "pnl": 29.15, "src": "sports+burst", "st": "settled"}, {"t": "KXMLBGAME-26JUL281…LECIN-CIN", "full": "KXMLBGAME-26JUL281910CLECIN-CIN", "side": "yes", "size": 58.0, "entry": 0.48, "exit": "settled YES (WIN)", "pnl": 29.15, "src": "sports+burst", "st": "settled"}, {"t": "KXBTCD-26JUL2917-T64749.99", "full": "KXBTCD-26JUL2917-T64749.99", "side": "no", "size": 20.0, "entry": 0.83, "exit": "settled NO (WIN)", "pnl": 3.2, "src": "crypto", "st": "settled"}, {"t": "KXBTCD-26JUL2917-T62999.99", "full": "KXBTCD-26JUL2917-T62999.99", "side": "yes", "size": 41.0, "entry": 0.9, "exit": "settled YES (WIN)", "pnl": 3.84, "src": "crypto", "st": "settled"}, {"t": "KXSILVERH-26JUL2908-T57.999", "full": "KXSILVERH-26JUL2908-T57.999", "side": "yes", "size": 36.0, "entry": 0.03, "exit": "closed @ 0.01", "pnl": -0.81, "src": "arb:dominance", "st": "closed"}, {"t": "KXETHD-26JUL3117-T1849.99", "full": "KXETHD-26JUL3117-T1849.99", "side": "no", "size": 73.0, "entry": 0.17, "exit": "settled YES (LOSS)", "pnl": -13.13, "src": "crypto", "st": "settled"}, {"t": "KXETH-26JUL3017-B1920", "full": "KXETH-26JUL3017-B1920", "side": "no", "size": 61.0, "entry": 0.61, "exit": "settled YES (LOSS)", "pnl": -38.22, "src": "crypto", "st": "settled"}, {"t": "KXBTCD-26JUL3117-T62999.99", "full": "KXBTCD-26JUL3117-T62999.99", "side": "no", "size": 77.0, "entry": 0.17, "exit": "settled NO (WIN)", "pnl": 63.16, "src": "crypto", "st": "settled"}, {"t": "KXBTCD-26JUL3117-T63499.99", "full": "KXBTCD-26JUL3117-T63499.99", "side": "no", "size": 49.0, "entry": 0.27, "exit": "settled NO (WIN)", "pnl": 35.1, "src": "crypto", "st": "settled"}, {"t": "KXBTCD-26JUL3117-T65999.99", "full": "KXBTCD-26JUL3117-T65999.99", "side": "yes", "size": 65.0, "entry": 0.17, "exit": "settled NO (LOSS)", "pnl": -11.69, "src": "crypto", "st": "settled"}, {"t": "KXRANKLISTGOOGLESE…26DEC-DON #2", "full": "KXRANKLISTGOOGLESEARCH-26DEC-DON", "side": "no", "size": 39.0, "entry": 0.87, "exit": "closed @ 0.90", "pnl": 0.92, "src": "xmarket", "st": "closed"}, {"t": "KXWHUNDREDMATCH-26…REMAN-TRE", "full": "KXWHUNDREDMATCH-26JUL311000TREMAN-TRE", "side": "no", "size": 33.0, "entry": 0.1, "exit": "closed @ 0.09", "pnl": -0.73, "src": "arb:no_basket", "st": "closed"}, {"t": "KXRANKLISTGOOGLESE…26DEC-ERL #3", "full": "KXRANKLISTGOOGLESEARCH-26DEC-ERL", "side": "no", "size": 42.0, "entry": 0.91, "exit": "closed @ 0.91", "pnl": -0.24, "src": "xmarket", "st": "closed"}, {"t": "KXETHD-26AUG0717-T1769.99", "full": "KXETHD-26AUG0717-T1769.99", "side": "yes", "size": 11.0, "entry": 0.87, "exit": "settled YES (WIN)", "pnl": 1.34, "src": "crypto", "st": "settled"}, {"t": "KXBTCD-26AUG0717-T60999.99", "full": "KXBTCD-26AUG0717-T60999.99", "side": "yes", "size": 11.0, "entry": 0.86, "exit": "settled YES (WIN)", "pnl": 1.45, "src": "crypto", "st": "settled"}, {"t": "KXETH-26AUG0317-B1870", "full": "KXETH-26AUG0317-B1870", "side": "yes", "size": 1.0, "entry": 0.33, "exit": "settled YES (WIN)", "pnl": 0.65, "src": "crypto", "st": "settled"}, {"t": "KXBTCD-26AUG0317-T62249.99", "full": "KXBTCD-26AUG0317-T62249.99", "side": "yes", "size": 11.0, "entry": 0.84, "exit": "settled YES (WIN)", "pnl": 1.66, "src": "crypto", "st": "settled"}, {"t": "KXETH-26AUG0417-B1860", "full": "KXETH-26AUG0417-B1860", "side": "yes", "size": 1.0, "entry": 0.49, "exit": "settled YES (WIN)", "pnl": 0.49, "src": "crypto", "st": "settled"}, {"t": "KXCPI-26JUL-T-0.1", "full": "KXCPI-26JUL-T-0.1", "side": "no", "size": 35.0, "entry": 0.09, "exit": "open (mark 0.89)", "pnl": 0.5, "src": "macro", "st": "open"}, {"t": "KXCPICORE-26JUL-T0.0", "full": "KXCPICORE-26JUL-T0.0", "side": "no", "size": 154.0, "entry": 0.09, "exit": "open (mark 0.95)", "pnl": -7.04, "src": "macro", "st": "open"}, {"t": "KXETH-26AUG0517-B1870", "full": "KXETH-26AUG0517-B1870", "side": "yes", "size": 38.0, "entry": 0.5, "exit": "settled NO (LOSS)", "pnl": -19.66, "src": "crypto", "st": "settled"}, {"t": "KXRANKLISTGOOGLESE…26DEC-DON #3", "full": "KXRANKLISTGOOGLESEARCH-26DEC-DON", "side": "no", "size": 43.0, "entry": 0.87, "exit": "open (mark 0.11)", "pnl": 0.86, "src": "xmarket", "st": "open"}, {"t": "KXETH-26AUG0817-B1920", "full": "KXETH-26AUG0817-B1920", "side": "no", "size": 146.0, "entry": 0.21, "exit": "open (mark 0.86)", "pnl": -11.91, "src": "crypto", "st": "open"}], "external": [{"t": "TESLACEOCHANGE-26", "exit": "open", "cash": -5.25}, {"t": "TESLAOPTIMUS-26DEC31", "exit": "open", "cash": 5.17}, {"t": "KXALIENS-27", "exit": "open", "cash": 0.96}, {"t": "KXRANKLISTGOOGLESE…26DEC-TAY", "exit": "open", "cash": 1.01}], "skipLatest": [{"t": "KXCPIYOY-26JUL-T3.1", "ti": "Inflation in July 2026 (CPI YoY) | Above 3.1%", "e": 91.5, "r": "not in verified whitelist"}, {"t": "KXFLPRIMARY-10R26", "ti": "FL-10 Republican nominee?", "e": 91.0, "r": "yes_basket (never auto-traded)"}, {"t": "KXLAPRIMARY-01D26", "ti": "LA-01 Democratic nominee?", "e": 87.1, "r": "yes_basket (never auto-traded)"}, {"t": "KXLAPRIMARY-01R26", "ti": "LA-01 Republican nominee?", "e": 85.2, "r": "yes_basket (never auto-traded)"}, {"t": "KXLAPRIMARY-02D26", "ti": "LA-02 Democratic nominee?", "e": 84.6, "r": "yes_basket (never auto-traded)"}, {"t": "KXLAPRIMARY-04D26", "ti": "LA-04 Democratic nominee?", "e": 83.0, "r": "yes_basket (never auto-traded)"}, {"t": "KXLAPRIMARY-04R26", "ti": "LA-04 Republican nominee?", "e": 81.0, "r": "yes_basket (never auto-traded)"}, {"t": "KXLAPRIMARY-05D26", "ti": "LA-05 Democratic nominee?", "e": 80.1, "r": "yes_basket (never auto-traded)"}, {"t": "KXSTATE51-29", "ti": "What will be the 51st state in Trump's term?", "e": 77.6, "r": "yes_basket (never auto-traded)"}, {"t": "KXLAPRIMARY-06R26", "ti": "LA-06 Republican nominee?", "e": 76.8, "r": "yes_basket (never auto-traded)"}, {"t": "KXLAPRIMARY-03D26", "ti": "LA-03 Democratic nominee?", "e": 75.4, "r": "yes_basket (never auto-traded)"}, {"t": "KXTOPALBUM-26AUG22", "ti": "#1 on the Billboard 200 chart for the Week of Aug 22, 2026?", "e": 70.0, "r": "yes_basket (never auto-traded)"}, {"t": "KXBILLBOARDRUNNERUPALBUM-26AUG22", "ti": "#2 on the Billboard 200 chart for the Week of Aug 22, 2026?", "e": 70.0, "r": "yes_basket (never auto-traded)"}, {"t": "KXLAPRIMARY-05R26", "ti": "LA-05 Republican nominee?", "e": 67.2, "r": "yes_basket (never auto-traded)"}, {"t": "KXACQUANNOUNCEPINS-27JAN01", "ti": "Who will acquire Pinterest this year?", "e": 67.0, "r": "yes_basket (never auto-traded)"}], "skipLatestMore": 127, "skipLatestSub": "142 candidates in the latest scan reports; top of book by edge, with the first gate each one failed.", "skipHist": [{"r": "xmarket: not in verified whitelist", "n": 44982}, {"r": "arb: yes_basket (never auto-traded)", "n": 14681}, {"r": "weather: SHADOW MODE (weather_auto_trade=false)", "n": 5772}, {"r": "crypto: WOULD TRADE", "n": 2086}, {"r": "xmarket: edge # &lt; required # (time-value hurdle)", "n": 1396}, {"r": "xmarket: edge -# &lt; required #", "n": 584}, {"r": "macro: already held", "n": 192}, {"r": "macro: WOULD TRADE", "n": 155}], "skipHistSub": "70,318 candidate evaluations across every report since 2026-07-20.", "skipNote": "2,400 evaluations passed every gate (\"would trade\") across all sources; the ones still live at the next trader run became fills. 4 partial-fill warnings logged all-time — all self-healed via the unwind path.", "shadow": [{"s": "weather", "sig": 385, "settled": 385, "pend": 0, "pred": 0.463, "real": 0.314, "brier": 0.154, "ppc": -0.024, "verdict": "overconfident — predicted 46% vs realized 31%", "cls": "warn"}, {"s": "crypto", "sig": 251, "settled": 246, "pend": 5, "pred": 0.694, "real": 0.691, "brier": 0.084, "ppc": 0.066, "verdict": "tracking — realized ≥ predicted-5pp, positive P&L/ct · LIVE took 14 → realized +$28.19 on 13 closed", "cls": "help"}, {"s": "macro", "sig": 8, "settled": 0, "pend": 8, "pred": null, "real": null, "brier": null, "ppc": null, "verdict": "no settled signals yet · LIVE took 2 → realized +$0.00 on 0 closed", "cls": ""}, {"s": "sports", "sig": 2, "settled": 2, "pend": 0, "pred": 0.58, "real": 1.0, "brier": 0.176, "ppc": 0.5, "verdict": "tracking — realized ≥ predicted-5pp, positive P&L/ct · LIVE took 2 → realized +$58.30 on 2 closed", "cls": "help"}, {"s": "xmarket", "sig": 8805, "settled": 1327, "pend": 7478, "pred": 0.65, "real": 0.205, "brier": 0.39, "ppc": -0.035, "verdict": "overconfident — predicted 65% vs realized 20% · LIVE took 10 → realized -$14.10 on 11 closed", "cls": "warn"}, {"s": "gas", "sig": 10, "settled": 0, "pend": 10, "pred": null, "real": null, "brier": null, "ppc": null, "verdict": "no settled signals yet", "cls": ""}], "xmFilters": {"wlBlocked": {"sigs": 53, "settled": 16, "ppc": -0.028, "win": 0.188}, "qualityFailed": {"sigs": 8752, "settled": 1311, "ppc": -0.035, "win": 0.205}, "liveTaken": {"count": 11, "realized": -14.1}}, "genNote": "Data: ledger.jsonl (fills), reports/*.json (candidates &amp; shadow signals), settled_list.jsonl + Kalshi public API (settlements), config.json (live/shadow flags). Numbers computed by dashboard_gen.py via stats.py — generated 2026-08-08 05:35Z. Narrative notes curated in dashboard_content.json. Strictly read-only — this page never places orders."};
+
+const $ = s => document.querySelector(s);
+document.getElementById("sub").innerHTML = DATA.sub;
+document.getElementById("stratNote").innerHTML = DATA.stratNote;
+document.getElementById("skipLatestSub").innerHTML = DATA.skipLatestSub;
+document.getElementById("skipHistSub").innerHTML = DATA.skipHistSub;
+document.getElementById("skipNote").innerHTML = DATA.skipNote;
+document.getElementById("genNote").innerHTML = DATA.genNote;
+const fmt$ = v => (v<0?"-":"+") + "$" + Math.abs(v).toFixed(2);
+const tip = $("#tip");
+function showTip(ev, html){ tip.innerHTML = html; tip.style.display="block"; moveTip(ev); }
+function moveTip(ev){ const pad=14; let x=ev.clientX+pad, y=ev.clientY+pad;
+  const r=tip.getBoundingClientRect();
+  if(x+r.width>innerWidth-8) x=ev.clientX-r.width-pad;
+  if(y+r.height>innerHeight-8) y=ev.clientY-r.height-pad;
+  tip.style.left=x+"px"; tip.style.top=y+"px"; }
+function hideTip(){ tip.style.display="none"; }
+
+/* ---- 1. Strategy scoreboard ---- */
+(function(){
+  const stMap = {live:["LIVE","st-live"], shadow:["SHADOW","st-shadow"], research:["RESEARCH","st-res"], retired:["RETIRED","st-ret"]};
+  $("#stratTable tbody").innerHTML = DATA.strategies.map(s=>{
+    const [lbl,cls] = stMap[s.st];
+    let ret;
+    if (s.ytd !== undefined){
+      const c = s.ytd>0.005?"pos-v":(s.ytd<-0.005?"neg-v":"");
+      ret = `<span class="${c}"><b>${fmt$(s.ytd)}</b></span>`;
+    } else {
+      ret = `<span style="color:var(--ink-2)">${s.ytdS}</span>`;
+    }
+    return `<tr>
+      <td style="min-width:150px"><b>${s.name}</b><br><span style="color:var(--muted);font-size:11px">${s.sub}</span></td>
+      <td style="max-width:380px">${s.thesis}</td>
+      <td><span class="st ${cls}">${lbl}</span></td>
+      <td class="num">${ret}<br><span style="color:var(--muted);font-size:10.5px;white-space:normal">${s.ytdNote}</span></td>
+    </tr>`;
+  }).join("");
+})();
+
+/* ---- 2. Open positions ---- */
+(function(){
+  const rows = DATA.open.map(p=>{
+    const c = p.unreal==null? "" : (p.unreal>0.005?"pos-v":(p.unreal<-0.005?"neg-v":""));
+    const u = p.unreal==null? `<span style="color:var(--muted)">n/a</span>` : fmt$(p.unreal);
+    return `<tr><td class="mono" title="${p.full}">${p.mkt}<br><span style="color:var(--muted);font-family:system-ui">${p.full}</span></td>
+      <td><b>${p.pos}</b></td><td class="num">${p.basis}</td><td class="num">${p.edge}</td>
+      <td class="num ${c}">${u}</td><td style="max-width:320px">${p.plan}</td></tr>`;
+  }).join("");
+  $("#openTable tbody").innerHTML = rows || `<tr><td colspan="6" style="color:var(--muted)">No open positions.</td></tr>`;
+})();
+
+/* ---- 3. Transactions ---- */
+(function(){
+  $("#txTable tbody").innerHTML = DATA.tx.map(t=>{
+    const buy = t.act.startsWith("Buy");
+    return `<tr><td class="mono">${t.ts}</td><td class="mono">${t.mkt}</td>
+      <td style="color:${buy?"var(--good-text)":"var(--crit)"};font-weight:600">${t.act}</td>
+      <td class="num">${t.qty}</td><td class="num">${t.px}</td><td style="max-width:340px">${t.why}</td></tr>`;
+  }).join("");
+})();
+
+/* ---- KPI row ---- */
+const K = DATA.kpis;
+const tiles = [
+  {l:"Equity", v:"$"+K.equity.toFixed(2), c:"", d:K.equityDay},
+  {l:"Realized P&L", v:fmt$(K.realized), c:K.realized<0?"neg-v":"pos-v", d:`${K.closed} closed episodes · fees $${K.fees.toFixed(2)}`},
+  {l:"Win rate", v:K.winRate==null?"—":(K.winRate*100).toFixed(0)+"%", c:"", d:`${K.wins} of ${K.closed} closed`},
+  {l:"Average entry edge", v:K.avgEdge==null?"—":K.avgEdge.toFixed(1)+"c", c:"", d:"per entry fill, at requote"},
+  {l:"Open positions", v:fmt$(K.openUnreal)+"*", c:K.openUnreal<0?"neg-v":"pos-v", d:`${K.openCount} open · mark-to-market`}
+];
+$("#kpis").innerHTML = tiles.map(t=>
+  `<div class="tile"><div class="lbl">${t.l}</div><div class="val ${t.c}">${t.v}</div><div class="d">${t.d}</div></div>`).join("");
+
+/* ---- Positions: diverging horizontal bars ---- */
+(function(){
+  const eps = DATA.episodes.filter(e=>e.st!=="open");
+  const W=880, rowH=26, barMax=300, mid=W/2, H=eps.length*rowH+26;
+  const maxAbs = Math.max(...eps.map(e=>Math.abs(e.pnl)), 1);
+  const sc = v => v/maxAbs*barMax;
+  let s = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto" role="img" aria-label="Realized P&L per position">`;
+  s += `<line x1="${mid}" y1="6" x2="${mid}" y2="${H-18}" stroke="var(--baseline)" stroke-width="1"/>`;
+  eps.forEach((e,i)=>{
+    const y=8+i*rowH, w=Math.max(Math.abs(sc(e.pnl)),1.5), pos=e.pnl>=0;
+    const x = pos? mid : mid-w;
+    const col = pos? "var(--pos)" : "var(--neg)";
+    const rx = 4;
+    const path = pos
+      ? `M${x},${y} h${Math.max(w-rx,0)} a${rx},${rx} 0 0 1 ${rx},${rx} v${16-2*rx} a${rx},${rx} 0 0 1 -${rx},${rx} h-${Math.max(w-rx,0)} z`
+      : `M${x+w},${y} h-${Math.max(w-rx,0)} a${rx},${rx} 0 0 0 -${rx},${rx} v${16-2*rx} a${rx},${rx} 0 0 0 ${rx},${rx} h${Math.max(w-rx,0)} z`;
+    s += `<path d="${path}" fill="${col}" class="bar" data-i="${i}"/>`;
+    s += `<text x="${pos? mid-8 : mid+8}" y="${y+12.5}" text-anchor="${pos?"end":"start"}" font-size="11.5" fill="var(--ink-2)">${e.t}</text>`;
+    s += `<text x="${pos? x+w+6 : x-6}" y="${y+12.5}" text-anchor="${pos?"start":"end"}" font-size="11.5" font-weight="600" fill="var(--ink)">${fmt$(e.pnl)}</text>`;
+  });
+  s += `</svg>`;
+  $("#pnlChart").innerHTML = s;
+  $("#pnlChart").querySelectorAll(".bar").forEach(b=>{
+    const e = eps[+b.dataset.i];
+    b.addEventListener("mousemove",ev=>{showTip(ev,`<b>${e.full}</b><br>${e.side.toUpperCase()} ${e.size} @ ${e.entry.toFixed(2)} \u2014 ${e.exit}<br>P&amp;L <b>${fmt$(e.pnl)}</b> \u00b7 ${e.src}`);});
+    b.addEventListener("mouseleave",hideTip);
+  });
+  const rows = DATA.episodes.map(e=>{
+    const cls = e.pnl>0.005?"pos-v":(e.pnl<-0.005?"neg-v":"");
+    return `<tr><td class="mono" title="${e.full}">${e.t}</td><td>${e.side}</td><td class="num">${e.size}</td><td class="num">${e.entry.toFixed(2)}</td><td>${e.exit}</td><td class="num ${cls}">${fmt$(e.pnl)}${e.st==="open"?"*":""}</td><td><span class="pill">${e.src}</span></td></tr>`;
+  }).join("") + DATA.external.map(e=>
+    `<tr><td class="mono">${e.t}</td><td colspan="3" style="color:var(--muted)">pre-bot manual position</td><td>${e.exit}</td><td class="num" style="color:var(--muted)">cash ${fmt$(e.cash)}</td><td><span class="pill">external</span></td></tr>`).join("");
+  $("#posTable tbody").innerHTML = rows;
+})();
+
+/* ---- Skip table (latest cycle) ---- */
+$("#skipTable tbody").innerHTML = DATA.skipLatest.map(r=>
+  `<tr><td><span class="mono">${r.t}</span><br><span style="color:var(--muted)">${r.ti}</span></td><td class="num">${r.e.toFixed(1)}c</td><td>${r.r}</td></tr>`).join("")
+  + `<tr><td colspan="3" style="color:var(--muted)">\u2026 and ${DATA.skipLatestMore} more this cycle (see stats.py output)</td></tr>`;
+
+/* ---- Skip reasons history ---- */
+(function(){
+  const d = DATA.skipHist, W=440, rowH=40, H=d.length*rowH+4, barMax=W-58;
+  const max = Math.max(...d.map(x=>x.n));
+  let s = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto" role="img" aria-label="Skip reason counts">`;
+  d.forEach((x,i)=>{
+    const y=i*rowH, w=Math.max(x.n/max*barMax,2), rx=Math.min(4,w/2);
+    s += `<text x="0" y="${y+12}" font-size="11.5" fill="var(--ink-2)">${x.r}</text>`;
+    s += `<path d="M0,${y+17} h${Math.max(w-rx,0)} a${rx},${rx} 0 0 1 ${rx},${rx} v${14-2*rx} a${rx},${rx} 0 0 1 -${rx},${rx} h-${Math.max(w-rx,0)} z" fill="var(--s1)" class="sb" data-i="${i}"/>`;
+    s += `<text x="${w+6}" y="${y+28}" font-size="11" font-weight="600" fill="var(--ink)">${x.n.toLocaleString()}</text>`;
+  });
+  s += `</svg>`;
+  $("#skipChart").innerHTML = s;
+  $("#skipChart").querySelectorAll(".sb").forEach(b=>{
+    const x=d[+b.dataset.i];
+    b.addEventListener("mousemove",ev=>showTip(ev,`<b>${x.r}</b><br>${x.n.toLocaleString()} candidate evaluations`));
+    b.addEventListener("mouseleave",hideTip);
+  });
+})();
+
+/* ---- Shadow: grouped predicted vs realized ---- */
+(function(){
+  const d = DATA.shadow.filter(x=>x.settled>0);
+  const W=680, H=180, plotH=130, gW=W/d.length;
+  let s = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;max-width:680px" role="img" aria-label="Predicted vs realized win rate by source">`;
+  [0,25,50,75].forEach(g=>{
+    const y = 10+plotH - g/100*plotH;
+    s += `<line x1="0" y1="${y}" x2="${W}" y2="${y}" stroke="var(--grid)" stroke-width="1"/>`;
+    s += `<text x="0" y="${y-3}" font-size="10" fill="var(--muted)">${g}%</text>`;
+  });
+  d.forEach((x,i)=>{
+    const cx = i*gW+gW/2, bw=24, gap=2;
+    const bars = [[x.pred,"var(--s1)"],[x.real,"var(--s2)"]];
+    bars.forEach(([v,c],j)=>{
+      const h=Math.max(v*100/100*plotH,2), bx=cx-bw-gap/2+j*(bw+gap), y=10+plotH-h, rx=4;
+      s += `<path d="M${bx},${y+rx} a${rx},${rx} 0 0 1 ${rx},-${rx} h${bw-2*rx} a${rx},${rx} 0 0 1 ${rx},${rx} v${h-rx} h-${bw} z" fill="${c}" class="shb" data-i="${i}" data-j="${j}"/>`;
+      s += `<text x="${bx+bw/2}" y="${y-4}" text-anchor="middle" font-size="10.5" font-weight="600" fill="var(--ink)">${(v*100).toFixed(0)}%</text>`;
+    });
+    s += `<text x="${cx}" y="${10+plotH+16}" text-anchor="middle" font-size="12" fill="var(--ink-2)">${x.s}</text>`;
+    s += `<text x="${cx}" y="${10+plotH+30}" text-anchor="middle" font-size="10.5" fill="var(--muted)">${x.settled} settled \u00b7 ${fmt$(x.ppc)}/ct</text>`;
+  });
+  s += `<line x1="0" y1="${10+plotH}" x2="${W}" y2="${10+plotH}" stroke="var(--baseline)" stroke-width="1"/></svg>`;
+  $("#shadowChart").innerHTML = s;
+  $("#shadowChart").querySelectorAll(".shb").forEach(b=>{
+    const x=d[+b.dataset.i], j=+b.dataset.j;
+    b.addEventListener("mousemove",ev=>showTip(ev,`<b>${x.s}</b> \u2014 ${j? "realized":"predicted"} win rate ${((j?x.real:x.pred)*100).toFixed(1)}%<br>${x.settled} settled of ${x.sig} signals \u00b7 Brier ${x.brier.toFixed(3)}<br>P&amp;L ${fmt$(x.ppc)}/contract`));
+    b.addEventListener("mouseleave",hideTip);
+  });
+  $("#shadowTable tbody").innerHTML = DATA.shadow.map(x=>{
+    const p = v => v==null? "\u2014" : (v*100).toFixed(1)+"%";
+    const vcls = x.cls==="help"?"flag-help":(x.cls==="warn"?"flag-warn":"");
+    return `<tr><td><b>${x.s}</b></td><td class="num">${x.sig||"\u2014"}</td><td class="num">${x.settled||"\u2014"}</td><td class="num">${p(x.pred)}</td><td class="num">${p(x.real)}</td><td class="num">${x.brier==null?"\u2014":x.brier.toFixed(3)}</td><td class="num">${x.ppc==null?"\u2014":fmt$(x.ppc)}</td><td style="max-width:280px">${x.verdict}</td></tr>`;
+  }).join("");
+  const f = DATA.xmFilters;
+  $("#filterNote").innerHTML =
+    `<b>Are the live filters helping?</b> Yes, so far. xmarket signals blocked <i>only</i> by the whitelist that have settled ran <b class="flag-warn">${fmt$(f.wlBlocked.ppc)}/contract</b> (${f.wlBlocked.settled} settled, ${(f.wlBlocked.win*100).toFixed(0)}% win) \u2014 the whitelist is saving money. `+
+    `Signals failing quality gates (conf/edge/liquidity) ran ${fmt$(f.qualityFailed.ppc)}/contract across ${f.qualityFailed.settled} settled. `+
+    `Live-taken xmarket trades realized ${fmt$(f.liveTaken.realized)} \u2014 worse than either skipped pool on a per-trade basis, driven by the TIME whitelist-removal exits; small sample throughout.`;
+})();
+
+</script>
+</body>
+</html>
