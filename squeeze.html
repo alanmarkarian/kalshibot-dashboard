@@ -24,7 +24,7 @@
     padding-left: max(16px, env(safe-area-inset-left));
     padding-right: max(16px, env(safe-area-inset-right));
   }
-  .wrap { max-width: 520px; margin: 0 auto; }
+  .wrap { max-width: 720px; margin: 0 auto; }
   h1 { font-size: 22px; font-weight: 700; margin: 0 0 4px; }
   h2 { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
        color: var(--muted); margin: 22px 0 10px; }
@@ -63,6 +63,41 @@
   .flat { font-size: 16px; }
   .flat b { color: var(--ok); }
   .note { color: var(--muted); font-size: 14px; margin-top: 8px; }
+  .counts { color: var(--muted); font-size: 14px; margin: -4px 0 10px; }
+  .table-wrap {
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line); border-radius: 14px; background: var(--card);
+  }
+  table {
+    width: 100%; border-collapse: collapse; min-width: 640px;
+    font-size: 14px;
+  }
+  th, td {
+    padding: 10px 8px; text-align: left; border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th {
+    font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; position: sticky; top: 0;
+    background: #161b26;
+  }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td.tkc { font-weight: 800; letter-spacing: .02em; }
+  td.tkc a { color: inherit; text-decoration: none; }
+  td.tape { color: #c8ceda; font-size: 13px; max-width: 180px; }
+  td.num.grok { color: var(--grok); font-weight: 650; }
+  td.num.claude { color: var(--claude); font-weight: 650; }
+  tr:last-child td { border-bottom: 0; }
+  .pill {
+    display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .04em;
+    padding: 4px 7px; border-radius: 999px; white-space: nowrap;
+  }
+  .l-trig { background: #3a1418; color: var(--hot); }
+  .l-watch { background: var(--warn-bg); color: var(--warn); }
+  .l-ign { background: #2a1630; color: var(--ign); }
+  .l-board { background: #1a2230; color: #a8b4c8; }
+  .l-grok { background: #152033; color: var(--grok); }
+  .l-claude { background: #2a1c0c; color: var(--claude); }
   footer { margin-top: 28px; color: var(--muted); font-size: 13px; line-height: 1.5; }
   footer a { color: var(--link); text-decoration: none; }
 </style>
@@ -70,22 +105,22 @@
 <body>
 <div class="wrap">
   <h1>Squeeze brief</h1>
-  <p class="sub">Buyable dual names only &middot; two theories, two scores<br>
+  <p class="sub">Full dual board + one-sided names &middot; two theories, two scores<br>
     <a href="index.html">Kalshi dashboard</a></p>
 
   <div class="banner">
-    <p><b>Not a full live board.</b> Grok here is the thin 2026-08-17 proof scan (26 names), not the last full 56-name board from 2026-08-14. Dated 8/14 12:39 AM ET consensus files were not found &mdash; they were overwritten.</p>
-    <p>Claude is the 2026-08-17 Mon AM snapshot (prices/SI mostly Fri 8/14 close). A full Grok board is due after Premarket Tue 8/18 7:36 AM ET. Do not treat this page as a complete scan.</p>
+    <p><b>Not a full live board.</b> Grok here is the thin 2026-08-17 proof scan (26 names; X skipped), not the last full 56-name board from 2026-08-14. Dated 8/14 12:39 AM ET consensus files were overwritten &mdash; history.jsonl only kept ticker lists, so this page does not reconstruct 8/14 scores.</p>
+    <p>Claude is the 2026-08-17 Mon AM snapshot (prices/SI mostly Fri 8/14 close). Tape/gamma were skipped on the thin proof &mdash; missing cells are "-" not zeros. A full rewrite is due after Premarket Tue 8/18 7:36 AM ET. Do not treat this page as a complete scan.</p>
   </div>
 
   <h2>Buyable</h2>
-  <div class="card empty">Dual trigger &mdash; none</div>
-  <div class="card empty">Dual watch &mdash; none</div>
+<div class="card empty">Dual trigger &mdash; none</div>
+<div class="card empty">Dual watch &mdash; none</div>
 
   <div class="card">
     <div class="name-row">
       <div class="tk"><a href="https://stockanalysis.com/stocks/htz/" target="_blank" rel="noopener">HTZ</a></div>
-      <div class="px">$2.16 &middot; SI 55.9%</div>
+      <div class="px">$2.16 · SI 55.9%</div>
     </div>
     <div class="lvl">DUAL IGNITION</div>
     <div class="scores">
@@ -109,10 +144,57 @@
     <div class="note">Live file <code>positions.csv</code> is header-only. Paper ledger is not the live book. Leftover Claude rows (GRPN / SOUN / ONDS) are not positions.</div>
   </div>
 
+  <h2>Full board</h2>
+  <p class="counts">26 names &middot; 9 dual (0 trigger / 0 watch / 1 ignition + 8 board) &middot; 3 Grok-only &middot; 14 Claude-only. Scores stay separate. Duplicates in the consensus one-sided lists (SOUN / GRPN / ONDS) are shown once at dual level.</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Ticker</th>
+          <th>Level</th>
+          <th class="num">Grok</th>
+          <th class="num">Claude</th>
+          <th class="num">SI</th>
+          <th class="num">Float</th>
+          <th>Tape</th>
+          <th class="num">Gamma</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/htz/" target="_blank" rel="noopener">HTZ</a></td><td><span class="pill l-ign">DUAL IGNITION</span></td><td class="num grok">56.4</td><td class="num claude">53.4</td><td class="num">55.9%</td><td class="num">169M</td><td class="tape">VELOCITY ACCELERATING d/d · WSB CHATTER ACCELERATING</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/grpn/" target="_blank" rel="noopener">GRPN</a></td><td><span class="pill l-board">DUAL BOARD</span></td><td class="num grok">46.0</td><td class="num claude">54.1</td><td class="num">58.9%</td><td class="num">19.9M</td><td class="tape">GAMMA RAMP - weekly calls bid</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/plce/" target="_blank" rel="noopener">PLCE</a></td><td><span class="pill l-board">DUAL BOARD</span></td><td class="num grok">36.4</td><td class="num claude">43.8</td><td class="num">33.7%</td><td class="num">7.8M</td><td class="tape">-</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/flws/" target="_blank" rel="noopener">FLWS</a></td><td><span class="pill l-board">DUAL BOARD</span></td><td class="num grok">39.1</td><td class="num claude">40.3</td><td class="num">37.2%</td><td class="num">10.4M</td><td class="tape">-</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/onds/" target="_blank" rel="noopener">ONDS</a></td><td><span class="pill l-board">DUAL BOARD</span></td><td class="num grok">27.7</td><td class="num claude">40.1</td><td class="num">42.5%</td><td class="num">522M</td><td class="tape">WSB rank 41-&gt;52 (drifting) · WSB CHATTER ACCELERATING</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/inhd/" target="_blank" rel="noopener">INHD</a></td><td><span class="pill l-board">DUAL BOARD</span></td><td class="num grok">37.6</td><td class="num claude">37.6</td><td class="num">60.2%</td><td class="num">2.5M</td><td class="tape">-</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/wen/" target="_blank" rel="noopener">WEN</a></td><td><span class="pill l-board">DUAL BOARD</span></td><td class="num grok">36.1</td><td class="num claude">26.6</td><td class="num">43.2%</td><td class="num">157M</td><td class="tape">Borrow fee stale (5.73% from 08-04)</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/soun/" target="_blank" rel="noopener">SOUN</a></td><td><span class="pill l-board">DUAL BOARD</span></td><td class="num grok">34.7</td><td class="num claude">26.4</td><td class="num">38.4%</td><td class="num">393M</td><td class="tape">VELOCITY ACCELERATING d/d · WSB CHATTER ACCELERATING</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/kust/" target="_blank" rel="noopener">KUST</a></td><td><span class="pill l-board">DUAL BOARD</span></td><td class="num grok">31.0</td><td class="num claude">31.0</td><td class="num">47.0%</td><td class="num">0.6M</td><td class="tape">-</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/open/" target="_blank" rel="noopener">OPEN</a></td><td><span class="pill l-grok">GROK ONLY</span></td><td class="num grok">38.0</td><td class="num claude">17.2</td><td class="num">19.0%</td><td class="num">955M</td><td class="tape">VELOCITY ACCELERATING d/d · WSB CHATTER ACCELERATING</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/bb/" target="_blank" rel="noopener">BB</a></td><td><span class="pill l-grok">GROK ONLY</span></td><td class="num grok">30.0</td><td class="num claude">-</td><td class="num">6.7%</td><td class="num">585M</td><td class="tape">VELOCITY ACCELERATING d/d · WSB CHATTER ACCELERATING</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/bird/" target="_blank" rel="noopener">BIRD</a></td><td><span class="pill l-grok">GROK ONLY</span></td><td class="num grok">27.6</td><td class="num claude">12.5</td><td class="num">20.2%</td><td class="num">4.4M</td><td class="tape">PRE-CATALYST: earnings 2026-08-17 (0d out)</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/apld/" target="_blank" rel="noopener">APLD</a></td><td><span class="pill l-claude">CLAUDE ONLY</span></td><td class="num grok">-</td><td class="num claude">32.6</td><td class="num">25.3%</td><td class="num">-</td><td class="tape">X TRENDING (buzz 70, falling) · VELOCITY ACCELERATING d/d</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/wyfi/" target="_blank" rel="noopener">WYFI</a></td><td><span class="pill l-claude">CLAUDE ONLY</span></td><td class="num grok">-</td><td class="num claude">30.6</td><td class="num">50.2%</td><td class="num">11.0M</td><td class="tape">X TRENDING (pre-Reddit)</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/lcid/" target="_blank" rel="noopener">LCID</a></td><td><span class="pill l-claude">CLAUDE ONLY</span></td><td class="num grok">24.1</td><td class="num claude">28.3</td><td class="num">37.3%</td><td class="num">172M</td><td class="tape">-</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/ai/" target="_blank" rel="noopener">AI</a></td><td><span class="pill l-claude">CLAUDE ONLY</span></td><td class="num grok">23.0</td><td class="num claude">26.7</td><td class="num">37.1%</td><td class="num">139M</td><td class="tape">X TRENDING (pre-Reddit)</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/ttd/" target="_blank" rel="noopener">TTD</a></td><td><span class="pill l-claude">CLAUDE ONLY</span></td><td class="num grok">-</td><td class="num claude">23.5</td><td class="num">-</td><td class="num">418M</td><td class="tape">WSB rank 313-&gt;9 (dip-buyer chatter spike) · WSB CHATTER ACCELERATING</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/nbis/" target="_blank" rel="noopener">NBIS</a></td><td><span class="pill l-claude">CLAUDE ONLY</span></td><td class="num grok">-</td><td class="num claude">19.4</td><td class="num">23.7%</td><td class="num">-</td><td class="tape">WSB rank steady 26-&gt;8, mentions 23-&gt;93</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/abcl/" target="_blank" rel="noopener">ABCL</a></td><td><span class="pill l-claude">CLAUDE ONLY</span></td><td class="num grok">-</td><td class="num claude">17.7</td><td class="num">22.4%</td><td class="num">205M</td><td class="tape">VOLUME SPIKE - may already be moving</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/hims/" target="_blank" rel="noopener">HIMS</a></td><td><span class="pill l-claude">CLAUDE ONLY</span></td><td class="num grok">-</td><td class="num claude">17.0</td><td class="num">29.1%</td><td class="num">211M</td><td class="tape">ST TRENDING (pre-WSB) · +6.5% Fri on 0.6x vol - quiet grind</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/vktx/" target="_blank" rel="noopener">VKTX</a></td><td><span class="pill l-claude">CLAUDE ONLY</span></td><td class="num grok">-</td><td class="num claude">15.7</td><td class="num">20.4%</td><td class="num">112M</td><td class="tape">X TRENDING (pre-Reddit)</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/crml/" target="_blank" rel="noopener">CRML</a></td><td><span class="pill l-claude">CLAUDE ONLY</span></td><td class="num grok">-</td><td class="num claude">13.7</td><td class="num">23.4%</td><td class="num">68.2M</td><td class="tape">ST TRENDING (pre-WSB) · X TRENDING (buzz 14.8, low)</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/iren/" target="_blank" rel="noopener">IREN</a></td><td><span class="pill l-claude">CLAUDE ONLY</span></td><td class="num grok">-</td><td class="num claude">9.1</td><td class="num">26.2%</td><td class="num">-</td><td class="tape">ST TRENDING (pre-WSB) · X TRENDING (buzz 82)</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/clsk/" target="_blank" rel="noopener">CLSK</a></td><td><span class="pill l-claude">CLAUDE ONLY</span></td><td class="num grok">-</td><td class="num claude">7.7</td><td class="num">30.4%</td><td class="num">-</td><td class="tape">X TRENDING (pre-Reddit) · ST TRENDING (pre-WSB)</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/wulf/" target="_blank" rel="noopener">WULF</a></td><td><span class="pill l-claude">CLAUDE ONLY</span></td><td class="num grok">-</td><td class="num claude">6.6</td><td class="num">26.1%</td><td class="num">398M</td><td class="tape">X TRENDING (pre-Reddit)</td><td class="num">-</td></tr>
+<tr><td class="tkc"><a href="https://stockanalysis.com/stocks/qxo/" target="_blank" rel="noopener">QXO</a></td><td><span class="pill l-claude">CLAUDE ONLY</span></td><td class="num grok">-</td><td class="num claude">3.8</td><td class="num">22.6%</td><td class="num">-</td><td class="tape">X TRENDING (pre-Reddit)</td><td class="num">-</td></tr>
+      </tbody>
+    </table>
+  </div>
+
   <footer>
     One product, two theories &mdash; scores are not merged.<br>
-    Dual board / one-sided names omitted on purpose.<br>
-    Built 2026-08-17 ~10:05 PM ET &middot; source consensus.json 8/17 thin scan
+    Gamma "-" = thin proof skipped options (all Grok gamma breakdowns were 0). Tape is short event-study / chatter flags only; long Claude essays are omitted.<br>
+    Built 2026-08-17 ~11:50 PM ET &middot; source consensus.json 8/17 thin scan + last_snapshot + Claude 8/17 Mon AM
   </footer>
 </div>
 </body>
