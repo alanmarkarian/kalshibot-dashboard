@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0a0c10">
+<title>MISSED MOVERS // Friday Card</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0c10;--surface:#111318;--surface2:#1a1d24;
+  --border:#2a2f3a;--accent:#00d4aa;--accent2:#7c6af7;--danger:#ff4d6d;
+  --text:#e8eaf0;--text2:#8892a4;--text3:#4a5568;
+  --green:#00d4aa;--red:#ff4d6d;--yellow:#f0a500;
+}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Space Grotesk',sans-serif;
+  background:var(--bg);color:var(--text);min-height:100vh;font-size:17px;
+  padding-left:max(16px, env(safe-area-inset-left));
+  padding-right:max(16px, env(safe-area-inset-right));
+  padding-bottom:max(24px, env(safe-area-inset-bottom));
+}
+.header{
+  padding:16px 8px;padding-top:max(16px, env(safe-area-inset-top));
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+}
+.logo{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;letter-spacing:.15em;color:var(--accent);text-transform:uppercase}
+.logo span{color:var(--text2)}
+.status-pill{font-family:'Space Mono',monospace;font-size:10px;padding:4px 10px;background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.3);border-radius:20px;color:var(--accent);letter-spacing:.06em}
+.sub{padding:14px 8px 6px;color:var(--text2);font-size:15px;line-height:1.5}
+.sub a{color:var(--accent);text-decoration:none}
+.honest{font-family:'Space Mono',monospace;font-size:11px;color:var(--text3);padding:0 8px 18px}
+.content{max-width:1100px;margin:0 auto}
+.section-eyebrow{font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:.15em;margin:8px 8px 16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.trade-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:18px;margin:0 0 14px}
+.trade-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;gap:12px}
+.trade-ticker{font-family:'Space Mono',monospace;font-size:16px;font-weight:700}
+.trade-ticker a{color:var(--accent);text-decoration:none}
+.trade-name{font-size:13px;color:var(--text2);margin-top:2px}
+.right{text-align:right}
+.pct{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;line-height:1}
+.pct.up{color:var(--green)}
+.pct.down{color:var(--red)}
+.trade-status{font-family:'Space Mono',monospace;font-size:10px;padding:4px 10px;border-radius:20px;white-space:nowrap;display:inline-block;margin-top:8px}
+.status-intact{background:rgba(0,212,170,.1);color:var(--green);border:1px solid rgba(0,212,170,.3)}
+.status-watch{background:rgba(124,106,247,.12);color:var(--accent2);border:1px solid rgba(124,106,247,.35)}
+.status-mute{background:rgba(74,85,104,.2);color:var(--text2);border:1px solid var(--border)}
+.trade-thesis{font-size:15px;color:var(--text2);line-height:1.55;margin-bottom:12px;border-left:2px solid var(--accent);padding-left:12px}
+.trade-meta{display:flex;gap:20px;flex-wrap:wrap;margin-top:12px}
+.meta-item{font-size:11px;color:var(--text3);font-family:'Space Mono',monospace}
+.meta-item span{color:var(--text2)}
+details.ledger{margin:8px 0 24px;border:1px solid var(--border);border-radius:10px;background:var(--surface)}
+details.ledger summary{padding:14px 16px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text2)}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);background:var(--surface)}
+td{padding:12px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text)}
+td a{color:var(--accent);font-family:'Space Mono',monospace;font-weight:700;text-decoration:none}
+.mono{font-family:'Space Mono',monospace;font-size:13px;white-space:nowrap}
+.mono.up{color:var(--green)}
+.mono.down{color:var(--red)}
+footer{padding:20px 8px 8px;color:var(--text3);font-size:13px;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+<div class="content">
+  <div class="header">
+    <div class="logo">MISSED MOVERS <span>// Friday Card</span></div>
+    <div class="status-pill">Week ending 2026-08-14 · 74 on card · 110 ledger</div>
+  </div>
+  <div class="sub">US equities that moved more than 30% on the week. Card hides sub-$20M nanos unless offering / FDA / halt.
+    <a href="index.html">Kalshi</a> ·
+    <a href="squeeze.html">Squeeze</a> ·
+    <a href="social.html">Social</a> ·
+    <a href="catalyst.html">Catalyst</a>
+  </div>
+  <div class="honest">56 up · 18 down on the card · headline driver is a hint · built Aug 18 2026 12:21 PM ET · dry-run until Friday 9pm ET</div>
+
+  <div class="section-eyebrow">Friday card</div>
+  <div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/XHG" target="_blank" rel="noopener">XHG</a></div>
+      <div class="trade-name">XChange TEC.INC</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+283.8%</div>
+      <span class="trade-status status-watch">mna</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Non-binding AI LOI on a distressed China nano. Pump tape. Do not build a screen for this class.</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$196M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/BOXL" target="_blank" rel="noopener">BOXL</a></div>
+      <div class="trade-name">BOXL</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+119.2%</div>
+      <span class="trade-status status-intact">offering</span>
+    </div>
+  </div>
+  <div class="trade-thesis">PIPE + $15m ELOC on a tiny float; listing-compliance raise that traded like a squeeze. Dilution/ELOC screen, not SI or brand buzz.</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>new screen?: offering/ELOC</span></div>
+    <div class="meta-item">MCAP <span>$5M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/QMCO" target="_blank" rel="noopener">QMCO</a></div>
+      <div class="trade-name">Quantum Corporation</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+114.0%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Real beat / first non-GAAP profit since 2023, ~$1B name. Not squeeze or social DNA. No new screen.</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$993M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/CAPR" target="_blank" rel="noopener">CAPR</a></div>
+      <div class="trade-name">CAPR</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+64.6%</div>
+      <span class="trade-status status-intact">fda</span>
+    </div>
+  </div>
+  <div class="trade-thesis">PDUFA path after AdCom: FDA open to BLA amendment / date extension. Catalyst owns this. Squeeze/social would not have seen it.</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>new screen?: fda/pdufa -- hand to Catalyst</span></div>
+    <div class="meta-item">MCAP <span>$396M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/BANL" target="_blank" rel="noopener">BANL</a></div>
+      <div class="trade-name">BANL</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+189.2%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">We&#x27;re Keeping An Eye On CBL International&#x27;s (NASDAQ:BANL) Cash Burn Rate</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$26M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/XHLD" target="_blank" rel="noopener">XHLD</a></div>
+      <div class="trade-name">TEN Holdings, Inc.</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+99.3%</div>
+      <span class="trade-status status-watch">unclassified</span>
+    </div>
+  </div>
+  <div class="trade-thesis">BC-Most Active Stocks</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$80M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/HHS" target="_blank" rel="noopener">HHS</a></div>
+      <div class="trade-name">HHS</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+84.5%</div>
+      <span class="trade-status status-watch">unclassified</span>
+    </div>
+  </div>
+  <div class="trade-thesis">We&#x27;re Not Worried About Harte Hanks&#x27; (NASDAQ:HHS) Cash Burn</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$30M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/OFAL" target="_blank" rel="noopener">OFAL</a></div>
+      <div class="trade-name">OFA Group</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+83.8%</div>
+      <span class="trade-status status-watch">unclassified</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Headline hint only. Driver not confirmed.</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$26M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/MDXH" target="_blank" rel="noopener">MDXH</a></div>
+      <div class="trade-name">MDXH</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+68.3%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">MDxHealth S.A. Q2 2026 Earnings Call Summary</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$78M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/WETO" target="_blank" rel="noopener">WETO</a></div>
+      <div class="trade-name">Wetour Robotics Limited</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+67.4%</div>
+      <span class="trade-status status-watch">unclassified</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Dear Wetour Robotics Stock Fans, Mark Your Calendars for August 24</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$31M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/INO" target="_blank" rel="noopener">INO</a></div>
+      <div class="trade-name">INO</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+65.2%</div>
+      <span class="trade-status status-intact">fda</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Inovio Pharmaceuticals Inc (INO) (Q2 2026) Earnings Call Highlights: INO-3107 on Track for ...</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>new screen?: fda</span></div>
+    <div class="meta-item">MCAP <span>$118M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/ARX" target="_blank" rel="noopener">ARX</a></div>
+      <div class="trade-name">ARX</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+58.8%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Why Is Accelerant Going Private Just One Year After Its IPO?</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$4.2B</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/RETO" target="_blank" rel="noopener">RETO</a></div>
+      <div class="trade-name">ReTo Eco-Solutions, Inc.</div>
+    </div>
+    <div class="right">
+      <div class="pct down">-58.6%</div>
+      <span class="trade-status status-watch">unclassified</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Headline hint only. Driver not confirmed.</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$65M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/SHAZ" target="_blank" rel="noopener">SHAZ</a></div>
+      <div class="trade-name">SharonAI Holdings, Inc.</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+56.0%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">SharonAI (SHAZ) Q2 2026 Earnings Call Transcript</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$2.5B</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/EROC" target="_blank" rel="noopener">EROC</a></div>
+      <div class="trade-name">EROC</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+55.8%</div>
+      <span class="trade-status status-watch">analyst</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Erock (EROC) Soars 23% as Anthropic Deal Brightens Outlook</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$3.6B</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/INV" target="_blank" rel="noopener">INV</a></div>
+      <div class="trade-name">INV</div>
+    </div>
+    <div class="right">
+      <div class="pct down">-53.2%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">YSS, INV Stocks Hit All-Time Lows Today – What’s Driving The Sell-Off?</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$110M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/MWYN" target="_blank" rel="noopener">MWYN</a></div>
+      <div class="trade-name">MWYN</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+52.7%</div>
+      <span class="trade-status status-watch">unclassified</span>
+    </div>
+  </div>
+  <div class="trade-thesis">BC-Most Active Stocks</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$21M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/NIQ" target="_blank" rel="noopener">NIQ</a></div>
+      <div class="trade-name">NIQ Global Intelligence plc</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+51.7%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">NIQ Global Intelligence (NIQ) Stock Looks Reasonable Even After A 52% Jump</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$5.2B</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/DDC" target="_blank" rel="noopener">DDC</a></div>
+      <div class="trade-name">DDC</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+50.9%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Smaller Bitcoin Treasuries Add 603 BTC as Strategy Pauses Buying</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$24M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/STDN" target="_blank" rel="noopener">STDN</a></div>
+      <div class="trade-name">Standard Nuclear, Inc.</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+50.4%</div>
+      <span class="trade-status status-watch">analyst</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Standard Nuclear Stock Hit Its High Ahead Of The Numbers</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$1.9B</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/GRDX" target="_blank" rel="noopener">GRDX</a></div>
+      <div class="trade-name">GRDX</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+50.0%</div>
+      <span class="trade-status status-watch">unclassified</span>
+    </div>
+  </div>
+  <div class="trade-thesis">GridAI appoints Marshall Chapin as CEO of energy-orchestration subsidiary</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$28M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/CSTE" target="_blank" rel="noopener">CSTE</a></div>
+      <div class="trade-name">CSTE</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+49.6%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Caesarstone Ltd (CSTE) (Q2 2026) Earnings Call Highlights: Margins Surge, Tariffs Cloud ...</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$119M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/KLC" target="_blank" rel="noopener">KLC</a></div>
+      <div class="trade-name">KLC</div>
+    </div>
+    <div class="right">
+      <div class="pct down">-49.3%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">KinderCare Learning Companies Inc (KLC) (Q2 2026) Earnings Call Highlights: Strategic ...</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$307M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/NBIS" target="_blank" rel="noopener">NBIS</a></div>
+      <div class="trade-name">NBIS</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+49.2%</div>
+      <span class="trade-status status-watch">unclassified</span>
+    </div>
+  </div>
+  <div class="trade-thesis">CoreWeave Sinks 7% as Rising Yields Test the Most Leveraged AI Landlord</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$69.0B</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/BZAI" target="_blank" rel="noopener">BZAI</a></div>
+      <div class="trade-name">BZAI</div>
+    </div>
+    <div class="right">
+      <div class="pct down">-48.9%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Blaize Holdings (BZAI) Stock Fair Value Moves Lower After Analysts Cut Revenue Views</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$83M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/HTFL" target="_blank" rel="noopener">HTFL</a></div>
+      <div class="trade-name">HTFL</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+48.6%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Heartflow (HTFL) Rockets 46%: What Analysts Say and Where Hedge Funds Stand</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$3.8B</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/CD" target="_blank" rel="noopener">CD</a></div>
+      <div class="trade-name">CD</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+47.8%</div>
+      <span class="trade-status status-watch">unclassified</span>
+    </div>
+  </div>
+  <div class="trade-thesis">We Think Chaince Digital Holdings (NASDAQ:CD) Can Easily Afford To Drive Business Growth</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$393M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/GLND" target="_blank" rel="noopener">GLND</a></div>
+      <div class="trade-name">GLND</div>
+    </div>
+    <div class="right">
+      <div class="pct down">-46.7%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">CRML, UUUU, USAR, ALOY, GLND: Greenland’s Rare-Earth Trade Draws Investors As Trump Revives Arctic Ambitions</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$57M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/FIEE" target="_blank" rel="noopener">FIEE</a></div>
+      <div class="trade-name">FIEE</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+46.2%</div>
+      <span class="trade-status status-watch">unclassified</span>
+    </div>
+  </div>
+  <div class="trade-thesis">FiEE (FIEE) Grants Restricted Stock Units to Key Partners to Incentivize Long-Term Collaboration</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$42M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/ACH" target="_blank" rel="noopener">ACH</a></div>
+      <div class="trade-name">ACH</div>
+    </div>
+    <div class="right">
+      <div class="pct down">-45.4%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Accendra Health drops equity issuance plan as CEO succession process advances</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$80M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/EXOD" target="_blank" rel="noopener">EXOD</a></div>
+      <div class="trade-name">EXOD</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+45.2%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Exodus Movement, Inc. Q2 2026 Earnings Call Summary</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$193M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/USDE" target="_blank" rel="noopener">USDE</a></div>
+      <div class="trade-name">StablecoinX Inc.</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+45.0%</div>
+      <span class="trade-status status-watch">mna</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Wall Street Set to Open Higher in Thursday Trading; US Adds Only 57,000 Jobs in June</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$74M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/AIAI" target="_blank" rel="noopener">AIAI</a></div>
+      <div class="trade-name">AIAI</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+43.8%</div>
+      <span class="trade-status status-watch">mna</span>
+    </div>
+  </div>
+  <div class="trade-thesis">AIAI and Constellation Launch Arca Wallet for Self-Custodied Stablecoins</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$379M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/SST" target="_blank" rel="noopener">SST</a></div>
+      <div class="trade-name">System1, Inc.</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+41.6%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">System1 (SST) Q2 2026 Earnings Call Transcript</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$23M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/BIVI" target="_blank" rel="noopener">BIVI</a></div>
+      <div class="trade-name">BIVI</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+41.4%</div>
+      <span class="trade-status status-intact">fda</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Parkinson&#x27;s drug developers are betting big on inflammation</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>new screen?: fda</span></div>
+    <div class="meta-item">MCAP <span>$9M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/STIM" target="_blank" rel="noopener">STIM</a></div>
+      <div class="trade-name">Neuronetics, Inc.</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+41.0%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Neuronetics (STIM) Q2 2026 Earnings Call Transcript</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$244M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/TTEC" target="_blank" rel="noopener">TTEC</a></div>
+      <div class="trade-name">TTEC Holdings, Inc.</div>
+    </div>
+    <div class="right">
+      <div class="pct down">-38.3%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">TeleTech Q2 Earnings Call Highlights</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$72M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/CDNL" target="_blank" rel="noopener">CDNL</a></div>
+      <div class="trade-name">CDNL</div>
+    </div>
+    <div class="right">
+      <div class="pct down">-38.0%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Cardinal (CDNL) Q2 2026 Earnings Call Transcript</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$2.0B</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/OBX" target="_blank" rel="noopener">OBX</a></div>
+      <div class="trade-name">Obsidian Therapeutics, Inc.</div>
+    </div>
+    <div class="right">
+      <div class="pct down">-37.6%</div>
+      <span class="trade-status status-watch">analyst</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Obsidian Therapeutics (OBX) Stock Dropped, So What Is Behind The Attention Now?</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$1.1B</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/LNSR" target="_blank" rel="noopener">LNSR</a></div>
+      <div class="trade-name">LNSR</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+37.6%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">LENSAR Inc (LNSR) (Q2 2026) Earnings Call Highlights: Record Revenue and Profitability Surge</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$102M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/CXAI" target="_blank" rel="noopener">CXAI</a></div>
+      <div class="trade-name">CXAI</div>
+    </div>
+    <div class="right">
+      <div class="pct down">-36.8%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">CXApp Inc (CXAI) (Q2 2026) Earnings Call Highlights: Revenue Surges 79% on Engine Room ...</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$482M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/SNDK" target="_blank" rel="noopener">SNDK</a></div>
+      <div class="trade-name">Sandisk Corporation</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+36.4%</div>
+      <span class="trade-status status-watch">unclassified</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Global bond sell-off pressures stocks: AlphaCheck</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$244.4B</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/AREN" target="_blank" rel="noopener">AREN</a></div>
+      <div class="trade-name">AREN</div>
+    </div>
+    <div class="right">
+      <div class="pct down">-35.8%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">The Arena Group Holdings, Inc. Q2 2026 Earnings Call Summary</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$51M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/PMA" target="_blank" rel="noopener">PMA</a></div>
+      <div class="trade-name">Ming Shing Group Holdings Limit</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+35.2%</div>
+      <span class="trade-status status-watch">unclassified</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Headline hint only. Driver not confirmed.</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$20M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/APLM" target="_blank" rel="noopener">APLM</a></div>
+      <div class="trade-name">APLM</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+35.1%</div>
+      <span class="trade-status status-watch">unclassified</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Headline hint only. Driver not confirmed.</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$70M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/INHD" target="_blank" rel="noopener">INHD</a></div>
+      <div class="trade-name">INHD</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+34.7%</div>
+      <span class="trade-status status-mute">split</span>
+    </div>
+  </div>
+  <div class="trade-thesis">From Penny Stock to $100 Million in One Day: The Ultimate Meme Stock Has Arrived</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>corporate action -- not a screen miss</span></div>
+    <div class="meta-item">MCAP <span>$21M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/AMPG" target="_blank" rel="noopener">AMPG</a></div>
+      <div class="trade-name">AMPG</div>
+    </div>
+    <div class="right">
+      <div class="pct down">-34.5%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">AmpliTech Group Inc (AMPG) (Q2 2026) Earnings Call Highlights: Revenue Surges 51% Sequentially, ...</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$109M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/MVIS" target="_blank" rel="noopener">MVIS</a></div>
+      <div class="trade-name">MVIS</div>
+    </div>
+    <div class="right">
+      <div class="pct down">-34.3%</div>
+      <span class="trade-status status-mute">split</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Microvision Inc (MVIS) (Q2 2026) Earnings Call Highlights: Revenue Surges 650% as Gross Margin ...</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>corporate action -- not a screen miss</span></div>
+    <div class="meta-item">MCAP <span>$46M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/SPAI" target="_blank" rel="noopener">SPAI</a></div>
+      <div class="trade-name">Safe Pro Group Inc.</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+34.1%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Why Did Red Cat Stock Drop Today?</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$117M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/GTEC" target="_blank" rel="noopener">GTEC</a></div>
+      <div class="trade-name">GTEC</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+34.0%</div>
+      <span class="trade-status status-watch">analyst</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Greenland Technologies (GTEC) Upgraded to Buy: Here&#x27;s What You Should Know</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$23M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/PRHI" target="_blank" rel="noopener">PRHI</a></div>
+      <div class="trade-name">Presurance Holdings, Inc.</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+33.5%</div>
+      <span class="trade-status status-mute">split</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Upcoming Stock Splits This Week (June 1 to June 5) – Stay Invested</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>corporate action -- not a screen miss</span></div>
+    <div class="meta-item">MCAP <span>$23M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/FTH" target="_blank" rel="noopener">FTH</a></div>
+      <div class="trade-name">FTH</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+33.4%</div>
+      <span class="trade-status status-watch">analyst</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Roblox downgraded, Quanta Services upgraded: Wall Street&#x27;s top analyst calls</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$868M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/AEYE" target="_blank" rel="noopener">AEYE</a></div>
+      <div class="trade-name">AEYE</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+33.4%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Wall Street Analysts Think AudioEye (AEYE) Is a Good Investment: Is It?</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$100M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/FSLY" target="_blank" rel="noopener">FSLY</a></div>
+      <div class="trade-name">FSLY</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+33.3%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Fastly Director Paula Loop Sells 7,332 Shares at $30</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$4.3B</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/NXTC" target="_blank" rel="noopener">NXTC</a></div>
+      <div class="trade-name">NextCure, Inc.</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+33.3%</div>
+      <span class="trade-status status-watch">mna</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Sector Update: Healthcare Stocks Fall Late Afternoon</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$31M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/SION" target="_blank" rel="noopener">SION</a></div>
+      <div class="trade-name">Sionna Therapeutics, Inc.</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+33.2%</div>
+      <span class="trade-status status-intact">fda</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Sionna Therapeutics (SION) Resets After Trial Miss, Is The Discount Now Too Deep?</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>new screen?: fda</span></div>
+    <div class="meta-item">MCAP <span>$258M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/SNAL" target="_blank" rel="noopener">SNAL</a></div>
+      <div class="trade-name">Snail, Inc.</div>
+    </div>
+    <div class="right">
+      <div class="pct down">-33.0%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Snail Stock Tumbles 38% in a Month: Buy the Dip, Hold or Sell?</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$27M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/SLNG" target="_blank" rel="noopener">SLNG</a></div>
+      <div class="trade-name">Stabilis Solutions, Inc.</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+32.8%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Stabilis Solutions Q2 Earnings Call Highlights</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$112M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/WFF" target="_blank" rel="noopener">WFF</a></div>
+      <div class="trade-name">WF Holding Limited</div>
+    </div>
+    <div class="right">
+      <div class="pct down">-32.7%</div>
+      <span class="trade-status status-watch">unclassified</span>
+    </div>
+  </div>
+  <div class="trade-thesis">WF Holding announces one-for-five reverse share split</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$106M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/GETY" target="_blank" rel="noopener">GETY</a></div>
+      <div class="trade-name">GETY</div>
+    </div>
+    <div class="right">
+      <div class="pct down">-32.5%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">The Top 5 Analyst Questions From Getty Images’s Q2 Earnings Call</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$115M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/GYGY" target="_blank" rel="noopener">GYGY</a></div>
+      <div class="trade-name">GYGY</div>
+    </div>
+    <div class="right">
+      <div class="pct down">-32.4%</div>
+      <span class="trade-status status-watch">unclassified</span>
+    </div>
+  </div>
+  <div class="trade-thesis">EXCLUSIVE: AI Golf Company Game Your Game Debuts on Nasdaq Under &#x27;GYGY&#x27;</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$26M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/ETON" target="_blank" rel="noopener">ETON</a></div>
+      <div class="trade-name">ETON</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+32.3%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Is Eton Pharmaceuticals (ETON) Fully Priced On Strong Q2 Results And Raised Guidance?</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$1.7B</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/BTAI" target="_blank" rel="noopener">BTAI</a></div>
+      <div class="trade-name">BTAI</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+32.2%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">BioXcel Therapeutics, Inc. (BTAI) Reports Q2 Loss, Misses Revenue Estimates</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$26M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/VALN" target="_blank" rel="noopener">VALN</a></div>
+      <div class="trade-name">Valneva SE</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+32.0%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Pfizer (PFE) Stock Looks Reasonable On Returns But Stretched On Earnings</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$648M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/HAO" target="_blank" rel="noopener">HAO</a></div>
+      <div class="trade-name">HAO</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+31.8%</div>
+      <span class="trade-status status-intact">offering</span>
+    </div>
+  </div>
+  <div class="trade-thesis">split adj x20 (2026-08-14 0.05); Haoxi Health Technology Signs Strategic Cooperation to Develop AI Digital Marketing System</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>new screen?: offering</span></div>
+    <div class="meta-item">MCAP <span>$2M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/AVAH" target="_blank" rel="noopener">AVAH</a></div>
+      <div class="trade-name">AVAH</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+31.6%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">AVAH Q2 Earnings Call Highlights Higher Growth Targets</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$2.7B</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/BODI" target="_blank" rel="noopener">BODI</a></div>
+      <div class="trade-name">BODI</div>
+    </div>
+    <div class="right">
+      <div class="pct down">-31.4%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Beachbody (BODI) Q2 2026 Earnings Call Transcript</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$45M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/YDES" target="_blank" rel="noopener">YDES</a></div>
+      <div class="trade-name">YD Bio Limited</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+31.0%</div>
+      <span class="trade-status status-watch">mna</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Breeze Holdings Acquisition (YDES) Rises 31% Over the Past Month</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$261M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/NSPR" target="_blank" rel="noopener">NSPR</a></div>
+      <div class="trade-name">InspireMD Inc.</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+30.7%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">InspireMD Inc (NSPR) (Q2 2026) Earnings Call Highlights: Navigating Recall Challenges While ...</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$42M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/BIOX" target="_blank" rel="noopener">BIOX</a></div>
+      <div class="trade-name">BIOX</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+30.5%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Cibus Inc’s Precision-Breeding Platform and BioFragrance Scale-Up Support Commercial Inflection</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$26M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/CURI" target="_blank" rel="noopener">CURI</a></div>
+      <div class="trade-name">CURI</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+30.5%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Why Did CuriosityStream Stock Rocket Higher Today?</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$165M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/TMCR" target="_blank" rel="noopener">TMCR</a></div>
+      <div class="trade-name">The Metals Royalty Company Inc.</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+30.1%</div>
+      <span class="trade-status status-watch">mna</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Prediction: TMC The Metals Company Will Soar Over the Next Year -- 2 Key Catalysts to Watch</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>neither desk -- classify</span></div>
+    <div class="meta-item">MCAP <span>$401M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/ATNM" target="_blank" rel="noopener">ATNM</a></div>
+      <div class="trade-name">ATNM</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+30.0%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Are Medical Stocks Lagging  Actinium Pharmaceuticals (ATNM) This Year?</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$34M</span></div>
+  </div>
+</div>
+<div class="trade-card">
+  <div class="trade-header">
+    <div>
+      <div class="trade-ticker"><a href="https://finance.yahoo.com/quote/STEX" target="_blank" rel="noopener">STEX</a></div>
+      <div class="trade-name">Streamex Corp.</div>
+    </div>
+    <div class="right">
+      <div class="pct up">+30.0%</div>
+      <span class="trade-status status-watch">earnings</span>
+    </div>
+  </div>
+  <div class="trade-thesis">Streamex Corp (STEX) (Q2 2026) Earnings Call Highlights: First Gold Lease Revenue and Path to ...</div>
+  <div class="trade-meta">
+    <div class="meta-item">GAP <span>catalyst-adjacent; not squeeze/social DNA</span></div>
+    <div class="meta-item">MCAP <span>$94M</span></div>
+  </div>
+</div>
+
+  <details class="ledger">
+    <summary>Full ledger · 110 names · tap to expand</summary>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Ticker</th><th>Name</th><th>Week</th><th>Driver</th><th>Learn</th><th>Gap</th></tr></thead>
+        <tbody>
+        <tr><td><a href='https://finance.yahoo.com/quote/XHG' target='_blank' rel='noopener'>XHG</a></td><td>XChange TEC.INC</td><td class='mono up'>+283.8%</td><td>mna</td><td>Non-binding AI LOI on a distressed China nano. Pump tape. Do not build a screen for this class.</td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/BANL' target='_blank' rel='noopener'>BANL</a></td><td>BANL</td><td class='mono up'>+189.2%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/DFSC' target='_blank' rel='noopener'>DFSC</a></td><td>DFSC</td><td class='mono up'>+129.0%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/BOXL' target='_blank' rel='noopener'>BOXL</a></td><td>BOXL</td><td class='mono up'>+119.2%</td><td>offering</td><td>PIPE + $15m ELOC on a tiny float; listing-compliance raise that traded like a squeeze. Dilution/ELOC screen, not SI or brand buzz.</td><td>new screen?: offering/ELOC</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/FGI' target='_blank' rel='noopener'>FGI</a></td><td>FGI</td><td class='mono up'>+115.3%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/QMCO' target='_blank' rel='noopener'>QMCO</a></td><td>Quantum Corporation</td><td class='mono up'>+114.0%</td><td>earnings</td><td>Real beat / first non-GAAP profit since 2023, ~$1B name. Not squeeze or social DNA. No new screen.</td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/XHLD' target='_blank' rel='noopener'>XHLD</a></td><td>TEN Holdings, Inc.</td><td class='mono up'>+99.3%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/HHS' target='_blank' rel='noopener'>HHS</a></td><td>HHS</td><td class='mono up'>+84.5%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/OFAL' target='_blank' rel='noopener'>OFAL</a></td><td>OFA Group</td><td class='mono up'>+83.8%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/SLXN' target='_blank' rel='noopener'>SLXN</a></td><td>Silexion Therapeutics Corp</td><td class='mono down'>-76.8%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/LEXX' target='_blank' rel='noopener'>LEXX</a></td><td>LEXX</td><td class='mono up'>+71.5%</td><td>split</td><td>1-for-15 reverse split Aug 3 + Nasdaq bid-price cure. FDA tag was a headline false positive.</td><td>corporate action -- not a screen miss</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/MDXH' target='_blank' rel='noopener'>MDXH</a></td><td>MDXH</td><td class='mono up'>+68.3%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/WETO' target='_blank' rel='noopener'>WETO</a></td><td>Wetour Robotics Limited</td><td class='mono up'>+67.4%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/INO' target='_blank' rel='noopener'>INO</a></td><td>INO</td><td class='mono up'>+65.2%</td><td>fda</td><td></td><td>new screen?: fda</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/CAPR' target='_blank' rel='noopener'>CAPR</a></td><td>CAPR</td><td class='mono up'>+64.6%</td><td>fda</td><td>PDUFA path after AdCom: FDA open to BLA amendment / date extension. Catalyst owns this. Squeeze/social would not have seen it.</td><td>new screen?: fda/pdufa -- hand to Catalyst</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/PLAG' target='_blank' rel='noopener'>PLAG</a></td><td>Planet Green Holdings Corp.</td><td class='mono up'>+60.7%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/ARX' target='_blank' rel='noopener'>ARX</a></td><td>ARX</td><td class='mono up'>+58.8%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/RETO' target='_blank' rel='noopener'>RETO</a></td><td>ReTo Eco-Solutions, Inc.</td><td class='mono down'>-58.6%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/BRNX' target='_blank' rel='noopener'>BRNX</a></td><td>BRNX</td><td class='mono up'>+56.9%</td><td>split</td><td></td><td>corporate action -- not a screen miss</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/SHAZ' target='_blank' rel='noopener'>SHAZ</a></td><td>SharonAI Holdings, Inc.</td><td class='mono up'>+56.0%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/EROC' target='_blank' rel='noopener'>EROC</a></td><td>EROC</td><td class='mono up'>+55.8%</td><td>analyst</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/CRIS' target='_blank' rel='noopener'>CRIS</a></td><td>CRIS</td><td class='mono down'>-55.8%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/SCKT' target='_blank' rel='noopener'>SCKT</a></td><td>Socket Mobile, Inc.</td><td class='mono down'>-55.2%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/CDTG' target='_blank' rel='noopener'>CDTG</a></td><td>CDTG</td><td class='mono up'>+54.8%</td><td>split</td><td></td><td>corporate action -- not a screen miss</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/INV' target='_blank' rel='noopener'>INV</a></td><td>INV</td><td class='mono down'>-53.2%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/MWYN' target='_blank' rel='noopener'>MWYN</a></td><td>MWYN</td><td class='mono up'>+52.7%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/NIQ' target='_blank' rel='noopener'>NIQ</a></td><td>NIQ Global Intelligence plc</td><td class='mono up'>+51.7%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/CLRO' target='_blank' rel='noopener'>CLRO</a></td><td>CLRO</td><td class='mono down'>-50.9%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/DDC' target='_blank' rel='noopener'>DDC</a></td><td>DDC</td><td class='mono up'>+50.9%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/STDN' target='_blank' rel='noopener'>STDN</a></td><td>Standard Nuclear, Inc.</td><td class='mono up'>+50.4%</td><td>analyst</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/GRDX' target='_blank' rel='noopener'>GRDX</a></td><td>GRDX</td><td class='mono up'>+50.0%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/CSTE' target='_blank' rel='noopener'>CSTE</a></td><td>CSTE</td><td class='mono up'>+49.6%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/KLC' target='_blank' rel='noopener'>KLC</a></td><td>KLC</td><td class='mono down'>-49.3%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/NBIS' target='_blank' rel='noopener'>NBIS</a></td><td>NBIS</td><td class='mono up'>+49.2%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/CJMB' target='_blank' rel='noopener'>CJMB</a></td><td>CJMB</td><td class='mono up'>+49.1%</td><td>mna</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/BZAI' target='_blank' rel='noopener'>BZAI</a></td><td>BZAI</td><td class='mono down'>-48.9%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/NXGL' target='_blank' rel='noopener'>NXGL</a></td><td>NexGel, Inc</td><td class='mono up'>+48.7%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/HTFL' target='_blank' rel='noopener'>HTFL</a></td><td>HTFL</td><td class='mono up'>+48.6%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/CD' target='_blank' rel='noopener'>CD</a></td><td>CD</td><td class='mono up'>+47.8%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/NWGL' target='_blank' rel='noopener'>NWGL</a></td><td>CL Workshop Group Limited</td><td class='mono up'>+47.1%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/RMCF' target='_blank' rel='noopener'>RMCF</a></td><td>Rocky Mountain Chocolate Factor</td><td class='mono up'>+47.0%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/GLND' target='_blank' rel='noopener'>GLND</a></td><td>GLND</td><td class='mono down'>-46.7%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/FIEE' target='_blank' rel='noopener'>FIEE</a></td><td>FIEE</td><td class='mono up'>+46.2%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/FGL' target='_blank' rel='noopener'>FGL</a></td><td>FGL</td><td class='mono down'>-46.2%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/MBRX' target='_blank' rel='noopener'>MBRX</a></td><td>MBRX</td><td class='mono up'>+45.7%</td><td>analyst</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/ACH' target='_blank' rel='noopener'>ACH</a></td><td>ACH</td><td class='mono down'>-45.4%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/EXOD' target='_blank' rel='noopener'>EXOD</a></td><td>EXOD</td><td class='mono up'>+45.2%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/USDE' target='_blank' rel='noopener'>USDE</a></td><td>StablecoinX Inc.</td><td class='mono up'>+45.0%</td><td>mna</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/LESL' target='_blank' rel='noopener'>LESL</a></td><td>LESL</td><td class='mono down'>-44.9%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/ARTW' target='_blank' rel='noopener'>ARTW</a></td><td>ARTW</td><td class='mono up'>+43.8%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/AIAI' target='_blank' rel='noopener'>AIAI</a></td><td>AIAI</td><td class='mono up'>+43.8%</td><td>mna</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/ADVB' target='_blank' rel='noopener'>ADVB</a></td><td>ADVB</td><td class='mono up'>+43.7%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/TOPP' target='_blank' rel='noopener'>TOPP</a></td><td>Toppoint Holdings Inc.</td><td class='mono down'>-43.3%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/SST' target='_blank' rel='noopener'>SST</a></td><td>System1, Inc.</td><td class='mono up'>+41.6%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/BIVI' target='_blank' rel='noopener'>BIVI</a></td><td>BIVI</td><td class='mono up'>+41.4%</td><td>fda</td><td></td><td>new screen?: fda</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/STIM' target='_blank' rel='noopener'>STIM</a></td><td>Neuronetics, Inc.</td><td class='mono up'>+41.0%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/IVDA' target='_blank' rel='noopener'>IVDA</a></td><td>IVDA</td><td class='mono up'>+38.7%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/TTEC' target='_blank' rel='noopener'>TTEC</a></td><td>TTEC Holdings, Inc.</td><td class='mono down'>-38.3%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/EXYN' target='_blank' rel='noopener'>EXYN</a></td><td>EXYN</td><td class='mono up'>+38.3%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/CDNL' target='_blank' rel='noopener'>CDNL</a></td><td>CDNL</td><td class='mono down'>-38.0%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/OBX' target='_blank' rel='noopener'>OBX</a></td><td>Obsidian Therapeutics, Inc.</td><td class='mono down'>-37.6%</td><td>analyst</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/LNSR' target='_blank' rel='noopener'>LNSR</a></td><td>LNSR</td><td class='mono up'>+37.6%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/DAIC' target='_blank' rel='noopener'>DAIC</a></td><td>DAIC</td><td class='mono down'>-37.2%</td><td>split</td><td></td><td>corporate action -- not a screen miss</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/CXAI' target='_blank' rel='noopener'>CXAI</a></td><td>CXAI</td><td class='mono down'>-36.8%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/VEEE' target='_blank' rel='noopener'>VEEE</a></td><td>Twin Vee PowerCats Co.</td><td class='mono up'>+36.8%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/SNDK' target='_blank' rel='noopener'>SNDK</a></td><td>Sandisk Corporation</td><td class='mono up'>+36.4%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/YXT' target='_blank' rel='noopener'>YXT</a></td><td>YXT.COM GROUP HOLDING LIMITED -</td><td class='mono down'>-36.2%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/INBS' target='_blank' rel='noopener'>INBS</a></td><td>INBS</td><td class='mono up'>+35.8%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/AREN' target='_blank' rel='noopener'>AREN</a></td><td>AREN</td><td class='mono down'>-35.8%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/PMA' target='_blank' rel='noopener'>PMA</a></td><td>Ming Shing Group Holdings Limit</td><td class='mono up'>+35.2%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/APLM' target='_blank' rel='noopener'>APLM</a></td><td>APLM</td><td class='mono up'>+35.1%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/IPDN' target='_blank' rel='noopener'>IPDN</a></td><td>IPDN</td><td class='mono down'>-35.0%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/INHD' target='_blank' rel='noopener'>INHD</a></td><td>INHD</td><td class='mono up'>+34.7%</td><td>split</td><td></td><td>corporate action -- not a screen miss</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/AMPG' target='_blank' rel='noopener'>AMPG</a></td><td>AMPG</td><td class='mono down'>-34.5%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/MVIS' target='_blank' rel='noopener'>MVIS</a></td><td>MVIS</td><td class='mono down'>-34.3%</td><td>split</td><td></td><td>corporate action -- not a screen miss</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/SPAI' target='_blank' rel='noopener'>SPAI</a></td><td>Safe Pro Group Inc.</td><td class='mono up'>+34.1%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/GTEC' target='_blank' rel='noopener'>GTEC</a></td><td>GTEC</td><td class='mono up'>+34.0%</td><td>analyst</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/FRGT' target='_blank' rel='noopener'>FRGT</a></td><td>FRGT</td><td class='mono down'>-33.9%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/DARE' target='_blank' rel='noopener'>DARE</a></td><td>DARE</td><td class='mono down'>-33.6%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/PRHI' target='_blank' rel='noopener'>PRHI</a></td><td>Presurance Holdings, Inc.</td><td class='mono up'>+33.5%</td><td>split</td><td></td><td>corporate action -- not a screen miss</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/FTH' target='_blank' rel='noopener'>FTH</a></td><td>FTH</td><td class='mono up'>+33.4%</td><td>analyst</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/AEYE' target='_blank' rel='noopener'>AEYE</a></td><td>AEYE</td><td class='mono up'>+33.4%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/FSLY' target='_blank' rel='noopener'>FSLY</a></td><td>FSLY</td><td class='mono up'>+33.3%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/NXTC' target='_blank' rel='noopener'>NXTC</a></td><td>NextCure, Inc.</td><td class='mono up'>+33.3%</td><td>mna</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/SION' target='_blank' rel='noopener'>SION</a></td><td>Sionna Therapeutics, Inc.</td><td class='mono up'>+33.2%</td><td>fda</td><td></td><td>new screen?: fda</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/SNAL' target='_blank' rel='noopener'>SNAL</a></td><td>Snail, Inc.</td><td class='mono down'>-33.0%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/SLNG' target='_blank' rel='noopener'>SLNG</a></td><td>Stabilis Solutions, Inc.</td><td class='mono up'>+32.8%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/DRMA' target='_blank' rel='noopener'>DRMA</a></td><td>DRMA</td><td class='mono up'>+32.7%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/WFF' target='_blank' rel='noopener'>WFF</a></td><td>WF Holding Limited</td><td class='mono down'>-32.7%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/GETY' target='_blank' rel='noopener'>GETY</a></td><td>GETY</td><td class='mono down'>-32.5%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/GYGY' target='_blank' rel='noopener'>GYGY</a></td><td>GYGY</td><td class='mono down'>-32.4%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/KIDZ' target='_blank' rel='noopener'>KIDZ</a></td><td>KIDZ</td><td class='mono down'>-32.3%</td><td>split</td><td></td><td>corporate action -- not a screen miss</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/ETON' target='_blank' rel='noopener'>ETON</a></td><td>ETON</td><td class='mono up'>+32.3%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/BTAI' target='_blank' rel='noopener'>BTAI</a></td><td>BTAI</td><td class='mono up'>+32.2%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/VALN' target='_blank' rel='noopener'>VALN</a></td><td>Valneva SE</td><td class='mono up'>+32.0%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/HAO' target='_blank' rel='noopener'>HAO</a></td><td>HAO</td><td class='mono up'>+31.8%</td><td>offering</td><td></td><td>new screen?: offering</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/GIPR' target='_blank' rel='noopener'>GIPR</a></td><td>GIPR</td><td class='mono down'>-31.6%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/AVAH' target='_blank' rel='noopener'>AVAH</a></td><td>AVAH</td><td class='mono up'>+31.6%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/BODI' target='_blank' rel='noopener'>BODI</a></td><td>BODI</td><td class='mono down'>-31.4%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/YDES' target='_blank' rel='noopener'>YDES</a></td><td>YD Bio Limited</td><td class='mono up'>+31.0%</td><td>mna</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/VNRX' target='_blank' rel='noopener'>VNRX</a></td><td>VolitionRX Limited</td><td class='mono down'>-30.8%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/NSPR' target='_blank' rel='noopener'>NSPR</a></td><td>InspireMD Inc.</td><td class='mono up'>+30.7%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/WXM' target='_blank' rel='noopener'>WXM</a></td><td>WF International Limited</td><td class='mono up'>+30.6%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/BIOX' target='_blank' rel='noopener'>BIOX</a></td><td>BIOX</td><td class='mono up'>+30.5%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/CURI' target='_blank' rel='noopener'>CURI</a></td><td>CURI</td><td class='mono up'>+30.5%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/AQB' target='_blank' rel='noopener'>AQB</a></td><td>AQB</td><td class='mono up'>+30.3%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/TMCR' target='_blank' rel='noopener'>TMCR</a></td><td>The Metals Royalty Company Inc.</td><td class='mono up'>+30.1%</td><td>mna</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/WLDS' target='_blank' rel='noopener'>WLDS</a></td><td>Wearable Devices Ltd.</td><td class='mono down'>-30.1%</td><td>--</td><td></td><td>neither desk -- classify</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/ATNM' target='_blank' rel='noopener'>ATNM</a></td><td>ATNM</td><td class='mono up'>+30.0%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+<tr><td><a href='https://finance.yahoo.com/quote/STEX' target='_blank' rel='noopener'>STEX</a></td><td>Streamex Corp.</td><td class='mono up'>+30.0%</td><td>earnings</td><td></td><td>catalyst-adjacent; not squeeze/social DNA</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+  <footer>Read-only. No trades. State resets on refresh. Republished after the Friday 9pm scan.</footer>
+</div>
+</body>
+</html>
