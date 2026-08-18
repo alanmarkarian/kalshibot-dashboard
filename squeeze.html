@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f1117">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Squeeze brief</title>
+<style>
+  :root {
+    color-scheme: dark;
+    --page:#0f1117; --card:#12161f; --ink:#dfe4ea; --muted:#8b93a7;
+    --line:#2f3542; --warn:#fab219; --warn-bg:#2a2410; --warn-line:#5a4a12;
+    --ok:#2ed573; --hot:#ff6b6b; --ign:#e056fd; --link:#70a1ff;
+    --grok:#70a1ff; --claude:#ffa502;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--page); color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 17px; line-height: 1.45;
+    padding: 18px 16px 48px;
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+  .wrap { max-width: 520px; margin: 0 auto; }
+  h1 { font-size: 22px; font-weight: 700; margin: 0 0 4px; }
+  h2 { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+       color: var(--muted); margin: 22px 0 10px; }
+  .sub { color: var(--muted); font-size: 14px; margin: 0 0 14px; }
+  .sub a { color: var(--link); text-decoration: none; }
+  .banner {
+    background: var(--warn-bg); border: 1px solid var(--warn-line);
+    color: #ffe7a3; border-radius: 12px; padding: 14px 16px; margin-bottom: 8px;
+  }
+  .banner b { color: var(--warn); }
+  .banner p { margin: 0 0 8px; }
+  .banner p:last-child { margin: 0; }
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 16px; margin-bottom: 10px;
+  }
+  .card.empty { color: var(--muted); }
+  .name-row { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+  .tk { font-size: 28px; font-weight: 800; letter-spacing: .02em; }
+  .tk a { color: inherit; text-decoration: none; }
+  .px { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 15px; }
+  .lvl { display: inline-block; margin-top: 8px; background: #2a1630; color: var(--ign);
+         font-size: 12px; font-weight: 700; letter-spacing: .04em; padding: 6px 10px;
+         border-radius: 999px; min-height: 32px; }
+  .scores { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px 0; }
+  .score {
+    background: #0c0e14; border: 1px solid var(--line); border-radius: 12px;
+    padding: 12px; min-height: 72px;
+  }
+  .score .who { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  .score.grok .who { color: var(--grok); }
+  .score.claude .who { color: var(--claude); }
+  .score .n { font-size: 26px; font-weight: 750; font-variant-numeric: tabular-nums; line-height: 1.1; margin-top: 2px; }
+  .score .tier { color: var(--muted); font-size: 13px; margin-top: 2px; }
+  .why { font-size: 15px; color: #c8ceda; }
+  .flat { font-size: 16px; }
+  .flat b { color: var(--ok); }
+  .note { color: var(--muted); font-size: 14px; margin-top: 8px; }
+  footer { margin-top: 28px; color: var(--muted); font-size: 13px; line-height: 1.5; }
+  footer a { color: var(--link); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Squeeze brief</h1>
+  <p class="sub">Buyable dual names only &middot; two theories, two scores<br>
+    <a href="index.html">Kalshi dashboard</a></p>
+
+  <div class="banner">
+    <p><b>Not a full live board.</b> Grok here is the thin 2026-08-17 proof scan (26 names), not the last full 56-name board from 2026-08-14. Dated 8/14 12:39 AM ET consensus files were not found &mdash; they were overwritten.</p>
+    <p>Claude is the 2026-08-17 Mon AM snapshot (prices/SI mostly Fri 8/14 close). A full Grok board is due after Premarket Tue 8/18 7:36 AM ET. Do not treat this page as a complete scan.</p>
+  </div>
+
+  <h2>Buyable</h2>
+  <div class="card empty">Dual trigger &mdash; none</div>
+  <div class="card empty">Dual watch &mdash; none</div>
+
+  <div class="card">
+    <div class="name-row">
+      <div class="tk"><a href="https://stockanalysis.com/stocks/htz/" target="_blank" rel="noopener">HTZ</a></div>
+      <div class="px">$2.16 &middot; SI 55.9%</div>
+    </div>
+    <div class="lvl">DUAL IGNITION</div>
+    <div class="scores">
+      <div class="score grok">
+        <div class="who">Grok</div>
+        <div class="n">56.4</div>
+        <div class="tier">WATCH</div>
+      </div>
+      <div class="score claude">
+        <div class="who">Claude</div>
+        <div class="n">53.4</div>
+        <div class="tier">MONITOR</div>
+      </div>
+    </div>
+    <div class="why">WSB 40&rarr;1 overnight (43&rarr;2357 mentions) after the 8/06 beat; Friday 2.88&rarr;2.27 fade looks like distribution. Grok: velocity + WSB accelerating.</div>
+  </div>
+
+  <h2>Exit pressure</h2>
+  <div class="card flat">
+    <b>Book is flat.</b>
+    <div class="note">Live file <code>positions.csv</code> is header-only. Paper ledger is not the live book. Leftover Claude rows (GRPN / SOUN / ONDS) are not positions.</div>
+  </div>
+
+  <footer>
+    One product, two theories &mdash; scores are not merged.<br>
+    Dual board / one-sided names omitted on purpose.<br>
+    Built 2026-08-17 ~10:05 PM ET &middot; source consensus.json 8/17 thin scan
+  </footer>
+</div>
+</body>
+</html>
