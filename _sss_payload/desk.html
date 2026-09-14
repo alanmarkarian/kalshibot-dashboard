@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Squeeze Desk">
+<meta name="theme-color" content="#0b0f19">
+<title>Squeeze Desk | Short Squeeze Screener</title>
+<style>
+:root {
+  --bg: #0b0f19;
+  --panel: #111827;
+  --card: #1e293b;
+  --card2: #0f172a;
+  --border: #1f2937;
+  --border2: #334155;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --dim: #64748b;
+  --title: #f8fafc;
+  --green: #22c55e;
+  --green2: #4ade80;
+  --yellow: #eab308;
+  --yellow2: #facc15;
+  --blue: #3b82f6;
+  --orange: #f59e0b;
+  --purple: #a855f7;
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+body { padding: 16px 18px 36px; max-width: 1280px; margin: 0 auto; }
+h1,h2,h3,h4 { color: var(--title); font-weight: 600; margin: 0; }
+button, input, select { font-family: inherit; }
+a { color: var(--blue); }
+
+.header { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+.header .bolt { font-size: 1.6rem; }
+.header .title { font-size: 1.5rem; font-weight: 700; color: var(--title); letter-spacing: -0.4px; }
+.header .sub { font-size: 0.82rem; color: var(--dim); }
+
+.takeaway {
+  background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+  border: 1px solid var(--border2);
+  border-left: 4px solid var(--blue);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 8px 0 18px 0;
+  line-height: 1.55;
+}
+.takeaway strong { color: var(--title); }
+.takeaway .note { color: var(--muted); font-size: 0.88rem; }
+
+.term-box {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 14px;
+  font-size: 0.9rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+.layout { display: grid; grid-template-columns: 240px 1fr; gap: 18px; }
+@media (max-width: 860px) {
+  .layout { grid-template-columns: 1fr; }
+  body { padding: 12px 12px 28px; }
+}
+
+.sidebar {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 14px 16px;
+  height: fit-content;
+  position: sticky;
+  top: 10px;
+}
+.sidebar h3 { font-size: 1.05rem; margin-bottom: 4px; }
+.sidebar .cap { font-size: 0.78rem; color: var(--dim); margin-bottom: 12px; }
+.sidebar label {
+  display: block; font-size: 0.82rem; color: #cbd5e1; margin: 10px 0 4px;
+}
+.sidebar input[type="range"] { width: 100%; accent-color: #2563eb; }
+.range-val { float: right; color: var(--title); font-weight: 600; }
+.checks label { display: flex; align-items: center; gap: 8px; margin: 6px 0; cursor: pointer; }
+.checks input { accent-color: #2563eb; }
+hr.div { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
+
+.status-row { display: flex; gap: 10px; align-items: stretch; flex-wrap: wrap; margin-bottom: 12px; }
+.status-bar {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 16px;
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  font-size: 0.88rem;
+  color: var(--muted);
+  flex-wrap: wrap;
+  flex: 1;
+}
+.status-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  display: inline-block; margin-right: 5px;
+}
+.dot-green { background: var(--green); box-shadow: 0 0 6px var(--green); }
+.dot-yellow { background: var(--yellow); box-shadow: 0 0 6px var(--yellow); }
+
+.metrics { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 16px; }
+@media (max-width: 720px) { .metrics { grid-template-columns: repeat(2, 1fr); } }
+.metric {
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.metric .lab { color: var(--muted); font-size: 0.78rem; }
+.metric .val { color: #f1f5f9; font-weight: 700; font-size: 1.35rem; }
+
+.section-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--dim);
+  margin: 4px 0 8px 0;
+  font-weight: 600;
+}
+
+.cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 18px; }
+@media (max-width: 980px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .cards { grid-template-columns: 1fr; } }
+.setup-card {
+  background: linear-gradient(160deg, #1e293b 0%, #0f172a 100%);
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+}
+.setup-card:hover { border-color: #475569; }
+.setup-card-green { border-color: rgba(34, 197, 94, 0.5); box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.12); }
+.setup-card-yellow { border-color: rgba(234, 179, 8, 0.4); }
+.setup-card .tk { font-size: 1.1rem; font-weight: 700; color: var(--title); }
+.setup-card .spsn { font-size: 1.55rem; font-weight: 700; color: var(--text); }
+.setup-card .spsn span { font-size: 0.72rem; color: var(--dim); font-weight: 500; }
+.setup-card .meta { font-size: 0.76rem; color: var(--muted); line-height: 1.4; }
+
+.pill-green {
+  background: rgba(34, 197, 94, 0.18); color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  padding: 3px 10px; border-radius: 20px; font-weight: 600; font-size: 0.82rem;
+}
+.pill-yellow {
+  background: rgba(234, 179, 8, 0.18); color: #facc15;
+  border: 1px solid rgba(234, 179, 8, 0.4);
+  padding: 3px 10px; border-radius: 20px; font-weight: 600; font-size: 0.82rem;
+}
+.pill-black {
+  background: rgba(100, 116, 139, 0.25); color: #94a3b8;
+  border: 1px solid rgba(100, 116, 139, 0.45);
+  padding: 3px 10px; border-radius: 20px; font-weight: 600; font-size: 0.82rem;
+}
+
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); border-radius: 10px; }
+table { width: 100%; border-collapse: collapse; font-size: 0.86rem; min-width: 780px; }
+th {
+  text-align: left; padding: 8px 8px; color: var(--dim);
+  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em;
+  background: #0f172a; border-bottom: 1px solid var(--border);
+  position: sticky; top: 0;
+}
+td { padding: 8px 8px; border-bottom: 1px solid #1a2332; }
+tr { cursor: pointer; }
+tr:hover td { background: rgba(30, 41, 59, 0.65); }
+.sps-hi { background: rgba(34,197,94,0.25); color: #4ade80; font-weight: 700; }
+.sps-mid { background: rgba(234,179,8,0.2); color: #facc15; font-weight: 600; }
+.sps-lo { background: rgba(100,116,139,0.15); color: #94a3b8; }
+.caption { color: var(--dim); font-size: 0.8rem; margin-top: 6px; }
+.warn {
+  background: rgba(234,179,8,0.12); border: 1px solid rgba(234,179,8,0.35);
+  color: #fde68a; border-radius: 10px; padding: 12px 14px; margin-bottom: 8px;
+}
+
+.dive { margin-top: 8px; }
+.dive-head { display: flex; align-items: center; gap: 12px; margin: 8px 0 14px 0; flex-wrap: wrap; }
+.dive-head .tk { font-size: 1.4rem; font-weight: 700; color: var(--title); }
+.dive-head .sps { font-size: 1.2rem; font-weight: 700; color: var(--text); }
+.dive-head .px { color: var(--muted); }
+.float-tag {
+  background: rgba(249,115,22,0.2); color: #fb923c;
+  padding: 2px 9px; border-radius: 12px; font-size: 0.76rem; font-weight: 600;
+}
+select#tickerPick {
+  background: var(--card2); color: var(--text);
+  border: 1px solid var(--border2); border-radius: 8px;
+  padding: 8px 10px; font-size: 1rem; min-width: 140px;
+}
+.bars { margin: 10px 0 16px; }
+.bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.bar-lab { width: 85px; font-size: 0.8rem; color: var(--muted); }
+.bar-track { flex: 1; background: #1e293b; border-radius: 5px; height: 8px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 5px; }
+.bar-n { width: 30px; text-align: right; font-size: 0.8rem; font-weight: 600; color: var(--text); }
+.expl { margin: 8px 0; }
+.expl details {
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px 12px; margin-bottom: 6px;
+}
+.expl summary { cursor: pointer; font-weight: 600; color: var(--title); }
+.expl p { margin: 8px 0 4px; color: #cbd5e1; line-height: 1.5; }
+.note-green { background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.35); color: #86efac; border-radius: 10px; padding: 12px 14px; }
+.note-yellow { background: rgba(234,179,8,0.12); border: 1px solid rgba(234,179,8,0.35); color: #fde68a; border-radius: 10px; padding: 12px 14px; }
+.note-black { background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.3); color: #93c5fd; border-radius: 10px; padding: 12px 14px; }
+.guide {
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 14px; margin-top: 16px; color: #cbd5e1;
+}
+.guide table { min-width: 0; font-size: 0.84rem; }
+.guide td, .guide th { border-bottom: 1px solid var(--border); }
+.foot { color: var(--dim); font-size: 0.78rem; margin-top: 16px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <span class="bolt">⚡</span>
+  <div>
+    <div class="title">Squeeze Desk</div>
+    <div class="sub">Finds stocks with short-squeeze potential before the market opens</div>
+  </div>
+</div>
+
+<div class="takeaway">
+  <strong>What to do with this page</strong><br>
+  1. Look at the <strong>Top Setups</strong> cards below — these are the best candidates right now.<br>
+  2. Focus first on any name marked <strong style="color:#4ade80;">🟢 GREEN</strong> (strong structure + real movement).<br>
+  3. Click a ticker in the Deep Dive section for a plain-English explanation of why it scored the way it did.<br>
+  4. Then do your own research (chart, news, social) before considering any trade.<br><br>
+  <span class="note">This is a screening tool, not a buy signal. Highest scores appear at the top.</span>
+</div>
+
+<div class="term-box">
+  <strong style="color:#e2e8f0;">Key terms (we made these up for the tool)</strong><br>
+  <strong>SPS</strong> = Squeeze Potential Score (0–100). Higher = stronger overall short-squeeze setup.<br>
+  <strong>Structural</strong> = How much short-interest “fuel” exists (short %, days to cover, float size).<br>
+  <strong>Velocity</strong> = Is the stock actually moving right now? (pre-market change + volume + options activity).<br>
+  <strong>🟢 GREEN</strong> = Strong setup worth watching ·
+  <strong>🟡 YELLOW</strong> = Interesting but needs more confirmation ·
+  <strong>⚫ BLACK</strong> = Missing key pieces right now.
+</div>
+
+<div class="layout">
+<aside class="sidebar">
+  <h3>⚙️ Filters</h3>
+  <div class="cap">Change these to show more or fewer names</div>
+
+  <label>Minimum SPS <span class="range-val" id="minSpsVal">30</span></label>
+  <input type="range" id="minSps" min="0" max="100" step="5" value="30">
+
+  <label>Show these colors</label>
+  <div class="checks">
+    <label><input type="checkbox" class="colChk" value="GREEN" checked> GREEN</label>
+    <label><input type="checkbox" class="colChk" value="YELLOW" checked> YELLOW</label>
+    <label><input type="checkbox" class="colChk" value="BLACK" checked> BLACK</label>
+  </div>
+
+  <label>Min Short Interest % <span class="range-val" id="minShortVal">0</span></label>
+  <input type="range" id="minShort" min="0" max="50" step="1" value="0">
+
+  <div class="checks">
+    <label><input type="checkbox" id="gammaOnly"> Only names with Gamma Signal</label>
+    <label><input type="checkbox" id="preMktOnly"> Only pre-market gainers (&gt;+2%)</label>
+  </div>
+  <hr class="div">
+  <div class="cap">Snapshot from last_run.json · filters run in this page. Edit watchlist.csv / short_data.csv in the Streamlit app to refresh scores.</div>
+</aside>
+
+<main>
+  <div class="status-row">
+    <div class="status-bar" id="statusBar"></div>
+  </div>
+  <div class="metrics" id="metrics"></div>
+
+  <div class="section-label">Top Setups Right Now — start here</div>
+  <div class="cards" id="cards"></div>
+
+  <div class="section-label">Full Rankings (sorted by SPS)</div>
+  <div id="tableArea"></div>
+
+  <hr class="div">
+  <h3>🔍 Deep Dive — why a stock scored this way</h3>
+  <label style="font-size:0.85rem;color:#cbd5e1;">Pick a ticker</label><br>
+  <select id="tickerPick"></select>
+  <div class="dive" id="dive"></div>
+
+  <details class="guide">
+    <summary>Full guide — how the scoring works</summary>
+    <p><strong>SPS (Squeeze Potential Score)</strong> is a 0–100 overall score made from four pillars:</p>
+    <table>
+      <thead><tr><th>Pillar</th><th>Weight</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>Structural</td><td>35%</td><td>Short interest, days to cover, borrow cost, utilization, float size</td></tr>
+        <tr><td>Velocity</td><td>30%</td><td>Pre-market price change, relative volume, front-week call activity (gamma)</td></tr>
+        <tr><td>Catalyst</td><td>20%</td><td>Upcoming earnings or a large pre-market gap</td></tr>
+        <tr><td>Narrative</td><td>15%</td><td>Meme / retail story strength + current attention</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Readiness colors</strong></p>
+    <ul>
+      <li>🟢 <strong>GREEN</strong> = SPS ≥ 70 <strong>and</strong> Structural ≥ 55 <strong>and</strong> Velocity ≥ 48 → strongest setups</li>
+      <li>🟡 <strong>YELLOW</strong> = SPS ≥ 54 and at least two solid pillars → watch list</li>
+      <li>⚫ <strong>BLACK</strong> = missing key pieces right now</li>
+    </ul>
+    <p><strong>Best time to use this</strong><br>7:30 AM – 9:30 AM ET (pre-market), when velocity and gamma data are most meaningful.</p>
+  </details>
+  <div class="foot">Squeeze Desk · Screening tool only · Not financial advice · Always do your own research</div>
+</main>
+</div>
+
+<script>
+const DATA = [{"ticker":"BBBY","sps":57.1,"structural":100,"narrative":82,"catalyst":22,"velocity":18,"readiness":"BLACK","readiness_emoji":"⚫","pre_mkt_pct":0.0,"rel_volume":0.51,"short_pct":31.2,"dtc":9.5,"current_price":4.35,"float_m":95.3,"low_float":false,"gamma_signal":false,"explanations":{"structural":"Float 95.3M. Short interest 31.2% + Days-to-cover 9.5 + Utilization 97% + Borrow 30.5% → Structural score: 100/100","narrative":"Known meme name with strong retail story potential + attention boost from volume/movement → Narrative score: 82/100","catalyst":"Earnings timing + pre-market gap 0.0% as ignition signal → Catalyst score: 22/100","velocity":"Pre-mkt 0.0% | Rel volume 0.5x | Gamma (front-week calls): Moderate/None → Velocity score: 18/100"},"last_updated":"2026-08-21 01:55"},{"ticker":"KOSS","sps":56.0,"structural":100,"narrative":75,"catalyst":22,"velocity":18,"readiness":"BLACK","readiness_emoji":"⚫","pre_mkt_pct":-3.37,"rel_volume":0.88,"short_pct":28.3,"dtc":12.1,"current_price":3.44,"float_m":5.5,"low_float":true,"gamma_signal":false,"explanations":{"structural":"Very low float (5.5M) — major squeeze amplifier. Short interest 28.3% + Days-to-cover 12.1 + Utilization 95% + Borrow 25.0% → Structural score: 100/100","narrative":"Known meme name with strong retail story potential + attention boost from volume/movement → Narrative score: 75/100","catalyst":"Earnings timing + pre-market gap -3.4% as ignition signal → Catalyst score: 22/100","velocity":"Pre-mkt -3.4% | Rel volume 0.9x | Gamma (front-week calls): Moderate/None → Velocity score: 18/100"},"last_updated":"2026-08-21 01:55"},{"ticker":"EXPR","sps":54.4,"structural":97,"narrative":70,"catalyst":22,"velocity":18,"readiness":"BLACK","readiness_emoji":"⚫","pre_mkt_pct":0.0,"rel_volume":0.0,"short_pct":25.6,"dtc":8.2,"current_price":1.0,"float_m":0.0,"low_float":false,"gamma_signal":false,"explanations":{"structural":"Short interest 25.6% + Days-to-cover 8.2 + Utilization 90% + Borrow 22.0% → Structural score: 97/100","narrative":"Known meme name with strong retail story potential + attention boost from volume/movement → Narrative score: 70/100","catalyst":"Earnings timing + pre-market gap 0.0% as ignition signal → Catalyst score: 22/100","velocity":"Pre-mkt 0.0% | Rel volume 0.0x | Gamma (front-week calls): Moderate/None → Velocity score: 18/100"},"last_updated":"2026-08-21 01:55"},{"ticker":"GME","sps":47.4,"structural":65,"narrative":88,"catalyst":22,"velocity":23,"readiness":"BLACK","readiness_emoji":"⚫","pre_mkt_pct":0.06,"rel_volume":0.87,"short_pct":24.8,"dtc":5.8,"current_price":18.04,"float_m":408.8,"low_float":false,"gamma_signal":false,"explanations":{"structural":"High float (408.8M) — harder to squeeze. Short interest 24.8% + Days-to-cover 5.8 + Utilization 88% + Borrow 18.5% → Structural score: 65/100","narrative":"Known meme name with strong retail story potential + attention boost from volume/movement → Narrative score: 88/100","catalyst":"Earnings timing + pre-market gap 0.1% as ignition signal → Catalyst score: 22/100","velocity":"Pre-mkt 0.1% | Rel volume 0.9x | Gamma (front-week calls): Moderate/None → Velocity score: 23/100"},"last_updated":"2026-08-21 01:55"},{"ticker":"SPCE","sps":46.0,"structural":70,"narrative":68,"catalyst":29,"velocity":18,"readiness":"BLACK","readiness_emoji":"⚫","pre_mkt_pct":-4.05,"rel_volume":0.19,"short_pct":22.1,"dtc":6.5,"current_price":3.08,"float_m":150.9,"low_float":false,"gamma_signal":false,"explanations":{"structural":"Float 150.9M. Short interest 22.1% + Days-to-cover 6.5 + Utilization 82% + Borrow 15.0% → Structural score: 70/100","narrative":"Known meme name with strong retail story potential + attention boost from volume/movement → Narrative score: 68/100","catalyst":"Earnings timing + pre-market gap -4.0% as ignition signal → Catalyst score: 29/100","velocity":"Pre-mkt -4.0% | Rel volume 0.2x | Gamma (front-week calls): Moderate/None → Velocity score: 18/100"},"last_updated":"2026-08-21 01:55"},{"ticker":"COIN","sps":42.0,"structural":27,"narrative":67,"catalyst":36,"velocity":50,"readiness":"BLACK","readiness_emoji":"⚫","pre_mkt_pct":7.58,"rel_volume":2.12,"short_pct":12.8,"dtc":2.5,"current_price":172.35,"float_m":219.7,"low_float":false,"gamma_signal":false,"explanations":{"structural":"High float (219.7M) — harder to squeeze. Short interest 12.8% + Days-to-cover 2.5 + Utilization 55% + Borrow 5.5% → Structural score: 27/100","narrative":"Known meme name with strong retail story potential + attention boost from volume/movement → Narrative score: 67/100","catalyst":"Earnings timing + pre-market gap 7.6% as ignition signal → Catalyst score: 36/100","velocity":"Pre-mkt 7.6% | Rel volume 2.1x | Gamma (front-week calls): Moderate/None → Velocity score: 50/100"},"last_updated":"2026-08-21 01:55"},{"ticker":"WISH","sps":40.1,"structural":61,"narrative":60,"catalyst":22,"velocity":18,"readiness":"BLACK","readiness_emoji":"⚫","pre_mkt_pct":0.0,"rel_volume":0.0,"short_pct":18.7,"dtc":5.1,"current_price":1.0,"float_m":0.0,"low_float":false,"gamma_signal":false,"explanations":{"structural":"Short interest 18.7% + Days-to-cover 5.1 + Utilization 70% + Borrow 11.2% → Structural score: 61/100","narrative":"Known meme name with strong retail story potential + attention boost from volume/movement → Narrative score: 60/100","catalyst":"Earnings timing + pre-market gap 0.0% as ignition signal → Catalyst score: 22/100","velocity":"Pre-mkt 0.0% | Rel volume 0.0x | Gamma (front-week calls): Moderate/None → Velocity score: 18/100"},"last_updated":"2026-08-21 01:55"},{"ticker":"AMC","sps":39.8,"structural":47,"narrative":80,"catalyst":22,"velocity":23,"readiness":"BLACK","readiness_emoji":"⚫","pre_mkt_pct":-1.98,"rel_volume":0.23,"short_pct":19.5,"dtc":4.2,"current_price":2.47,"float_m":835.3,"low_float":false,"gamma_signal":false,"explanations":{"structural":"High float (835.3M) — harder to squeeze. Short interest 19.5% + Days-to-cover 4.2 + Utilization 75% + Borrow 9.2% → Structural score: 47/100","narrative":"Known meme name with strong retail story potential + attention boost from volume/movement → Narrative score: 80/100","catalyst":"Earnings timing + pre-market gap -2.0% as ignition signal → Catalyst score: 22/100","velocity":"Pre-mkt -2.0% | Rel volume 0.2x | Gamma (front-week calls): Moderate/None → Velocity score: 23/100"},"last_updated":"2026-08-21 01:55"},{"ticker":"AG","sps":31.4,"structural":41,"narrative":38,"catalyst":22,"velocity":23,"readiness":"BLACK","readiness_emoji":"⚫","pre_mkt_pct":1.63,"rel_volume":1.09,"short_pct":16.8,"dtc":4.0,"current_price":21.19,"float_m":487.6,"low_float":false,"gamma_signal":false,"explanations":{"structural":"High float (487.6M) — harder to squeeze. Short interest 16.8% + Days-to-cover 4.0 + Utilization 68% + Borrow 10.5% → Structural score: 41/100","narrative":"Known meme name with strong retail story potential + attention boost from volume/movement → Narrative score: 38/100","catalyst":"Earnings timing + pre-market gap 1.6% as ignition signal → Catalyst score: 22/100","velocity":"Pre-mkt 1.6% | Rel volume 1.1x | Gamma (front-week calls): Moderate/None → Velocity score: 23/100"},"last_updated":"2026-08-21 01:55"},{"ticker":"CLOV","sps":30.8,"structural":32,"narrative":65,"catalyst":22,"velocity":18,"readiness":"BLACK","readiness_emoji":"⚫","pre_mkt_pct":-2.84,"rel_volume":0.58,"short_pct":14.3,"dtc":3.5,"current_price":4.1,"float_m":412.9,"low_float":false,"gamma_signal":false,"explanations":{"structural":"High float (412.9M) — harder to squeeze. Short interest 14.3% + Days-to-cover 3.5 + Utilization 60% + Borrow 8.5% → Structural score: 32/100","narrative":"Known meme name with strong retail story potential + attention boost from volume/movement → Narrative score: 65/100","catalyst":"Earnings timing + pre-market gap -2.8% as ignition signal → Catalyst score: 22/100","velocity":"Pre-mkt -2.8% | Rel volume 0.6x | Gamma (front-week calls): Moderate/None → Velocity score: 18/100"},"last_updated":"2026-08-21 01:55"},{"ticker":"LCID","sps":30.8,"structural":19,"narrative":48,"catalyst":29,"velocity":37,"readiness":"BLACK","readiness_emoji":"⚫","pre_mkt_pct":-4.98,"rel_volume":0.99,"short_pct":9.8,"dtc":2.3,"current_price":5.62,"float_m":176.1,"low_float":false,"gamma_signal":true,"explanations":{"structural":"Float 176.1M. Short interest 9.8% + Days-to-cover 2.3 + Utilization 40% + Borrow 4.2% → Structural score: 19/100","narrative":"Known meme name with strong retail story potential + attention boost from volume/movement → Narrative score: 48/100","catalyst":"Earnings timing + pre-market gap -5.0% as ignition signal → Catalyst score: 29/100","velocity":"Pre-mkt -5.0% | Rel volume 1.0x | Gamma (front-week calls): STRONG → Velocity score: 37/100"},"last_updated":"2026-08-21 01:55"},{"ticker":"PLUG","sps":30.3,"structural":35,"narrative":55,"catalyst":22,"velocity":18,"readiness":"BLACK","readiness_emoji":"⚫","pre_mkt_pct":-2.22,"rel_volume":0.73,"short_pct":15.2,"dtc":3.8,"current_price":2.2,"float_m":1333.4,"low_float":false,"gamma_signal":false,"explanations":{"structural":"High float (1333.4M) — harder to squeeze. Short interest 15.2% + Days-to-cover 3.8 + Utilization 65% + Borrow 7.8% → Structural score: 35/100","narrative":"Known meme name with strong retail story potential + attention boost from volume/movement → Narrative score: 55/100","catalyst":"Earnings timing + pre-market gap -2.2% as ignition signal → Catalyst score: 22/100","velocity":"Pre-mkt -2.2% | Rel volume 0.7x | Gamma (front-week calls): Moderate/None → Velocity score: 18/100"},"last_updated":"2026-08-21 01:55"},{"ticker":"CLNE","sps":28.8,"structural":30,"narrative":40,"catalyst":22,"velocity":26,"readiness":"BLACK","readiness_emoji":"⚫","pre_mkt_pct":2.55,"rel_volume":1.22,"short_pct":12.5,"dtc":3.2,"current_price":1.61,"float_m":174.2,"low_float":false,"gamma_signal":false,"explanations":{"structural":"Float 174.2M. Short interest 12.5% + Days-to-cover 3.2 + Utilization 52% + Borrow 6.8% → Structural score: 30/100","narrative":"Known meme name with strong retail story potential + attention boost from volume/movement → Narrative score: 40/100","catalyst":"Earnings timing + pre-market gap 2.5% as ignition signal → Catalyst score: 22/100","velocity":"Pre-mkt 2.5% | Rel volume 1.2x | Gamma (front-week calls): Moderate/None → Velocity score: 26/100"},"last_updated":"2026-08-21 01:55"},{"ticker":"RIVN","sps":26.1,"structural":21,"narrative":50,"catalyst":22,"velocity":23,"readiness":"BLACK","readiness_emoji":"⚫","pre_mkt_pct":1.78,"rel_volume":0.53,"short_pct":11.5,"dtc":2.8,"current_price":16.01,"float_m":945.5,"low_float":false,"gamma_signal":false,"explanations":{"structural":"High float (945.5M) — harder to squeeze. Short interest 11.5% + Days-to-cover 2.8 + Utilization 48% + Borrow 6.0% → Structural score: 21/100","narrative":"Known meme name with strong retail story potential + attention boost from volume/movement → Narrative score: 50/100","catalyst":"Earnings timing + pre-market gap 1.8% as ignition signal → Catalyst score: 22/100","velocity":"Pre-mkt 1.8% | Rel volume 0.5x | Gamma (front-week calls): Moderate/None → Velocity score: 23/100"},"last_updated":"2026-08-21 01:55"},{"ticker":"SOFI","sps":23.6,"structural":10,"narrative":58,"catalyst":22,"velocity":23,"readiness":"BLACK","readiness_emoji":"⚫","pre_mkt_pct":-2.71,"rel_volume":0.59,"short_pct":8.5,"dtc":2.1,"current_price":17.92,"float_m":1271.8,"low_float":false,"gamma_signal":false,"explanations":{"structural":"High float (1271.8M) — harder to squeeze. Short interest 8.5% + Days-to-cover 2.1 + Utilization 45% + Borrow 3.5% → Structural score: 10/100","narrative":"Known meme name with strong retail story potential + attention boost from volume/movement → Narrative score: 58/100","catalyst":"Earnings timing + pre-market gap -2.7% as ignition signal → Catalyst score: 22/100","velocity":"Pre-mkt -2.7% | Rel volume 0.6x | Gamma (front-week calls): Moderate/None → Velocity score: 23/100"},"last_updated":"2026-08-21 01:55"},{"ticker":"SMCI","sps":22.7,"structural":6,"narrative":62,"catalyst":22,"velocity":23,"readiness":"BLACK","readiness_emoji":"⚫","pre_mkt_pct":-0.22,"rel_volume":0.86,"short_pct":7.5,"dtc":1.5,"current_price":36.5,"float_m":519.1,"low_float":false,"gamma_signal":false,"explanations":{"structural":"High float (519.1M) — harder to squeeze. Short interest 7.5% + Days-to-cover 1.5 + Utilization 25% + Borrow 3.0% → Structural score: 6/100","narrative":"Known meme name with strong retail story potential + attention boost from volume/movement → Narrative score: 62/100","catalyst":"Earnings timing + pre-market gap -0.2% as ignition signal → Catalyst score: 22/100","velocity":"Pre-mkt -0.2% | Rel volume 0.9x | Gamma (front-week calls): Moderate/None → Velocity score: 23/100"},"last_updated":"2026-08-21 01:55"},{"ticker":"HOOD","sps":21.0,"structural":5,"narrative":52,"catalyst":22,"velocity":23,"readiness":"BLACK","readiness_emoji":"⚫","pre_mkt_pct":-0.7,"rel_volume":0.97,"short_pct":6.2,"dtc":1.8,"current_price":95.1,"float_m":783.7,"low_float":false,"gamma_signal":false,"explanations":{"structural":"High float (783.7M) — harder to squeeze. Short interest 6.2% + Days-to-cover 1.8 + Utilization 30% + Borrow 2.1% → Structural score: 5/100","narrative":"Known meme name with strong retail story potential + attention boost from volume/movement → Narrative score: 52/100","catalyst":"Earnings timing + pre-market gap -0.7% as ignition signal → Catalyst score: 22/100","velocity":"Pre-mkt -0.7% | Rel volume 1.0x | Gamma (front-week calls): Moderate/None → Velocity score: 23/100"},"last_updated":"2026-08-21 01:55"},{"ticker":"TSLA","sps":20.2,"structural":1,"narrative":58,"catalyst":22,"velocity":23,"readiness":"BLACK","readiness_emoji":"⚫","pre_mkt_pct":-1.71,"rel_volume":0.73,"short_pct":4.8,"dtc":1.2,"current_price":345.13,"float_m":2819.2,"low_float":false,"gamma_signal":false,"explanations":{"structural":"High float (2819.2M) — harder to squeeze. Short interest 4.8% + Days-to-cover 1.2 + Utilization 20% + Borrow 2.0% → Structural score: 1/100","narrative":"Known meme name with strong retail story potential + attention boost from volume/movement → Narrative score: 58/100","catalyst":"Earnings timing + pre-market gap -1.7% as ignition signal → Catalyst score: 22/100","velocity":"Pre-mkt -1.7% | Rel volume 0.7x | Gamma (front-week calls): Moderate/None → Velocity score: 23/100"},"last_updated":"2026-08-21 01:55"},{"ticker":"PLTR","sps":18.9,"structural":3,"narrative":45,"catalyst":22,"velocity":23,"readiness":"BLACK","readiness_emoji":"⚫","pre_mkt_pct":-0.7,"rel_volume":0.62,"short_pct":5.5,"dtc":1.4,"current_price":173.96,"float_m":2110.4,"low_float":false,"gamma_signal":false,"explanations":{"structural":"High float (2110.4M) — harder to squeeze. Short interest 5.5% + Days-to-cover 1.4 + Utilization 28% + Borrow 2.8% → Structural score: 3/100","narrative":"Known meme name with strong retail story potential + attention boost from volume/movement → Narrative score: 45/100","catalyst":"Earnings timing + pre-market gap -0.7% as ignition signal → Catalyst score: 22/100","velocity":"Pre-mkt -0.7% | Rel volume 0.6x | Gamma (front-week calls): Moderate/None → Velocity score: 23/100"},"last_updated":"2026-08-21 01:55"},{"ticker":"NVDA","sps":17.6,"structural":0,"narrative":42,"catalyst":22,"velocity":23,"readiness":"BLACK","readiness_emoji":"⚫","pre_mkt_pct":-0.33,"rel_volume":0.65,"short_pct":3.2,"dtc":0.8,"current_price":216.85,"float_m":23226.2,"low_float":false,"gamma_signal":false,"explanations":{"structural":"High float (23226.2M) — harder to squeeze. Short interest 3.2% + Days-to-cover 0.8 + Utilization 15% + Borrow 1.5% → Structural score: 0/100","narrative":"Known meme name with strong retail story potential + attention boost from volume/movement → Narrative score: 42/100","catalyst":"Earnings timing + pre-market gap -0.3% as ignition signal → Catalyst score: 22/100","velocity":"Pre-mkt -0.3% | Rel volume 0.7x | Gamma (front-week calls): Moderate/None → Velocity score: 23/100"},"last_updated":"2026-08-21 01:55"}];
+
+function esc(s) {
+  return String(s == null ? "" : s)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+function fmtPct(x) { const n = Number(x)||0; return (n>=0?"+":"") + n.toFixed(1) + "%"; }
+function fmtPct2(x) { const n = Number(x)||0; return (n>=0?"+":"") + n.toFixed(2) + "%"; }
+function spsClass(v) {
+  v = Number(v);
+  if (v >= 70) return "sps-hi";
+  if (v >= 55) return "sps-mid";
+  return "sps-lo";
+}
+function pill(r) {
+  const c = r === "GREEN" ? "pill-green" : r === "YELLOW" ? "pill-yellow" : "pill-black";
+  const e = r === "GREEN" ? "🟢" : r === "YELLOW" ? "🟡" : "⚫";
+  return '<span class="'+c+'">'+e+' '+r+'</span>';
+}
+function readyLabel(r) {
+  return r === "GREEN" ? "🟢 GREEN" : r === "YELLOW" ? "🟡 YELLOW" : "⚫ BLACK";
+}
+
+function filters() {
+  const colors = Array.from(document.querySelectorAll(".colChk:checked")).map(c => c.value);
+  return {
+    minSps: Number(document.getElementById("minSps").value),
+    colors,
+    minShort: Number(document.getElementById("minShort").value),
+    gammaOnly: document.getElementById("gammaOnly").checked,
+    preMktOnly: document.getElementById("preMktOnly").checked
+  };
+}
+function applyFilter(rows) {
+  const f = filters();
+  return rows.filter(r => {
+    if (Number(r.sps) < f.minSps) return false;
+    if (f.colors.length && f.colors.indexOf(r.readiness) < 0) return false;
+    if (Number(r.short_pct) < f.minShort) return false;
+    if (f.gammaOnly && !r.gamma_signal) return false;
+    if (f.preMktOnly && !(Number(r.pre_mkt_pct) > 2.0)) return false;
+    return true;
+  });
+}
+
+function renderStatus() {
+  const last = (DATA[0] && DATA[0].last_updated) ? DATA[0].last_updated : "—";
+  const g = DATA.filter(r => r.readiness === "GREEN").length;
+  const y = DATA.filter(r => r.readiness === "YELLOW").length;
+  const b = DATA.filter(r => r.readiness === "BLACK").length;
+  document.getElementById("statusBar").innerHTML =
+    '<span><span class="status-dot dot-green"></span> Updated <b style="color:#e2e8f0">'+esc(last)+'</b></span>' +
+    '<span><span class="status-dot dot-green"></span> <b style="color:#4ade80">'+g+'</b> GREEN</span>' +
+    '<span><span class="status-dot dot-yellow"></span> <b style="color:#facc15">'+y+'</b> YELLOW</span>' +
+    '<span style="color:#64748b;">'+b+' BLACK · '+DATA.length+' total</span>';
+
+  const top = DATA.reduce((m,r) => Math.max(m, Number(r.sps)||0), 0);
+  const avg = DATA.length ? DATA.reduce((s,r)=>s+(Number(r.sps)||0),0)/DATA.length : 0;
+  document.getElementById("metrics").innerHTML = [
+    ["Screened", String(DATA.length)],
+    ["🟢 GREEN", String(g)],
+    ["🟡 YELLOW", String(y)],
+    ["Best SPS", String(Math.round(top))],
+    ["Avg SPS", String(Math.round(avg))]
+  ].map(([lab,val]) => '<div class="metric"><div class="lab">'+lab+'</div><div class="val">'+val+'</div></div>').join("");
+}
+
+function renderCards() {
+  const top = DATA.slice(0, 5);
+  document.getElementById("cards").innerHTML = top.map(r => {
+    const border = r.readiness === "GREEN" ? "setup-card-green" :
+                   r.readiness === "YELLOW" ? "setup-card-yellow" : "";
+    const extra = [];
+    if (r.low_float) extra.push("🔥 Low float");
+    if (r.gamma_signal) extra.push("Gamma");
+    const extraTxt = extra.length ? "<br>" + extra.join(" · ") : "";
+    return '<div class="setup-card '+border+'" data-tk="'+esc(r.ticker)+'">' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">' +
+        '<span class="tk">'+esc(r.ticker)+'</span><span style="font-size:0.85rem;">'+esc(r.readiness_emoji||"")+'</span>' +
+      '</div>' +
+      '<div class="spsn">'+Math.round(Number(r.sps))+' <span>SPS</span></div>' +
+      '<div class="meta">Struct '+esc(r.structural)+' · Vel '+esc(r.velocity)+'<br>' +
+        fmtPct(r.pre_mkt_pct)+' · '+(Number(r.rel_volume)||0).toFixed(1)+'x vol' + extraTxt +
+      '</div></div>';
+  }).join("");
+  document.querySelectorAll(".setup-card").forEach(el => {
+    el.addEventListener("click", () => pick(el.getAttribute("data-tk")));
+  });
+}
+
+function renderTable() {
+  const filtered = applyFilter(DATA);
+  const area = document.getElementById("tableArea");
+  if (!filtered.length) {
+    area.innerHTML = '<div class="warn">No names match your current filters. The Top Setups cards above still show the strongest available names. Try lowering Minimum SPS or selecting more colors.</div>';
+    return;
+  }
+  const rows = filtered.map((r,i) => {
+    const floatTxt = (Number(r.float_m)||0) > 0 ? Math.round(Number(r.float_m))+"M" : "—";
+    return '<tr data-tk="'+esc(r.ticker)+'">' +
+      '<td>'+(i+1)+'</td>' +
+      '<td><strong>'+esc(r.ticker)+'</strong></td>' +
+      '<td class="'+spsClass(r.sps)+'">'+(Number(r.sps).toFixed(1))+'</td>' +
+      '<td>'+readyLabel(r.readiness)+'</td>' +
+      '<td>'+esc(r.structural)+'</td>' +
+      '<td>'+esc(r.velocity)+'</td>' +
+      '<td>'+fmtPct(r.pre_mkt_pct)+'</td>' +
+      '<td>'+(Number(r.rel_volume)||0).toFixed(1)+'x</td>' +
+      '<td>'+(Number(r.short_pct)||0).toFixed(1)+'</td>' +
+      '<td>'+(Number(r.dtc)||0).toFixed(1)+'</td>' +
+      '<td>'+floatTxt+'</td>' +
+      '<td>'+(r.gamma_signal ? "✅" : "—")+'</td>' +
+      '<td>$'+(Number(r.current_price)||0).toFixed(2)+'</td>' +
+    '</tr>';
+  }).join("");
+  area.innerHTML =
+    '<div class="table-wrap"><table><thead><tr>' +
+    '<th>Rank</th><th>Ticker</th><th>SPS</th><th>Ready</th><th>Struct</th><th>Vel</th>' +
+    '<th>PreMkt</th><th>RelVol</th><th>Short %</th><th>DTC</th><th>Float</th><th>Gamma</th><th>Price</th>' +
+    '</tr></thead><tbody>'+rows+'</tbody></table></div>' +
+    '<div class="caption">Showing '+filtered.length+' of '+DATA.length+' tickers</div>';
+  area.querySelectorAll("tr[data-tk]").forEach(tr => {
+    tr.addEventListener("click", () => pick(tr.getAttribute("data-tk")));
+  });
+}
+
+function bar(label, val, color) {
+  val = Math.max(0, Math.min(100, Number(val)||0));
+  return '<div class="bar-row"><div class="bar-lab">'+label+'</div>' +
+    '<div class="bar-track"><div class="bar-fill" style="width:'+val+'%;background:'+color+';"></div></div>' +
+    '<div class="bar-n">'+Math.round(val)+'</div></div>';
+}
+
+function renderDive(ticker) {
+  const row = DATA.find(r => r.ticker === ticker) || DATA[0];
+  if (!row) { document.getElementById("dive").innerHTML = ""; return; }
+  const readyClass = row.readiness === "GREEN" ? "pill-green" :
+                     row.readiness === "YELLOW" ? "pill-yellow" : "pill-black";
+  const floatTag = row.low_float ? '<span class="float-tag">🔥 LOW FLOAT</span>' : "";
+  const expl = row.explanations || {};
+  let note;
+  if (row.readiness === "GREEN") {
+    note = '<div class="note-green">🟢 Strong setup — real short pressure + movement is already showing. Watch it, then do your own research.</div>';
+  } else if (row.readiness === "YELLOW") {
+    note = '<div class="note-yellow">🟡 Has several good pieces but is not fully confirmed yet.</div>';
+  } else {
+    note = '<div class="note-black">⚫ Missing too many key ingredients right now.</div>';
+  }
+  const floatTxt = (Number(row.float_m)||0) > 0 ? (Number(row.float_m).toFixed(1)+"M") : "—";
+  document.getElementById("dive").innerHTML =
+    '<div class="dive-head">' +
+      '<span class="tk">'+esc(row.ticker)+'</span>' +
+      '<span class="sps">SPS '+esc(row.sps)+'</span>' +
+      '<span class="'+readyClass+'">'+esc(row.readiness_emoji||"")+' '+esc(row.readiness)+'</span>' +
+      '<span class="px">$'+(Number(row.current_price)||0).toFixed(2)+'</span>' +
+      floatTag +
+    '</div>' +
+    '<div class="metrics">' +
+      '<div class="metric"><div class="lab">Structural</div><div class="val">'+esc(row.structural)+'/100</div></div>' +
+      '<div class="metric"><div class="lab">Narrative</div><div class="val">'+esc(row.narrative)+'/100</div></div>' +
+      '<div class="metric"><div class="lab">Catalyst</div><div class="val">'+esc(row.catalyst)+'/100</div></div>' +
+      '<div class="metric"><div class="lab">Velocity</div><div class="val">'+esc(row.velocity)+'/100</div></div>' +
+    '</div>' +
+    '<div style="font-weight:600;margin:4px 0 8px;">Score breakdown</div>' +
+    '<div class="bars">' +
+      bar("Structural", row.structural, "#22c55e") +
+      bar("Narrative", row.narrative, "#3b82f6") +
+      bar("Catalyst", row.catalyst, "#a855f7") +
+      bar("Velocity", row.velocity, "#f59e0b") +
+    '</div>' +
+    '<div style="font-weight:600;margin:8px 0;">Plain-English explanations</div>' +
+    '<div class="expl">' +
+      ["structural","narrative","catalyst","velocity"].map(k =>
+        '<details><summary>'+k.charAt(0).toUpperCase()+k.slice(1)+'</summary><p>'+esc(expl[k]||"—")+'</p></details>'
+      ).join("") +
+    '</div>' +
+    '<div style="font-weight:600;margin:12px 0 8px;">Key numbers</div>' +
+    '<div class="metrics">' +
+      '<div class="metric"><div class="lab">Pre-Market</div><div class="val">'+fmtPct2(row.pre_mkt_pct)+'</div></div>' +
+      '<div class="metric"><div class="lab">Rel Volume</div><div class="val">'+(Number(row.rel_volume)||0).toFixed(2)+'x</div></div>' +
+      '<div class="metric"><div class="lab">Short %</div><div class="val">'+(Number(row.short_pct)||0).toFixed(1)+'%</div></div>' +
+      '<div class="metric"><div class="lab">Days to Cover</div><div class="val">'+(Number(row.dtc)||0).toFixed(1)+'</div></div>' +
+      '<div class="metric"><div class="lab">Float</div><div class="val">'+floatTxt+'</div></div>' +
+      '<div class="metric"><div class="lab">Gamma</div><div class="val">'+(row.gamma_signal?"✅":"—")+'</div></div>' +
+    '</div>' +
+    note;
+}
+
+function pick(ticker) {
+  const sel = document.getElementById("tickerPick");
+  if (sel.value !== ticker) sel.value = ticker;
+  renderDive(ticker);
+  document.getElementById("dive").scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+function fillSelect() {
+  const sel = document.getElementById("tickerPick");
+  sel.innerHTML = DATA.map(r => '<option value="'+esc(r.ticker)+'">'+esc(r.ticker)+'</option>').join("");
+  sel.addEventListener("change", () => renderDive(sel.value));
+}
+
+function bindFilters() {
+  const minSps = document.getElementById("minSps");
+  const minShort = document.getElementById("minShort");
+  minSps.addEventListener("input", () => {
+    document.getElementById("minSpsVal").textContent = minSps.value;
+    renderTable();
+  });
+  minShort.addEventListener("input", () => {
+    document.getElementById("minShortVal").textContent = minShort.value;
+    renderTable();
+  });
+  document.querySelectorAll(".colChk, #gammaOnly, #preMktOnly").forEach(el => {
+    el.addEventListener("change", renderTable);
+  });
+}
+
+renderStatus();
+renderCards();
+fillSelect();
+bindFilters();
+renderTable();
+if (DATA.length) renderDive(DATA[0].ticker);
+</script>
+</body>
+</html>

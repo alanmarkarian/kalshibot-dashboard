@@ -1,0 +1,471 @@
+{
+  "as_of": "2026-09-09",
+  "grok_meta": {
+    "as_of": "2026-09-09",
+    "x": {
+      "ok": true,
+      "n": 10,
+      "quota_remaining": "160",
+      "error": null,
+      "tickers": [
+        "FLNC",
+        "SOUN",
+        "HTZ",
+        "WYFI",
+        "BATL",
+        "GRPN",
+        "FLWS",
+        "KPTI",
+        "WGS",
+        "NEGG"
+      ],
+      "config_source": "C:\\Users\\alanm\\OneDrive\\Documents\\Claude Meme Screener\\adanos_config.json",
+      "candidates": [
+        "HTZ",
+        "GRPN",
+        "SOUN",
+        "FLNC",
+        "KPTI",
+        "BATL",
+        "NEGG",
+        "FLWS",
+        "WGS",
+        "WYFI"
+      ]
+    }
+  },
+  "claude_meta": {
+    "as_of": "2026-09-09",
+    "asof_date": "2026-09-09",
+    "n": 56,
+    "path": "C:\\Users\\alanm\\ShortSqueezeScreener\\data\\claude_engine\\snapshot.json"
+  },
+  "counts": {
+    "dual_trigger": 2,
+    "dual_watch": 0,
+    "dual_ignition": 2,
+    "dual_board": 11,
+    "only_grok": 1,
+    "only_claude": 1
+  },
+  "agreements": [
+    {
+      "ticker": "HTZ",
+      "level": "DUAL TRIGGER",
+      "grok_score": 51.4,
+      "grok_tier": "MONITOR",
+      "grok_fuel": 22.4,
+      "grok_ign": 15.0,
+      "grok_flags": [
+        "X TRENDING (pre-Reddit)",
+        "X ACCELERATING 1.6x vs 3d",
+        "TAPE BB SQUEEZE (compression)",
+        "GAMMA RAMP  -  weekly calls bid"
+      ],
+      "grok_x_buzz": 62.2,
+      "grok_trigger": true,
+      "claude_score": 51.4,
+      "claude_tier": "MONITOR",
+      "claude_fuel": 22.4,
+      "claude_ign": 15.0,
+      "claude_flags": [
+        "GAMMA RAMP - weekly calls bid"
+      ],
+      "claude_x_buzz": 62.2,
+      "claude_trigger": true,
+      "price": 2.069999933242798,
+      "si_pct": 55.85
+    },
+    {
+      "ticker": "PLCE",
+      "level": "DUAL TRIGGER",
+      "grok_score": 44.9,
+      "grok_tier": "MONITOR",
+      "grok_fuel": 22.4,
+      "grok_ign": 12.5,
+      "grok_flags": [
+        "GAMMA RAMP  -  weekly calls bid"
+      ],
+      "grok_x_buzz": null,
+      "grok_trigger": true,
+      "claude_score": 44.9,
+      "claude_tier": "MONITOR",
+      "claude_fuel": 22.4,
+      "claude_ign": 12.5,
+      "claude_flags": [
+        "GAMMA RAMP - weekly calls bid"
+      ],
+      "claude_x_buzz": null,
+      "claude_trigger": true,
+      "price": 2.5399999618530273,
+      "si_pct": 33.73
+    },
+    {
+      "ticker": "FLWS",
+      "level": "DUAL IGNITION",
+      "grok_score": 41.1,
+      "grok_tier": "MONITOR",
+      "grok_fuel": 24.1,
+      "grok_ign": 12.0,
+      "grok_flags": [
+        "PRE-CATALYST: earnings 2026-09-10 (1d out)"
+      ],
+      "grok_x_buzz": 17.6,
+      "grok_trigger": false,
+      "claude_score": 41.1,
+      "claude_tier": "MONITOR",
+      "claude_fuel": 24.1,
+      "claude_ign": 12.0,
+      "claude_flags": [
+        "PRE-CATALYST: earnings 2026-09-10 (1d out)"
+      ],
+      "claude_x_buzz": 17.6,
+      "claude_trigger": false,
+      "price": 3.490000009536743,
+      "si_pct": 37.22
+    },
+    {
+      "ticker": "WEN",
+      "level": "DUAL IGNITION",
+      "grok_score": 46.3,
+      "grok_tier": "MONITOR",
+      "grok_fuel": 13.3,
+      "grok_ign": 19.0,
+      "grok_flags": [
+        "TAPE BB SQUEEZE (compression)",
+        "WSB CHATTER ACCELERATING"
+      ],
+      "grok_x_buzz": null,
+      "grok_trigger": false,
+      "claude_score": 46.3,
+      "claude_tier": "MONITOR",
+      "claude_fuel": 13.3,
+      "claude_ign": 19.0,
+      "claude_flags": [
+        "WSB CHATTER ACCELERATING"
+      ],
+      "claude_x_buzz": null,
+      "claude_trigger": false,
+      "price": 7.539999961853027,
+      "si_pct": 37.54
+    },
+    {
+      "ticker": "GME",
+      "level": "DUAL BOARD",
+      "grok_score": 29.0,
+      "grok_tier": "BACKGROUND",
+      "grok_fuel": 0.0,
+      "grok_ign": 15.0,
+      "grok_flags": [
+        "GAMMA RAMP  -  weekly calls bid"
+      ],
+      "grok_x_buzz": null,
+      "grok_trigger": false,
+      "claude_score": 29.0,
+      "claude_tier": "BACKGROUND",
+      "claude_fuel": 0.0,
+      "claude_ign": 15.0,
+      "claude_flags": [
+        "GAMMA RAMP - weekly calls bid"
+      ],
+      "claude_x_buzz": null,
+      "claude_trigger": true,
+      "price": 19.889999389648438,
+      "si_pct": 13.2
+    },
+    {
+      "ticker": "GRPN",
+      "level": "DUAL BOARD",
+      "grok_score": 51.0,
+      "grok_tier": "MONITOR",
+      "grok_fuel": 33.0,
+      "grok_ign": 8.0,
+      "grok_flags": [
+        "TAPE BB SQUEEZE (compression)"
+      ],
+      "grok_x_buzz": 20.0,
+      "grok_trigger": false,
+      "claude_score": 51.0,
+      "claude_tier": "MONITOR",
+      "claude_fuel": 33.0,
+      "claude_ign": 8.0,
+      "claude_flags": [],
+      "claude_x_buzz": 20.0,
+      "claude_trigger": false,
+      "price": 18.299999237060547,
+      "si_pct": 58.91
+    },
+    {
+      "ticker": "KOSS",
+      "level": "DUAL BOARD",
+      "grok_score": 28.0,
+      "grok_tier": "BACKGROUND",
+      "grok_fuel": 13.0,
+      "grok_ign": 5.0,
+      "grok_flags": [],
+      "grok_x_buzz": null,
+      "grok_trigger": false,
+      "claude_score": 28.0,
+      "claude_tier": "BACKGROUND",
+      "claude_fuel": 13.0,
+      "claude_ign": 5.0,
+      "claude_flags": [],
+      "claude_x_buzz": null,
+      "claude_trigger": false,
+      "price": 3.4600000381469727,
+      "si_pct": 3.84
+    },
+    {
+      "ticker": "KPTI",
+      "level": "DUAL BOARD",
+      "grok_score": 29.4,
+      "grok_tier": "BACKGROUND",
+      "grok_fuel": 26.4,
+      "grok_ign": 3.0,
+      "grok_flags": [],
+      "grok_x_buzz": 14.8,
+      "grok_trigger": false,
+      "claude_score": 29.4,
+      "claude_tier": "BACKGROUND",
+      "claude_fuel": 26.4,
+      "claude_ign": 3.0,
+      "claude_flags": [],
+      "claude_x_buzz": 14.8,
+      "claude_trigger": false,
+      "price": 1.690000057220459,
+      "si_pct": 45.72
+    },
+    {
+      "ticker": "KSS",
+      "level": "DUAL BOARD",
+      "grok_score": 29.3,
+      "grok_tier": "BACKGROUND",
+      "grok_fuel": 11.3,
+      "grok_ign": 8.0,
+      "grok_flags": [],
+      "grok_x_buzz": null,
+      "grok_trigger": false,
+      "claude_score": 29.3,
+      "claude_tier": "BACKGROUND",
+      "claude_fuel": 11.3,
+      "claude_ign": 8.0,
+      "claude_flags": [],
+      "claude_x_buzz": null,
+      "claude_trigger": false,
+      "price": 17.520000457763672,
+      "si_pct": 27.66
+    },
+    {
+      "ticker": "NEGG",
+      "level": "DUAL BOARD",
+      "grok_score": 30.1,
+      "grok_tier": "BACKGROUND",
+      "grok_fuel": 27.1,
+      "grok_ign": 3.0,
+      "grok_flags": [],
+      "grok_x_buzz": 0.0,
+      "grok_trigger": false,
+      "claude_score": 30.1,
+      "claude_tier": "BACKGROUND",
+      "claude_fuel": 27.1,
+      "claude_ign": 3.0,
+      "claude_flags": [],
+      "claude_x_buzz": 0.0,
+      "claude_trigger": false,
+      "price": 15.0600004196167,
+      "si_pct": 39.29
+    },
+    {
+      "ticker": "OPEN",
+      "level": "DUAL BOARD",
+      "grok_score": 36.7,
+      "grok_tier": "BACKGROUND",
+      "grok_fuel": 2.7,
+      "grok_ign": 20.0,
+      "grok_flags": [
+        "VELOCITY ACCELERATING d/d",
+        "WSB CHATTER ACCELERATING"
+      ],
+      "grok_x_buzz": null,
+      "grok_trigger": false,
+      "claude_score": 36.7,
+      "claude_tier": "BACKGROUND",
+      "claude_fuel": 2.7,
+      "claude_ign": 20.0,
+      "claude_flags": [
+        "WSB CHATTER ACCELERATING"
+      ],
+      "claude_x_buzz": null,
+      "claude_trigger": false,
+      "price": 3.0,
+      "si_pct": 20.3
+    },
+    {
+      "ticker": "SPCE",
+      "level": "DUAL BOARD",
+      "grok_score": 30.1,
+      "grok_tier": "BACKGROUND",
+      "grok_fuel": 18.1,
+      "grok_ign": 2.0,
+      "grok_flags": [
+        "TAPE BB SQUEEZE (compression)"
+      ],
+      "grok_x_buzz": null,
+      "grok_trigger": false,
+      "claude_score": 30.1,
+      "claude_tier": "BACKGROUND",
+      "claude_fuel": 18.1,
+      "claude_ign": 2.0,
+      "claude_flags": [],
+      "claude_x_buzz": null,
+      "claude_trigger": false,
+      "price": 2.9600000381469727,
+      "si_pct": 41.21
+    },
+    {
+      "ticker": "SPHR",
+      "level": "DUAL BOARD",
+      "grok_score": 28.2,
+      "grok_tier": "BACKGROUND",
+      "grok_fuel": 18.2,
+      "grok_ign": 5.0,
+      "grok_flags": [],
+      "grok_x_buzz": null,
+      "grok_trigger": false,
+      "claude_score": 28.2,
+      "claude_tier": "BACKGROUND",
+      "claude_fuel": 18.2,
+      "claude_ign": 5.0,
+      "claude_flags": [],
+      "claude_x_buzz": null,
+      "claude_trigger": false,
+      "price": 140.94000244140625,
+      "si_pct": 29.4
+    },
+    {
+      "ticker": "WGS",
+      "level": "DUAL BOARD",
+      "grok_score": 28.4,
+      "grok_tier": "BACKGROUND",
+      "grok_fuel": 23.4,
+      "grok_ign": 5.0,
+      "grok_flags": [
+        "TAPE BB SQUEEZE (compression)"
+      ],
+      "grok_x_buzz": 11.5,
+      "grok_trigger": false,
+      "claude_score": 28.4,
+      "claude_tier": "BACKGROUND",
+      "claude_fuel": 23.4,
+      "claude_ign": 5.0,
+      "claude_flags": [],
+      "claude_x_buzz": 11.5,
+      "claude_trigger": false,
+      "price": 86.4800033569336,
+      "si_pct": 39.75
+    },
+    {
+      "ticker": "XRX",
+      "level": "DUAL BOARD",
+      "grok_score": 27.8,
+      "grok_tier": "BACKGROUND",
+      "grok_fuel": 12.8,
+      "grok_ign": 5.0,
+      "grok_flags": [],
+      "grok_x_buzz": null,
+      "grok_trigger": false,
+      "claude_score": 27.8,
+      "claude_tier": "BACKGROUND",
+      "claude_fuel": 12.8,
+      "claude_ign": 5.0,
+      "claude_flags": [],
+      "claude_x_buzz": null,
+      "claude_trigger": false,
+      "price": 3.140000104904175,
+      "si_pct": 30.67
+    }
+  ],
+  "only_grok": [
+    {
+      "ticker": "FLNC",
+      "level": "GROK ONLY",
+      "grok_score": 23.7,
+      "grok_tier": "BACKGROUND",
+      "grok_fuel": 14.7,
+      "grok_ign": 3.0,
+      "grok_flags": [
+        "X TRENDING (pre-Reddit)",
+        "X TREND RISING",
+        "X #1 IN BATCH (hottest FinTwit in scan set)",
+        "ST TRENDING (pre-WSB)"
+      ],
+      "grok_x_buzz": 76.4,
+      "grok_trigger": true,
+      "claude_score": 17.7,
+      "claude_tier": "BACKGROUND",
+      "claude_fuel": 14.7,
+      "claude_ign": 3.0,
+      "claude_flags": [],
+      "claude_x_buzz": 76.4,
+      "claude_trigger": false,
+      "price": 10.119999885559082,
+      "si_pct": 34.44
+    }
+  ],
+  "only_claude": [
+    {
+      "ticker": "GME",
+      "level": "CLAUDE ONLY",
+      "grok_score": 29.0,
+      "grok_tier": "BACKGROUND",
+      "grok_fuel": 0.0,
+      "grok_ign": 15.0,
+      "grok_flags": [
+        "GAMMA RAMP  -  weekly calls bid"
+      ],
+      "grok_x_buzz": null,
+      "grok_trigger": false,
+      "claude_score": 29.0,
+      "claude_tier": "BACKGROUND",
+      "claude_fuel": 0.0,
+      "claude_ign": 15.0,
+      "claude_flags": [
+        "GAMMA RAMP - weekly calls bid"
+      ],
+      "claude_x_buzz": null,
+      "claude_trigger": true,
+      "price": 19.889999389648438,
+      "si_pct": 13.2
+    }
+  ],
+  "sets": {
+    "dual_trigger": [
+      "HTZ",
+      "PLCE"
+    ],
+    "dual_watch": [],
+    "dual_ignition": [
+      "FLWS",
+      "WEN"
+    ],
+    "dual_board": [
+      "GME",
+      "GRPN",
+      "KOSS",
+      "KPTI",
+      "KSS",
+      "NEGG",
+      "OPEN",
+      "SPCE",
+      "SPHR",
+      "WGS",
+      "XRX"
+    ],
+    "only_grok": [
+      "FLNC"
+    ],
+    "only_claude": [
+      "GME"
+    ]
+  }
+}

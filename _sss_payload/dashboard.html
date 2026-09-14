@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Short Squeeze Screener — 2026-09-09</title>
+<style>
+  :root { --bg:#0f1117; --card:#12161f; --border:#2f3542; --text:#dfe4ea; --muted:#747d8c; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif;
+         margin:0; padding:20px 24px 48px; }
+  h1 { font-size:22px; margin:0 0 4px; }
+  .sub { color:var(--muted); font-size:13px; margin-bottom:18px; }
+  .legend { background:var(--card); border:1px solid var(--border); border-radius:8px;
+             padding:12px 16px; margin-bottom:16px; font-size:12px; color:#a4b0be; line-height:1.45; }
+  .position { background:var(--card); border:1px solid; border-radius:8px; padding:12px 16px; margin-bottom:10px; }
+  .pos-head { font-size:14px; margin-bottom:6px; }
+  .pos-sig { font-size:13px; color:#ff9f9f; padding:2px 0; }
+  .pos-sig.ok { color:#2ed573; }
+  .trigger-stack { background:#1c1420; border:1px solid #ff4757; border-radius:8px;
+                    padding:12px 16px; margin-bottom:14px; }
+  .trigger-stack.empty { border-color:#3d4450; background:#141820; }
+  .trig-head { color:#ff6b6b; font-weight:700; font-size:14px; margin-bottom:4px; }
+  .trig-sub { color:#a4b0be; font-size:11px; margin-bottom:8px; line-height:1.4; }
+  .trig-item { font-size:13px; padding:3px 0; }
+  .ign-bar { background:#1a1a12; border:1px solid #ffa502; border-radius:8px;
+              padding:10px 16px; margin-bottom:14px; font-size:13px; color:#ffdd59; }
+  .paper { font-size:12px; color:var(--muted); margin-bottom:14px; }
+  .consensus-bar { background:#0f1a14; border:1px solid #2ed573; border-radius:8px;
+                    padding:12px 16px; margin-bottom:14px; }
+  .consensus-bar.empty { border-color:#3d4450; background:#141820; }
+  .c-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; font-size:13px; }
+  .c-item { background:#1a2420; padding:4px 8px; border-radius:4px; }
+  .c-lvl { color:#7bed9f; font-size:10px; margin-left:4px; }
+  .x-bar { background:#141820; border:1px solid #57606f; border-radius:8px;
+            padding:10px 16px; margin-bottom:14px; font-size:13px; color:#a4b0be; }
+  .muted { color:var(--muted); }
+  table { border-collapse:collapse; width:100%; font-size:12.5px; }
+  th { text-align:left; color:#a4b0be; font-weight:600; padding:8px 8px;
+       border-bottom:2px solid var(--border); position:sticky; top:0; background:var(--bg); z-index:2; }
+  td { padding:7px 8px; border-bottom:1px solid #1e2430; vertical-align:middle; }
+  tr.main { cursor:pointer; }
+  tr.main:hover { background:#161b26; }
+  tr.detail { display:none; background:#0c0e14; }
+  tr.detail.show { display:table-row; }
+  tr.detail td { color:#a4b0be; font-size:12px; padding:10px 12px; line-height:1.5; }
+  .tk a { color:#70a1ff; text-decoration:none; font-weight:700; }
+  .tk a:hover { text-decoration:underline; }
+  .nm { color:#a4b0be; max-width:140px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .num { font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .subnum { font-size:11px; color:var(--muted); }
+  .tier { display:inline-block; color:#fff; font-size:10px; font-weight:700;
+           padding:2px 7px; border-radius:4px; letter-spacing:0.3px; }
+  .flag { display:inline-block; background:#2f1b1b; color:#ff9f9f; font-size:10px;
+           padding:2px 6px; border-radius:3px; margin:1px 2px; }
+  .bar { height:4px; background:#1e2430; border-radius:2px; margin-top:3px; width:56px; overflow:hidden; }
+  .bar > div { height:100%; border-radius:2px; }
+  .mk-in { color:#7bed9f; }
+  .mk-out { color:#ff6b6b; }
+  a { color:#70a1ff; }
+  code { background:#1e2430; padding:1px 5px; border-radius:3px; font-size:11px; }
+  .filters { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px; align-items:center; font-size:13px; }
+  .filters label { color:var(--muted); }
+  .filters input, .filters select { background:#1e2430; border:1px solid var(--border);
+      color:var(--text); border-radius:4px; padding:4px 8px; }
+  footer { margin-top:28px; color:var(--muted); font-size:11px; line-height:1.5; }
+</style>
+</head><body>
+<h1>🚀 Short Squeeze Screener</h1>
+<div class="sub">as of 2026-09-09 · 56 names ·
+click any row for entry/exit markers &amp; score breakdown ·
+score = mechanics 50 + social 50 + gamma bonus 12</div>
+
+
+<div class="legend">
+  <div><b>SETUP facts</b> (not buy signals): SI · float · DTC · WSB velocity · volume ·
+    gamma · borrow · catalyst · tape structure · X heat
+  </div>
+  <div style="margin-top:6px"><b>IGNITION ALERTS</b> = look/research now.
+    <b>DUAL TRIGGER</b> (Grok×Claude) = strongest dual-system attention for a possible purchase <i>consideration</i>.
+    Single-screener alerts alone are never auto-buys.
+  </div>
+  <div style="margin-top:6px"><b>EXIT markers</b>
+    dilution filing · social velocity &lt;1x · parabolic on ≥5x vol ·
+    borrow fee/avail normalizing · options flip to puts · 3–4x scale-out (SPRT rule)
+  </div>
+  <div style="margin-top:6px"><b>Tiers</b>
+    <span class="tier" style="background:#ff4757">RED HOT ≥70</span>
+    <span class="tier" style="background:#ffa502">WATCH 55–69</span>
+    <span class="tier" style="background:#70a1ff">MONITOR 40–54</span>
+    <span class="tier" style="background:#57606f">BACKGROUND &lt;40</span>
+    &nbsp;· Fuel = SI+float · Ignition = vol+velocity+gamma+catalyst
+  </div>
+</div>
+
+<div class="position" style="border-color:#2ed573"><div class="pos-head"><b>HTZ</b> POSITION · 1000.0 sh · entry $2.29 → $2.0882999897003174 (-8.8% / $-202) <span class="tier" style="background:#2ed573;float:right">EXIT PRESSURE: GREEN</span></div><div class="pos-sig ok">✓ no exit signals — let it work</div></div>
+<div class="consensus-bar"><div class="trig-head" style="color:#7bed9f">🎯 DUAL CONSENSUS (Grok × Claude) — TRIGGER 0 · WATCH 0 · IGN 1 · BOARD 14 &nbsp; <a href="consensus.html" style="color:#7bed9f">full report →</a></div><div class="c-row"><span class="c-item"><b>FLWS</b> <span class="c-lvl">DUAL IGNITION</span></span><span class="c-item"><b>AI</b> <span class="c-lvl">DUAL BOARD</span></span><span class="c-item"><b>BB</b> <span class="c-lvl">DUAL BOARD</span></span><span class="c-item"><b>CHWY</b> <span class="c-lvl">DUAL BOARD</span></span><span class="c-item"><b>CPB</b> <span class="c-lvl">DUAL BOARD</span></span><span class="c-item"><b>GRPN</b> <span class="c-lvl">DUAL BOARD</span></span><span class="c-item"><b>HTZ</b> <span class="c-lvl">DUAL BOARD</span></span><span class="c-item"><b>KOSS</b> <span class="c-lvl">DUAL BOARD</span></span><span class="c-item"><b>KPTI</b> <span class="c-lvl">DUAL BOARD</span></span><span class="c-item"><b>NEGG</b> <span class="c-lvl">DUAL BOARD</span></span><span class="c-item"><b>PLCE</b> <span class="c-lvl">DUAL BOARD</span></span><span class="c-item"><b>SPCE</b> <span class="c-lvl">DUAL BOARD</span></span></div></div>
+<div class="trigger-stack"><div class="trig-head">⚡ IGNITION ALERTS — look / research now (NOT buy orders · tier be damned)</div><div class="trig-sub">Something heated up. Open the chart and checklist — do not treat this as a purchase recommendation.</div><div class="trig-item"><b>HTZ</b> (39.4, BACKGROUND) @ $2.09 — HEAT: X accelerating 1.5x vs 3d (buzz 62)</div></div>
+<div class="x-bar">𝕏 FinTwit batch: <b>CHWY</b> 81↑ · <b>HTZ</b> 62↓ · <b>WYFI</b> 59↓ · <b>BATL</b> 25↓ · <b>GRPN</b> 20↓ · <b>FLWS</b> 18↑ · <b>KPTI</b> 15↑ · <b>WGS</b> 12↑ · Adanos quota left 161</div>
+<div class="ign-bar">🔥 TOP IGNITION among fueled names: <b>FLWS</b> ign 10.0/47 (fuel 24.1) · <b>AI</b> ign 7.0/47 (fuel 13.0) · <b>PLCE</b> ign 5.0/47 (fuel 22.4) · <b>WGS</b> ign 5.0/47 (fuel 23.4) · <b>SPHR</b> ign 5.0/47 (fuel 18.2)</div>
+<div class="paper">📋 Paper ledger: 4 open · 38 closed · paper-trades ignition alerts only (not real buys); exits on signal / −25% / 14d</div>
+
+<div class="filters">
+  <label>Min score <input type="number" id="minScore" value="0" min="0" max="100" style="width:64px"></label>
+  <label>Tier
+    <select id="tierFilter">
+      <option value="ALL">All</option>
+      <option value="RED HOT">RED HOT</option>
+      <option value="WATCH">WATCH</option>
+      <option value="MONITOR">MONITOR</option>
+      <option value="BACKGROUND">BACKGROUND</option>
+    </select>
+  </label>
+  <label><input type="checkbox" id="trigOnly"> Trigger / flag only</label>
+  <label><input type="checkbox" id="fuelOnly"> Fuel ≥12</label>
+  <span class="muted" id="rowCount"></span>
+</div>
+
+<div style="overflow-x:auto">
+<table id="board">
+<thead><tr>
+  <th>#</th><th>Ticker</th><th>Name</th><th>Price</th><th>Tier</th><th>Score</th>
+  <th>Mech</th><th>Soc</th><th>γ</th><th>Fuel</th><th>Ign</th>
+  <th>SI%</th><th>Float</th><th>DTC</th><th>WSB</th><th>Vel</th><th>X</th><th>Flags</th>
+</tr></thead>
+<tbody>
+
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>1</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/grpn/" target="_blank">GRPN</a></td>
+  <td class="nm">Groupon</td>
+  <td class="num">$18.09<div class="subnum">-5.5%</div></td>
+  <td><span class="tier" style="background:#70a1ff">MONITOR</span></td>
+  <td class="num"><b>46.0</b><div class="bar"><div style="width:46.0%;background:#70a1ff"></div></div></td>
+  <td class="num">36.0<div class="bar"><div style="width:72.0%;background:#2ed573"></div></div></td>
+  <td class="num">10.0<div class="bar"><div style="width:20.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">33.0</td>
+  <td class="num">3.0</td>
+  <td class="num">58.9%</td>
+  <td class="num">19.89M</td>
+  <td class="num">8.0d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">20↓</td>
+  <td><span class="flag">TAPE BB SQUEEZE (compression)</span></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 22.0/25 · Float 11.0/15 · Vol 3.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 10.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 33.0/40 · Ignition 3.0/47</b><br>𝕏 buzz 20.0 · trend falling · accel — · mentions 4 · bullish 25%<br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 59% of float · Tight float 19.89M · Days-to-cover 8.0d (crowded short book) · BB volatility compression</span> &nbsp; <a href="https://finance.yahoo.com/quote/GRPN/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/GRPN/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/grpn" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/GRPN" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/grpn/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>2</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/chwy/" target="_blank">CHWY</a></td>
+  <td class="nm">Chewy, Inc.</td>
+  <td class="num">$20.92<div class="subnum">-10.1%</div></td>
+  <td><span class="tier" style="background:#70a1ff">MONITOR</span></td>
+  <td class="num"><b>43.0</b><div class="bar"><div style="width:43.0%;background:#70a1ff"></div></div></td>
+  <td class="num">8.0<div class="bar"><div style="width:16.0%;background:#2ed573"></div></div></td>
+  <td class="num">35.0<div class="bar"><div style="width:70.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">8.0</td>
+  <td class="num">25.0</td>
+  <td class="num">8.9%</td>
+  <td class="num">54.36M</td>
+  <td class="num">0.6d</td>
+  <td class="num">#44 (11m)</td>
+  <td class="num">11.0x</td>
+  <td class="num">81↑</td>
+  <td><span class="flag">X BUZZ 81</span> <span class="flag">X TREND RISING</span> <span class="flag">X #1 IN BATCH (hottest FinTwit in scan set)</span> <span class="flag">PRE-CATALYST: earnings 2026-09-09 (0d out)</span> <span class="flag">WSB CHATTER ACCELERATING</span> <span class="flag">ST TRENDING (pre-WSB)</span></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 0.0/25 · Float 8.0/15 · Vol 0.0/10 &nbsp;|&nbsp; Rank 4.0/10 · Velocity 20.0/20 · Upvotes 1.0/5 · Brand 10.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 8.0/40 · Ignition 25.0/47</b><br>𝕏 buzz 81.1 · trend rising · accel 1.46 · mentions 151 · bullish 63%<br><span class="mk-in">SETUP (fuel/heat facts): WSB chatter accelerating · Dated catalyst &lt;=2 days · X buzz 81 (rising)</span> &nbsp; <a href="https://finance.yahoo.com/quote/CHWY/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/CHWY/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/chwy" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/CHWY" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/chwy/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>3</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/htz/" target="_blank">HTZ</a></td>
+  <td class="nm">Hertz Global</td>
+  <td class="num">$2.09<div class="subnum">-4.2%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>39.4</b><div class="bar"><div style="width:39.4%;background:#57606f"></div></div></td>
+  <td class="num">23.4<div class="bar"><div style="width:46.8%;background:#2ed573"></div></div></td>
+  <td class="num">16.0<div class="bar"><div style="width:32.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">22.4</td>
+  <td class="num">3.0</td>
+  <td class="num">55.9%</td>
+  <td class="num">169.11M</td>
+  <td class="num">2.9d</td>
+  <td class="num">#79 (4m)</td>
+  <td class="num">1.3x</td>
+  <td class="num">62↓</td>
+  <td><span class="flag">X TRENDING (pre-Reddit)</span> <span class="flag">X ACCELERATING 1.5x vs 3d</span> <span class="flag">TAPE BB SQUEEZE (compression)</span></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 20.4/25 · Float 2.0/15 · Vol 1.0/10 &nbsp;|&nbsp; Rank 3.0/10 · Velocity 2.0/20 · Upvotes 1.0/5 · Brand 10.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 22.4/40 · Ignition 3.0/47</b><br>𝕏 buzz 61.6 · trend falling · accel 1.53 · mentions 167 · bullish 53%<br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 56% of float · X buzz 62 (falling) · X accel 1.5x · BB volatility compression</span> &nbsp; <a href="https://finance.yahoo.com/quote/HTZ/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/HTZ/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/htz" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/HTZ" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/htz/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>4</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/flws/" target="_blank">FLWS</a></td>
+  <td class="nm">1-800-FLOWERS.COM</td>
+  <td class="num">$3.49<div class="subnum">-7.0%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>39.1</b><div class="bar"><div style="width:39.1%;background:#57606f"></div></div></td>
+  <td class="num">29.1<div class="bar"><div style="width:58.20000000000001%;background:#2ed573"></div></div></td>
+  <td class="num">10.0<div class="bar"><div style="width:20.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">24.1</td>
+  <td class="num">10.0</td>
+  <td class="num">37.2%</td>
+  <td class="num">10.38M</td>
+  <td class="num">13.0d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">18↑</td>
+  <td><span class="flag">PRE-CATALYST: earnings 2026-09-10 (1d out)</span></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 11.1/25 · Float 13.0/15 · Vol 5.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 10.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 24.1/40 · Ignition 10.0/47</b><br>𝕏 buzz 17.6 · trend rising · accel 0.0 · mentions 2 · bullish 50%<br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 37% of float · Tight float 10.38M · Days-to-cover 13.0d (crowded short book) · Dated catalyst &lt;=2 days</span> &nbsp; <a href="https://finance.yahoo.com/quote/FLWS/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/FLWS/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/flws" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/FLWS" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/flws/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>5</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/plce/" target="_blank">PLCE</a></td>
+  <td class="nm">Children&#x27;s Place</td>
+  <td class="num">$2.62<div class="subnum">-6.4%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>37.4</b><div class="bar"><div style="width:37.4%;background:#57606f"></div></div></td>
+  <td class="num">27.4<div class="bar"><div style="width:54.79999999999999%;background:#2ed573"></div></div></td>
+  <td class="num">10.0<div class="bar"><div style="width:20.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">22.4</td>
+  <td class="num">5.0</td>
+  <td class="num">33.7%</td>
+  <td class="num">7.77M</td>
+  <td class="num">9.8d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">9</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 9.4/25 · Float 13.0/15 · Vol 5.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 10.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 22.4/40 · Ignition 5.0/47</b><br>𝕏 buzz 9.4 · trend stable · accel — · mentions 1 · bullish 0%<br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 34% of float · Tight float 7.77M · Days-to-cover 9.8d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/PLCE/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/PLCE/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/plce" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/PLCE" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/plce/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>6</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/negg/" target="_blank">NEGG</a></td>
+  <td class="nm">Newegg Commerce</td>
+  <td class="num">$15.24<div class="subnum">+0.5%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>30.1</b><div class="bar"><div style="width:30.099999999999998%;background:#57606f"></div></div></td>
+  <td class="num">30.1<div class="bar"><div style="width:60.199999999999996%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">27.1</td>
+  <td class="num">3.0</td>
+  <td class="num">39.3%</td>
+  <td class="num">0.8M</td>
+  <td class="num">4.6d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">0</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 12.1/25 · Float 15.0/15 · Vol 3.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 27.1/40 · Ignition 3.0/47</b><br>𝕏 buzz 0.0 · trend — · accel — · mentions 0 · bullish None%<br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 39% of float · Tight float 0.8M · Days-to-cover 4.6d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/NEGG/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/NEGG/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/negg" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/NEGG" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/negg/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>7</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/kpti/" target="_blank">KPTI</a></td>
+  <td class="nm">Karyopharm Therapeutics Inc.</td>
+  <td class="num">$1.67<div class="subnum">-4.6%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>29.4</b><div class="bar"><div style="width:29.4%;background:#57606f"></div></div></td>
+  <td class="num">29.4<div class="bar"><div style="width:58.8%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">26.4</td>
+  <td class="num">3.0</td>
+  <td class="num">45.7%</td>
+  <td class="num">15.07M</td>
+  <td class="num">5.1d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">15↑</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 15.4/25 · Float 11.0/15 · Vol 3.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 26.4/40 · Ignition 3.0/47</b><br>𝕏 buzz 14.8 · trend rising · accel 0.0 · mentions 2 · bullish 0%<br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 46% of float · Tight float 15.07M · Days-to-cover 5.1d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/KPTI/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/KPTI/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/kpti" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/KPTI" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/kpti/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>8</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/spce/" target="_blank">SPCE</a></td>
+  <td class="nm">Virgin Galactic</td>
+  <td class="num">$3.00<div class="subnum">-4.3%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>29.1</b><div class="bar"><div style="width:29.100000000000005%;background:#57606f"></div></div></td>
+  <td class="num">19.1<div class="bar"><div style="width:38.2%;background:#2ed573"></div></div></td>
+  <td class="num">10.0<div class="bar"><div style="width:20.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">18.1</td>
+  <td class="num">1.0</td>
+  <td class="num">41.2%</td>
+  <td class="num">100.13M</td>
+  <td class="num">2.4d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td><span class="flag">TAPE BB SQUEEZE (compression)</span></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 13.1/25 · Float 5.0/15 · Vol 1.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 10.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 18.1/40 · Ignition 1.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 41% of float · BB volatility compression</span> &nbsp; <a href="https://finance.yahoo.com/quote/SPCE/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/SPCE/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/spce" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/SPCE" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/spce/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>9</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/ai/" target="_blank">AI</a></td>
+  <td class="nm">C3.ai</td>
+  <td class="num">$10.35<div class="subnum">-1.4%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>29.0</b><div class="bar"><div style="width:28.999999999999996%;background:#57606f"></div></div></td>
+  <td class="num">18.0<div class="bar"><div style="width:36.0%;background:#2ed573"></div></div></td>
+  <td class="num">11.0<div class="bar"><div style="width:22.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">13.0</td>
+  <td class="num">7.0</td>
+  <td class="num">37.1%</td>
+  <td class="num">139.06M</td>
+  <td class="num">9.3d</td>
+  <td class="num">#96 (3m)</td>
+  <td class="num">1.0x</td>
+  <td class="num">—</td>
+  <td><span class="flag">TAPE BB SQUEEZE (compression)</span></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 11.0/25 · Float 2.0/15 · Vol 5.0/10 &nbsp;|&nbsp; Rank 3.0/10 · Velocity 2.0/20 · Upvotes 1.0/5 · Brand 5.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 13.0/40 · Ignition 7.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 37% of float · Days-to-cover 9.3d (crowded short book) · BB volatility compression</span> &nbsp; <a href="https://finance.yahoo.com/quote/AI/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/AI/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/ai" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/AI" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/ai/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>10</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/wgs/" target="_blank">WGS</a></td>
+  <td class="nm">GeneDx Holdings</td>
+  <td class="num">$88.10<div class="subnum">+2.6%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>28.4</b><div class="bar"><div style="width:28.4%;background:#57606f"></div></div></td>
+  <td class="num">28.4<div class="bar"><div style="width:56.8%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">23.4</td>
+  <td class="num">5.0</td>
+  <td class="num">39.8%</td>
+  <td class="num">16.94M</td>
+  <td class="num">8.5d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">12↑</td>
+  <td><span class="flag">TAPE BB SQUEEZE (compression)</span></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 12.4/25 · Float 11.0/15 · Vol 5.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 23.4/40 · Ignition 5.0/47</b><br>𝕏 buzz 11.5 · trend rising · accel 0.0 · mentions 1 · bullish 0%<br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 40% of float · Tight float 16.94M · Days-to-cover 8.5d (crowded short book) · BB volatility compression</span> &nbsp; <a href="https://finance.yahoo.com/quote/WGS/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/WGS/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/wgs" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/WGS" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/wgs/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>11</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/sphr/" target="_blank">SPHR</a></td>
+  <td class="nm">Sphere Entertainment</td>
+  <td class="num">$140.76<div class="subnum">-0.7%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>28.2</b><div class="bar"><div style="width:28.199999999999996%;background:#57606f"></div></div></td>
+  <td class="num">23.2<div class="bar"><div style="width:46.4%;background:#2ed573"></div></div></td>
+  <td class="num">5.0<div class="bar"><div style="width:10.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">18.2</td>
+  <td class="num">5.0</td>
+  <td class="num">29.4%</td>
+  <td class="num">24.65M</td>
+  <td class="num">10.1d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 7.2/25 · Float 11.0/15 · Vol 5.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 5.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 18.2/40 · Ignition 5.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Elevated SI 29% · Tight float 24.65M · Days-to-cover 10.1d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/SPHR/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/SPHR/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/sphr" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/SPHR" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/sphr/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>12</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/koss/" target="_blank">KOSS</a></td>
+  <td class="nm">Koss</td>
+  <td class="num">$3.49<div class="subnum">-1.3%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>28.0</b><div class="bar"><div style="width:28.000000000000004%;background:#57606f"></div></div></td>
+  <td class="num">18.0<div class="bar"><div style="width:36.0%;background:#2ed573"></div></div></td>
+  <td class="num">10.0<div class="bar"><div style="width:20.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">13.0</td>
+  <td class="num">5.0</td>
+  <td class="num">3.8%</td>
+  <td class="num">5.51M</td>
+  <td class="num">11.1d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 0.0/25 · Float 13.0/15 · Vol 5.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 10.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 13.0/40 · Ignition 5.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Tight float 5.51M · Days-to-cover 11.1d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/KOSS/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/KOSS/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/koss" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/KOSS" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/koss/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>13</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/xrx/" target="_blank">XRX</a></td>
+  <td class="nm">Xerox</td>
+  <td class="num">$3.19<div class="subnum">-3.0%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>27.8</b><div class="bar"><div style="width:27.800000000000004%;background:#57606f"></div></div></td>
+  <td class="num">17.8<div class="bar"><div style="width:35.6%;background:#2ed573"></div></div></td>
+  <td class="num">10.0<div class="bar"><div style="width:20.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">12.8</td>
+  <td class="num">5.0</td>
+  <td class="num">30.7%</td>
+  <td class="num">119.09M</td>
+  <td class="num">10.8d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 7.8/25 · Float 5.0/15 · Vol 5.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 10.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 12.8/40 · Ignition 5.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 31% of float · Days-to-cover 10.8d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/XRX/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/XRX/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/xrx" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/XRX" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/xrx/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>14</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/bb/" target="_blank">BB</a></td>
+  <td class="nm">BlackBerry</td>
+  <td class="num">$7.78<div class="subnum">-1.2%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>26.0</b><div class="bar"><div style="width:26.0%;background:#57606f"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#2ed573"></div></div></td>
+  <td class="num">26.0<div class="bar"><div style="width:52.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">0.0</td>
+  <td class="num">12.0</td>
+  <td class="num">6.3%</td>
+  <td class="num">584.64M</td>
+  <td class="num">1.8d</td>
+  <td class="num">#91 (3m)</td>
+  <td class="num">3.0x</td>
+  <td class="num">—</td>
+  <td><span class="flag">WSB CHATTER ACCELERATING</span></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 0.0/25 · Float 0.0/15 · Vol 0.0/10 &nbsp;|&nbsp; Rank 3.0/10 · Velocity 12.0/20 · Upvotes 1.0/5 · Brand 10.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 0.0/40 · Ignition 12.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): WSB chatter accelerating</span> &nbsp; <a href="https://finance.yahoo.com/quote/BB/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/BB/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/bb" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/BB" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/bb/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>15</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/cpb/" target="_blank">CPB</a></td>
+  <td class="nm">The Campbell&#x27;s Company</td>
+  <td class="num">$21.83<div class="subnum">+0.1%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>26.0</b><div class="bar"><div style="width:26.0%;background:#57606f"></div></div></td>
+  <td class="num">11.0<div class="bar"><div style="width:22.0%;background:#2ed573"></div></div></td>
+  <td class="num">15.0<div class="bar"><div style="width:30.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">8.0</td>
+  <td class="num">5.0</td>
+  <td class="num">27.1%</td>
+  <td class="num">192.18M</td>
+  <td class="num">6.2d</td>
+  <td class="num">#171 (1m)</td>
+  <td class="num">1.0x</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 6.0/25 · Float 2.0/15 · Vol 3.0/10 &nbsp;|&nbsp; Rank 2.0/10 · Velocity 2.0/20 · Upvotes 1.0/5 · Brand 10.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 8.0/40 · Ignition 5.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Elevated SI 27% · Days-to-cover 6.2d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/CPB/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/CPB/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/cpb" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/CPB" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/cpb/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>16</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/batl/" target="_blank">BATL</a></td>
+  <td class="nm">Battalion Oil</td>
+  <td class="num">$1.38<div class="subnum">+3.8%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>25.4</b><div class="bar"><div style="width:25.4%;background:#57606f"></div></div></td>
+  <td class="num">25.4<div class="bar"><div style="width:50.8%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">25.4</td>
+  <td class="num">0.0</td>
+  <td class="num">39.8%</td>
+  <td class="num">9.18M</td>
+  <td class="num">0.2d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">25↓</td>
+  <td><span class="flag">TAPE RECLAIM 20-MA</span> <span class="flag">TAPE BB SQUEEZE (compression)</span></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 12.4/25 · Float 13.0/15 · Vol 0.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 25.4/40 · Ignition 0.0/47</b><br>𝕏 buzz 25.4 · trend falling · accel 0.0 · mentions 16 · bullish 12%<br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 40% of float · Tight float 9.18M · Reclaiming 20-day MA · BB volatility compression</span> &nbsp; <a href="https://finance.yahoo.com/quote/BATL/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/BATL/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/batl" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/BATL" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/batl/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>17</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/wyfi/" target="_blank">WYFI</a></td>
+  <td class="nm">WhiteFiber</td>
+  <td class="num">$19.49<div class="subnum">-5.3%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>25.3</b><div class="bar"><div style="width:25.3%;background:#57606f"></div></div></td>
+  <td class="num">23.3<div class="bar"><div style="width:46.6%;background:#2ed573"></div></div></td>
+  <td class="num">2.0<div class="bar"><div style="width:4.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">23.3</td>
+  <td class="num">0.0</td>
+  <td class="num">35.6%</td>
+  <td class="num">11.19M</td>
+  <td class="num">1.4d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">59↓</td>
+  <td><span class="flag">X ROLLING OVER (buzz fading)</span></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 10.3/25 · Float 13.0/15 · Vol 0.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 2.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 23.3/40 · Ignition 0.0/47</b><br>𝕏 buzz 59.3 · trend falling · accel 0.69 · mentions 90 · bullish 44%<br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 36% of float · Tight float 11.19M · X buzz 59 (falling)</span> &nbsp; <a href="https://finance.yahoo.com/quote/WYFI/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/WYFI/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/wyfi" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/WYFI" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/wyfi/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>18</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/kss/" target="_blank">KSS</a></td>
+  <td class="nm">Kohl&#x27;s</td>
+  <td class="num">$17.95<div class="subnum">-3.6%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>24.3</b><div class="bar"><div style="width:24.3%;background:#57606f"></div></div></td>
+  <td class="num">14.3<div class="bar"><div style="width:28.6%;background:#2ed573"></div></div></td>
+  <td class="num">10.0<div class="bar"><div style="width:20.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">11.3</td>
+  <td class="num">3.0</td>
+  <td class="num">27.7%</td>
+  <td class="num">111.62M</td>
+  <td class="num">7.1d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 6.3/25 · Float 5.0/15 · Vol 3.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 10.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 11.3/40 · Ignition 3.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Elevated SI 28% · Days-to-cover 7.1d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/KSS/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/KSS/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/kss" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/KSS" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/kss/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>19</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/wen/" target="_blank">WEN</a></td>
+  <td class="nm">Wendys</td>
+  <td class="num">$7.59<div class="subnum">-0.2%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>24.3</b><div class="bar"><div style="width:24.3%;background:#57606f"></div></div></td>
+  <td class="num">14.3<div class="bar"><div style="width:28.6%;background:#2ed573"></div></div></td>
+  <td class="num">10.0<div class="bar"><div style="width:20.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">13.3</td>
+  <td class="num">1.0</td>
+  <td class="num">37.5%</td>
+  <td class="num">157.13M</td>
+  <td class="num">3.6d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td><span class="flag">TAPE BB SQUEEZE (compression)</span></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 11.3/25 · Float 2.0/15 · Vol 1.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 10.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 13.3/40 · Ignition 1.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 38% of float · BB volatility compression</span> &nbsp; <a href="https://finance.yahoo.com/quote/WEN/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/WEN/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/wen" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/WEN" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/wen/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>20</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/wrld/" target="_blank">WRLD</a></td>
+  <td class="nm">World Acceptance</td>
+  <td class="num">$189.59<div class="subnum">-1.0%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>24.3</b><div class="bar"><div style="width:24.3%;background:#57606f"></div></div></td>
+  <td class="num">24.3<div class="bar"><div style="width:48.6%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">21.3</td>
+  <td class="num">3.0</td>
+  <td class="num">27.5%</td>
+  <td class="num">2.17M</td>
+  <td class="num">5.4d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 6.3/25 · Float 15.0/15 · Vol 3.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 21.3/40 · Ignition 3.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Elevated SI 28% · Tight float 2.17M · Days-to-cover 5.4d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/WRLD/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/WRLD/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/wrld" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/WRLD" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/wrld/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>21</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/lcid/" target="_blank">LCID</a></td>
+  <td class="nm">Lucid Group</td>
+  <td class="num">$4.29<div class="subnum">-7.3%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>24.1</b><div class="bar"><div style="width:24.1%;background:#57606f"></div></div></td>
+  <td class="num">14.1<div class="bar"><div style="width:28.199999999999996%;background:#2ed573"></div></div></td>
+  <td class="num">10.0<div class="bar"><div style="width:20.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">13.1</td>
+  <td class="num">1.0</td>
+  <td class="num">37.3%</td>
+  <td class="num">172.28M</td>
+  <td class="num">3.8d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 11.1/25 · Float 2.0/15 · Vol 1.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 10.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 13.1/40 · Ignition 1.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 37% of float</span> &nbsp; <a href="https://finance.yahoo.com/quote/LCID/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/LCID/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/lcid" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/LCID" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/lcid/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>22</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/krus/" target="_blank">KRUS</a></td>
+  <td class="nm">Kura Sushi USA</td>
+  <td class="num">$42.78<div class="subnum">-3.5%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>23.9</b><div class="bar"><div style="width:23.9%;background:#57606f"></div></div></td>
+  <td class="num">23.9<div class="bar"><div style="width:47.8%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">20.9</td>
+  <td class="num">3.0</td>
+  <td class="num">30.8%</td>
+  <td class="num">6.97M</td>
+  <td class="num">7.4d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 7.9/25 · Float 13.0/15 · Vol 3.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 20.9/40 · Ignition 3.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 31% of float · Tight float 6.97M · Days-to-cover 7.4d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/KRUS/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/KRUS/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/krus" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/KRUS" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/krus/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>23</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/xpof/" target="_blank">XPOF</a></td>
+  <td class="nm">Xponential Fitness</td>
+  <td class="num">$4.30<div class="subnum">-10.4%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>23.7</b><div class="bar"><div style="width:23.7%;background:#57606f"></div></div></td>
+  <td class="num">23.7<div class="bar"><div style="width:47.4%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">18.7</td>
+  <td class="num">5.0</td>
+  <td class="num">30.4%</td>
+  <td class="num">26.16M</td>
+  <td class="num">10.2d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 7.7/25 · Float 11.0/15 · Vol 5.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 18.7/40 · Ignition 5.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 30% of float · Tight float 26.16M · Days-to-cover 10.2d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/XPOF/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/XPOF/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/xpof" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/XPOF" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/xpof/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>24</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/bird/" target="_blank">BIRD</a></td>
+  <td class="nm">Smartbird, Inc.</td>
+  <td class="num">$2.47<div class="subnum">-2.6%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>23.1</b><div class="bar"><div style="width:23.1%;background:#57606f"></div></div></td>
+  <td class="num">13.1<div class="bar"><div style="width:26.200000000000003%;background:#2ed573"></div></div></td>
+  <td class="num">10.0<div class="bar"><div style="width:20.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">13.1</td>
+  <td class="num">0.0</td>
+  <td class="num">15.2%</td>
+  <td class="num">7.51M</td>
+  <td class="num">0.7d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 0.1/25 · Float 13.0/15 · Vol 0.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 10.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 13.1/40 · Ignition 0.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Tight float 7.51M</span> &nbsp; <a href="https://finance.yahoo.com/quote/BIRD/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/BIRD/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/bird" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/BIRD" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/bird/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>25</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/srpt/" target="_blank">SRPT</a></td>
+  <td class="nm">Sarepta Therapeutics</td>
+  <td class="num">$22.14<div class="subnum">+5.7%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>22.7</b><div class="bar"><div style="width:22.7%;background:#57606f"></div></div></td>
+  <td class="num">17.7<div class="bar"><div style="width:35.4%;background:#2ed573"></div></div></td>
+  <td class="num">5.0<div class="bar"><div style="width:10.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">12.7</td>
+  <td class="num">5.0</td>
+  <td class="num">30.4%</td>
+  <td class="num">94.61M</td>
+  <td class="num">8.4d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 7.7/25 · Float 5.0/15 · Vol 5.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 5.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 12.7/40 · Ignition 5.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 30% of float · Days-to-cover 8.4d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/SRPT/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/SRPT/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/srpt" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/SRPT" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/srpt/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>26</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/ttec/" target="_blank">TTEC</a></td>
+  <td class="nm">TTEC Holdings</td>
+  <td class="num">$1.31<div class="subnum">-2.4%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>22.2</b><div class="bar"><div style="width:22.2%;background:#57606f"></div></div></td>
+  <td class="num">22.2<div class="bar"><div style="width:44.4%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">17.2</td>
+  <td class="num">5.0</td>
+  <td class="num">27.4%</td>
+  <td class="num">19.76M</td>
+  <td class="num">9.5d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 6.2/25 · Float 11.0/15 · Vol 5.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 17.2/40 · Ignition 5.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Elevated SI 27% · Tight float 19.76M · Days-to-cover 9.5d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/TTEC/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/TTEC/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/ttec" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/TTEC" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/ttec/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>27</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/serv/" target="_blank">SERV</a></td>
+  <td class="nm">Serve Robotics</td>
+  <td class="num">$4.78<div class="subnum">-2.6%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>21.9</b><div class="bar"><div style="width:21.9%;background:#57606f"></div></div></td>
+  <td class="num">16.9<div class="bar"><div style="width:33.8%;background:#2ed573"></div></div></td>
+  <td class="num">5.0<div class="bar"><div style="width:10.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">13.9</td>
+  <td class="num">3.0</td>
+  <td class="num">32.8%</td>
+  <td class="num">70.85M</td>
+  <td class="num">5.3d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td><span class="flag">TAPE BB SQUEEZE (compression)</span></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 8.9/25 · Float 5.0/15 · Vol 3.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 5.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 13.9/40 · Ignition 3.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 33% of float · Days-to-cover 5.3d (crowded short book) · BB volatility compression</span> &nbsp; <a href="https://finance.yahoo.com/quote/SERV/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/SERV/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/serv" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/SERV" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/serv/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>28</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/evgo/" target="_blank">EVGO</a></td>
+  <td class="nm">EVgo</td>
+  <td class="num">$1.38<div class="subnum">-2.5%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>21.7</b><div class="bar"><div style="width:21.7%;background:#57606f"></div></div></td>
+  <td class="num">16.7<div class="bar"><div style="width:33.4%;background:#2ed573"></div></div></td>
+  <td class="num">5.0<div class="bar"><div style="width:10.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">11.7</td>
+  <td class="num">5.0</td>
+  <td class="num">34.3%</td>
+  <td class="num">133.19M</td>
+  <td class="num">12.2d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 9.7/25 · Float 2.0/15 · Vol 5.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 5.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 11.7/40 · Ignition 5.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 34% of float · Days-to-cover 12.2d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/EVGO/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/EVGO/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/evgo" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/EVGO" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/evgo/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>29</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/gme/" target="_blank">GME</a></td>
+  <td class="nm">GameStop</td>
+  <td class="num">$19.92<div class="subnum">+5.3%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>21.0</b><div class="bar"><div style="width:21.0%;background:#57606f"></div></div></td>
+  <td class="num">6.0<div class="bar"><div style="width:12.0%;background:#2ed573"></div></div></td>
+  <td class="num">15.0<div class="bar"><div style="width:30.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">0.0</td>
+  <td class="num">8.0</td>
+  <td class="num">13.2%</td>
+  <td class="num">408.81M</td>
+  <td class="num">9.5d</td>
+  <td class="num">#127 (2m)</td>
+  <td class="num">1.0x</td>
+  <td class="num">—</td>
+  <td><span class="flag">ST TRENDING (pre-WSB)</span></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 0.0/25 · Float 0.0/15 · Vol 6.0/10 &nbsp;|&nbsp; Rank 2.0/10 · Velocity 2.0/20 · Upvotes 1.0/5 · Brand 10.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 0.0/40 · Ignition 8.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Days-to-cover 9.5d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/GME/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/GME/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/gme" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/GME" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/gme/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>30</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/metc/" target="_blank">METC</a></td>
+  <td class="nm">Ramaco Resources, Inc.</td>
+  <td class="num">$12.67<div class="subnum">-0.4%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>20.8</b><div class="bar"><div style="width:20.8%;background:#57606f"></div></div></td>
+  <td class="num">20.8<div class="bar"><div style="width:41.6%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">17.8</td>
+  <td class="num">3.0</td>
+  <td class="num">34.7%</td>
+  <td class="num">38.74M</td>
+  <td class="num">6.9d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 9.8/25 · Float 8.0/15 · Vol 3.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 17.8/40 · Ignition 3.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 35% of float · Days-to-cover 6.9d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/METC/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/METC/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/metc" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/METC" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/metc/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>31</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/dnut/" target="_blank">DNUT</a></td>
+  <td class="nm">Krispy Kreme, Inc.</td>
+  <td class="num">$3.21<div class="subnum">-3.1%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>20.5</b><div class="bar"><div style="width:20.5%;background:#57606f"></div></div></td>
+  <td class="num">10.5<div class="bar"><div style="width:21.0%;background:#2ed573"></div></div></td>
+  <td class="num">10.0<div class="bar"><div style="width:20.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">7.5</td>
+  <td class="num">3.0</td>
+  <td class="num">20.1%</td>
+  <td class="num">91.54M</td>
+  <td class="num">6.4d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 2.5/25 · Float 5.0/15 · Vol 3.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 10.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 7.5/40 · Ignition 3.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Elevated SI 20% · Days-to-cover 6.4d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/DNUT/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/DNUT/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/dnut" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/DNUT" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/dnut/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>32</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/bynd/" target="_blank">BYND</a></td>
+  <td class="nm">Beyond Meat</td>
+  <td class="num">$11.11<div class="subnum">-1.0%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>19.9</b><div class="bar"><div style="width:19.9%;background:#57606f"></div></div></td>
+  <td class="num">9.9<div class="bar"><div style="width:19.8%;background:#2ed573"></div></div></td>
+  <td class="num">10.0<div class="bar"><div style="width:20.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">4.9</td>
+  <td class="num">5.0</td>
+  <td class="num">24.7%</td>
+  <td class="num">499.35M</td>
+  <td class="num">93.7d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 4.9/25 · Float 0.0/15 · Vol 5.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 10.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 4.9/40 · Ignition 5.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Elevated SI 25% · Days-to-cover 93.7d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/BYND/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/BYND/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/bynd" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/BYND" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/bynd/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>33</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/soun/" target="_blank">SOUN</a></td>
+  <td class="nm">SoundHound AI</td>
+  <td class="num">$6.55<div class="subnum">-0.5%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>19.7</b><div class="bar"><div style="width:19.7%;background:#57606f"></div></div></td>
+  <td class="num">14.7<div class="bar"><div style="width:29.4%;background:#2ed573"></div></div></td>
+  <td class="num">5.0<div class="bar"><div style="width:10.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">11.7</td>
+  <td class="num">3.0</td>
+  <td class="num">38.4%</td>
+  <td class="num">393.21M</td>
+  <td class="num">5.0d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td><span class="flag">TAPE BB SQUEEZE (compression)</span></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 11.7/25 · Float 0.0/15 · Vol 3.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 5.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 11.7/40 · Ignition 3.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 38% of float · Days-to-cover 5.0d (crowded short book) · BB volatility compression</span> &nbsp; <a href="https://finance.yahoo.com/quote/SOUN/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/SOUN/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/soun" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/SOUN" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/soun/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>34</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/open/" target="_blank">OPEN</a></td>
+  <td class="nm">Opendoor Technologies Inc</td>
+  <td class="num">$3.02<div class="subnum">-2.1%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>19.7</b><div class="bar"><div style="width:19.7%;background:#57606f"></div></div></td>
+  <td class="num">3.7<div class="bar"><div style="width:7.400000000000001%;background:#2ed573"></div></div></td>
+  <td class="num">16.0<div class="bar"><div style="width:32.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">2.7</td>
+  <td class="num">3.0</td>
+  <td class="num">20.3%</td>
+  <td class="num">953.57M</td>
+  <td class="num">3.5d</td>
+  <td class="num">#78 (4m)</td>
+  <td class="num">1.0x</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 2.7/25 · Float 0.0/15 · Vol 1.0/10 &nbsp;|&nbsp; Rank 3.0/10 · Velocity 2.0/20 · Upvotes 1.0/5 · Brand 10.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 2.7/40 · Ignition 3.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Elevated SI 20%</span> &nbsp; <a href="https://finance.yahoo.com/quote/OPEN/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/OPEN/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/open" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/OPEN" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/open/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>35</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/nvax/" target="_blank">NVAX</a></td>
+  <td class="nm">Novavax</td>
+  <td class="num">$9.80<div class="subnum">-3.9%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>18.4</b><div class="bar"><div style="width:18.4%;background:#57606f"></div></div></td>
+  <td class="num">13.4<div class="bar"><div style="width:26.8%;background:#2ed573"></div></div></td>
+  <td class="num">5.0<div class="bar"><div style="width:10.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">8.4</td>
+  <td class="num">5.0</td>
+  <td class="num">27.8%</td>
+  <td class="num">141.47M</td>
+  <td class="num">9.3d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 6.4/25 · Float 2.0/15 · Vol 5.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 5.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 8.4/40 · Ignition 5.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Elevated SI 28% · Days-to-cover 9.3d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/NVAX/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/NVAX/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/nvax" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/NVAX" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/nvax/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>36</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/spry/" target="_blank">SPRY</a></td>
+  <td class="nm">ARS Pharmaceuticals</td>
+  <td class="num">$5.28<div class="subnum">-2.3%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>18.0</b><div class="bar"><div style="width:18.0%;background:#57606f"></div></div></td>
+  <td class="num">18.0<div class="bar"><div style="width:36.0%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">13.0</td>
+  <td class="num">5.0</td>
+  <td class="num">30.9%</td>
+  <td class="num">68.43M</td>
+  <td class="num">10.6d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 8.0/25 · Float 5.0/15 · Vol 5.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 13.0/40 · Ignition 5.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 31% of float · Days-to-cover 10.6d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/SPRY/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/SPRY/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/spry" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/SPRY" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/spry/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>37</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/flnc/" target="_blank">FLNC</a></td>
+  <td class="nm">Fluence Energy</td>
+  <td class="num">$10.23<div class="subnum">-6.0%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>17.7</b><div class="bar"><div style="width:17.7%;background:#57606f"></div></div></td>
+  <td class="num">17.7<div class="bar"><div style="width:35.4%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">14.7</td>
+  <td class="num">3.0</td>
+  <td class="num">34.4%</td>
+  <td class="num">100.31M</td>
+  <td class="num">4.1d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 9.7/25 · Float 5.0/15 · Vol 3.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 14.7/40 · Ignition 3.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 34% of float · Days-to-cover 4.1d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/FLNC/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/FLNC/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/flnc" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/FLNC" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/flnc/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>38</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/hims/" target="_blank">HIMS</a></td>
+  <td class="nm">Hims &amp; Hers Health</td>
+  <td class="num">$27.49<div class="subnum">-2.3%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>17.7</b><div class="bar"><div style="width:17.7%;background:#57606f"></div></div></td>
+  <td class="num">12.7<div class="bar"><div style="width:25.4%;background:#2ed573"></div></div></td>
+  <td class="num">5.0<div class="bar"><div style="width:10.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">9.7</td>
+  <td class="num">3.0</td>
+  <td class="num">30.4%</td>
+  <td class="num">210.59M</td>
+  <td class="num">4.3d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 7.7/25 · Float 2.0/15 · Vol 3.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 5.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 9.7/40 · Ignition 3.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 30% of float · Days-to-cover 4.3d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/HIMS/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/HIMS/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/hims" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/HIMS" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/hims/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>39</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/run/" target="_blank">RUN</a></td>
+  <td class="nm">Sunrun</td>
+  <td class="num">$8.82<div class="subnum">-4.6%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>17.6</b><div class="bar"><div style="width:17.6%;background:#57606f"></div></div></td>
+  <td class="num">12.6<div class="bar"><div style="width:25.2%;background:#2ed573"></div></div></td>
+  <td class="num">5.0<div class="bar"><div style="width:10.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">9.6</td>
+  <td class="num">3.0</td>
+  <td class="num">30.2%</td>
+  <td class="num">219.96M</td>
+  <td class="num">6.7d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 7.6/25 · Float 2.0/15 · Vol 3.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 5.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 9.6/40 · Ignition 3.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 30% of float · Days-to-cover 6.7d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/RUN/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/RUN/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/run" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/RUN" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/run/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>40</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/vstm/" target="_blank">VSTM</a></td>
+  <td class="nm">Verastem</td>
+  <td class="num">$7.97<div class="subnum">-2.8%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>17.0</b><div class="bar"><div style="width:17.0%;background:#57606f"></div></div></td>
+  <td class="num">17.0<div class="bar"><div style="width:34.0%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">12.0</td>
+  <td class="num">5.0</td>
+  <td class="num">29.0%</td>
+  <td class="num">70.38M</td>
+  <td class="num">8.2d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 7.0/25 · Float 5.0/15 · Vol 5.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 12.0/40 · Ignition 5.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Elevated SI 29% · Days-to-cover 8.2d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/VSTM/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/VSTM/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/vstm" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/VSTM" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/vstm/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>41</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/pct/" target="_blank">PCT</a></td>
+  <td class="nm">PureCycle Tech</td>
+  <td class="num">$6.39<div class="subnum">-3.5%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>16.4</b><div class="bar"><div style="width:16.4%;background:#57606f"></div></div></td>
+  <td class="num">16.4<div class="bar"><div style="width:32.8%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">11.4</td>
+  <td class="num">5.0</td>
+  <td class="num">33.8%</td>
+  <td class="num">145.24M</td>
+  <td class="num">9.8d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td><span class="flag">TAPE BB SQUEEZE (compression)</span></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 9.4/25 · Float 2.0/15 · Vol 5.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 11.4/40 · Ignition 5.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 34% of float · Days-to-cover 9.8d (crowded short book) · BB volatility compression</span> &nbsp; <a href="https://finance.yahoo.com/quote/PCT/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/PCT/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/pct" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/PCT" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/pct/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>42</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/upst/" target="_blank">UPST</a></td>
+  <td class="nm">Upstart Holdings</td>
+  <td class="num">$26.14<div class="subnum">-3.4%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>16.2</b><div class="bar"><div style="width:16.2%;background:#57606f"></div></div></td>
+  <td class="num">16.2<div class="bar"><div style="width:32.4%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">13.2</td>
+  <td class="num">3.0</td>
+  <td class="num">31.4%</td>
+  <td class="num">82.19M</td>
+  <td class="num">6.0d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 8.2/25 · Float 5.0/15 · Vol 3.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 13.2/40 · Ignition 3.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 31% of float · Days-to-cover 6.0d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/UPST/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/UPST/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/upst" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/UPST" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/upst/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>43</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/indi/" target="_blank">INDI</a></td>
+  <td class="nm">indie Semiconductor</td>
+  <td class="num">$3.35<div class="subnum">-5.0%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>16.0</b><div class="bar"><div style="width:16.0%;background:#57606f"></div></div></td>
+  <td class="num">16.0<div class="bar"><div style="width:32.0%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">11.0</td>
+  <td class="num">5.0</td>
+  <td class="num">33.0%</td>
+  <td class="num">208.21M</td>
+  <td class="num">11.1d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 9.0/25 · Float 2.0/15 · Vol 5.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 11.0/40 · Ignition 5.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 33% of float · Days-to-cover 11.1d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/INDI/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/INDI/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/indi" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/INDI" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/indi/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>44</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/rxrx/" target="_blank">RXRX</a></td>
+  <td class="nm">Recursion Pharma</td>
+  <td class="num">$3.24<div class="subnum">-5.8%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>14.6</b><div class="bar"><div style="width:14.6%;background:#57606f"></div></div></td>
+  <td class="num">14.6<div class="bar"><div style="width:29.2%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">9.6</td>
+  <td class="num">5.0</td>
+  <td class="num">34.1%</td>
+  <td class="num">513.01M</td>
+  <td class="num">9.1d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td><span class="flag">TAPE BB SQUEEZE (compression)</span></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 9.6/25 · Float 0.0/15 · Vol 5.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 9.6/40 · Ignition 5.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 34% of float · Days-to-cover 9.1d (crowded short book) · BB volatility compression</span> &nbsp; <a href="https://finance.yahoo.com/quote/RXRX/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/RXRX/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/rxrx" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/RXRX" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/rxrx/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>45</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/qubt/" target="_blank">QUBT</a></td>
+  <td class="nm">Quantum Computing Inc.</td>
+  <td class="num">$8.21<div class="subnum">+0.4%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>14.5</b><div class="bar"><div style="width:14.499999999999998%;background:#57606f"></div></div></td>
+  <td class="num">14.5<div class="bar"><div style="width:28.999999999999996%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">11.5</td>
+  <td class="num">3.0</td>
+  <td class="num">34.0%</td>
+  <td class="num">190.64M</td>
+  <td class="num">6.2d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td><span class="flag">TAPE BB SQUEEZE (compression)</span></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 9.5/25 · Float 2.0/15 · Vol 3.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 11.5/40 · Ignition 3.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 34% of float · Days-to-cover 6.2d (crowded short book) · BB volatility compression</span> &nbsp; <a href="https://finance.yahoo.com/quote/QUBT/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/QUBT/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/qubt" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/QUBT" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/qubt/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>46</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/onds/" target="_blank">ONDS</a></td>
+  <td class="nm">Ondas Inc</td>
+  <td class="num">$7.50<div class="subnum">-1.7%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>14.3</b><div class="bar"><div style="width:14.3%;background:#57606f"></div></div></td>
+  <td class="num">14.3<div class="bar"><div style="width:28.6%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">13.3</td>
+  <td class="num">1.0</td>
+  <td class="num">41.6%</td>
+  <td class="num">533.42M</td>
+  <td class="num">2.7d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 13.3/25 · Float 0.0/15 · Vol 1.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 13.3/40 · Ignition 1.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 42% of float</span> &nbsp; <a href="https://finance.yahoo.com/quote/ONDS/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/ONDS/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/onds" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/ONDS" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/onds/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>47</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/sls/" target="_blank">SLS</a></td>
+  <td class="nm">SELLAS Life Sciences</td>
+  <td class="num">$14.08<div class="subnum">+0.8%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>14.1</b><div class="bar"><div style="width:14.099999999999998%;background:#57606f"></div></div></td>
+  <td class="num">14.1<div class="bar"><div style="width:28.199999999999996%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">11.1</td>
+  <td class="num">3.0</td>
+  <td class="num">33.2%</td>
+  <td class="num">185.28M</td>
+  <td class="num">7.5d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td><span class="flag">TAPE BB SQUEEZE (compression)</span></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 9.1/25 · Float 2.0/15 · Vol 3.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 11.1/40 · Ignition 3.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 33% of float · Days-to-cover 7.5d (crowded short book) · Borrow fee 188.75% · BB volatility compression</span> &nbsp; <a href="https://finance.yahoo.com/quote/SLS/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/SLS/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/sls" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/SLS" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/sls/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>48</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/ibrx/" target="_blank">IBRX</a></td>
+  <td class="nm">ImmunityBio, Inc.</td>
+  <td class="num">$8.05<div class="subnum">-2.5%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>13.4</b><div class="bar"><div style="width:13.4%;background:#57606f"></div></div></td>
+  <td class="num">13.4<div class="bar"><div style="width:26.8%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">8.4</td>
+  <td class="num">5.0</td>
+  <td class="num">31.8%</td>
+  <td class="num">406.64M</td>
+  <td class="num">12.9d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td><span class="flag">TAPE BB SQUEEZE (compression)</span></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 8.4/25 · Float 0.0/15 · Vol 5.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 8.4/40 · Ignition 5.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 32% of float · Days-to-cover 12.9d (crowded short book) · BB volatility compression</span> &nbsp; <a href="https://finance.yahoo.com/quote/IBRX/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/IBRX/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/ibrx" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/IBRX" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/ibrx/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>49</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/crml/" target="_blank">CRML</a></td>
+  <td class="nm">Critical Metals</td>
+  <td class="num">$7.14<div class="subnum">-2.9%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>13.3</b><div class="bar"><div style="width:13.3%;background:#57606f"></div></div></td>
+  <td class="num">13.3<div class="bar"><div style="width:26.6%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">12.3</td>
+  <td class="num">1.0</td>
+  <td class="num">29.7%</td>
+  <td class="num">68.16M</td>
+  <td class="num">3.2d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 7.3/25 · Float 5.0/15 · Vol 1.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 12.3/40 · Ignition 1.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Elevated SI 30%</span> &nbsp; <a href="https://finance.yahoo.com/quote/CRML/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/CRML/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/crml" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/CRML" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/crml/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>50</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/mara/" target="_blank">MARA</a></td>
+  <td class="nm">MARA Holdings</td>
+  <td class="num">$11.75<div class="subnum">-0.9%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>13.1</b><div class="bar"><div style="width:13.100000000000001%;background:#57606f"></div></div></td>
+  <td class="num">8.1<div class="bar"><div style="width:16.2%;background:#2ed573"></div></div></td>
+  <td class="num">5.0<div class="bar"><div style="width:10.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">7.1</td>
+  <td class="num">1.0</td>
+  <td class="num">29.1%</td>
+  <td class="num">373.04M</td>
+  <td class="num">2.3d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 7.1/25 · Float 0.0/15 · Vol 1.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 5.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 7.1/40 · Ignition 1.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Elevated SI 29%</span> &nbsp; <a href="https://finance.yahoo.com/quote/MARA/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/MARA/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/mara" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/MARA" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/mara/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>51</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/rxt/" target="_blank">RXT</a></td>
+  <td class="nm">Rackspace Technology</td>
+  <td class="num">$3.18<div class="subnum">-1.4%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>12.7</b><div class="bar"><div style="width:12.7%;background:#57606f"></div></div></td>
+  <td class="num">12.7<div class="bar"><div style="width:25.4%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">11.7</td>
+  <td class="num">1.0</td>
+  <td class="num">28.4%</td>
+  <td class="num">104.73M</td>
+  <td class="num">2.1d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 6.7/25 · Float 5.0/15 · Vol 1.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 11.7/40 · Ignition 1.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Elevated SI 28%</span> &nbsp; <a href="https://finance.yahoo.com/quote/RXT/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/RXT/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/rxt" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/RXT" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/rxt/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>52</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/mpt/" target="_blank">MPT</a></td>
+  <td class="nm">Medical Properties Trust</td>
+  <td class="num">$3.88<div class="subnum">-2.1%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>12.0</b><div class="bar"><div style="width:12.0%;background:#57606f"></div></div></td>
+  <td class="num">12.0<div class="bar"><div style="width:24.0%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">7.0</td>
+  <td class="num">5.0</td>
+  <td class="num">28.9%</td>
+  <td class="num">490.65M</td>
+  <td class="num">20.2d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 7.0/25 · Float 0.0/15 · Vol 5.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 7.0/40 · Ignition 5.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Elevated SI 29% · Days-to-cover 20.2d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/MPT/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/MPT/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/mpt" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/MPT" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/mpt/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>53</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/envx/" target="_blank">ENVX</a></td>
+  <td class="nm">Enovix</td>
+  <td class="num">$3.25<div class="subnum">-7.1%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>11.0</b><div class="bar"><div style="width:11.0%;background:#57606f"></div></div></td>
+  <td class="num">11.0<div class="bar"><div style="width:22.0%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">8.0</td>
+  <td class="num">3.0</td>
+  <td class="num">27.0%</td>
+  <td class="num">188.35M</td>
+  <td class="num">7.6d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 6.0/25 · Float 2.0/15 · Vol 3.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 8.0/40 · Ignition 3.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Elevated SI 27% · Days-to-cover 7.6d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/ENVX/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/ENVX/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/envx" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/ENVX" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/envx/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>54</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/bbai/" target="_blank">BBAI</a></td>
+  <td class="nm">BigBear.ai</td>
+  <td class="num">$2.88<div class="subnum">-2.2%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>10.6</b><div class="bar"><div style="width:10.6%;background:#57606f"></div></div></td>
+  <td class="num">10.6<div class="bar"><div style="width:21.2%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">7.6</td>
+  <td class="num">3.0</td>
+  <td class="num">30.1%</td>
+  <td class="num">474.71M</td>
+  <td class="num">5.8d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 7.6/25 · Float 0.0/15 · Vol 3.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 7.6/40 · Ignition 3.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Heavy SI 30% of float · Days-to-cover 5.8d (crowded short book)</span> &nbsp; <a href="https://finance.yahoo.com/quote/BBAI/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/BBAI/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/bbai" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/BBAI" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/bbai/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>55</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/amc/" target="_blank">AMC</a></td>
+  <td class="nm">AMC Entertainment</td>
+  <td class="num">$2.56<div class="subnum">+1.0%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>10.0</b><div class="bar"><div style="width:10.0%;background:#57606f"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#2ed573"></div></div></td>
+  <td class="num">10.0<div class="bar"><div style="width:20.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">0.0</td>
+  <td class="num">0.0</td>
+  <td class="num">4.8%</td>
+  <td class="num">835.34M</td>
+  <td class="num">1.0d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 0.0/25 · Float 0.0/15 · Vol 0.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 10.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 0.0/40 · Ignition 0.0/47</b> &nbsp; <a href="https://finance.yahoo.com/quote/AMC/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/AMC/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/amc" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/AMC" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/amc/" target="_blank">Stats</a></td></tr>
+<tr class="main" onclick="this.nextElementSibling.classList.toggle('show')">
+  <td>56</td>
+  <td class="tk"><a href="https://stockanalysis.com/stocks/eose/" target="_blank">EOSE</a></td>
+  <td class="nm">Eos Energy</td>
+  <td class="num">$4.11<div class="subnum">-4.5%</div></td>
+  <td><span class="tier" style="background:#57606f">BACKGROUND</span></td>
+  <td class="num"><b>7.6</b><div class="bar"><div style="width:7.6%;background:#57606f"></div></div></td>
+  <td class="num">7.6<div class="bar"><div style="width:15.2%;background:#2ed573"></div></div></td>
+  <td class="num">0.0<div class="bar"><div style="width:0.0%;background:#e056fd"></div></div></td>
+  <td class="num">—</td>
+  <td class="num">6.6</td>
+  <td class="num">1.0</td>
+  <td class="num">28.1%</td>
+  <td class="num">333.09M</td>
+  <td class="num">3.6d</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td></td>
+</tr>
+<tr class="detail"><td colspan="18">SI 6.6/25 · Float 0.0/15 · Vol 1.0/10 &nbsp;|&nbsp; Rank 0.0/10 · Velocity 0.0/20 · Upvotes 0.0/5 · Brand 0.0/10 &nbsp;|&nbsp; Gamma OI 0.0/4 · CallShare 0.0/3 · Prem 0.0/3 · IV 0.0/2 &nbsp;|&nbsp; <b>Fuel 6.6/40 · Ignition 1.0/47</b><br><span class="mk-in">SETUP (fuel/heat facts): Elevated SI 28%</span> &nbsp; <a href="https://finance.yahoo.com/quote/EOSE/" target="_blank">Yahoo</a> · <a href="https://apewisdom.io/stocks/EOSE/" target="_blank">ApeWisdom</a> · <a href="https://fintel.io/ss/us/eose" target="_blank">Fintel SI</a> · <a href="https://optioncharts.io/options/EOSE" target="_blank">Options</a> · <a href="https://stockanalysis.com/stocks/eose/" target="_blank">Stats</a></td></tr>
+</tbody>
+</table>
+</div>
+
+<footer>
+  Data: Yahoo Finance (price/volume/float/SI/options), ApeWisdom (WSB), StockTwits trending,
+  Adanos X/FinTwit (≤10 tickers/scan), highshortinterest.com + <code>data/short_overrides.csv</code>.
+  Dual consensus scores Claude&rsquo;s <code>snapshot.json</code> with their screener.py.
+  SI is often bi-weekly. Watchlist tool, not a buy-every-signal system. Exit: half at 3–4x, trail rest.
+</footer>
+
+<script>
+function applyFilters() {
+  const minS = parseFloat(document.getElementById('minScore').value) || 0;
+  const tier = document.getElementById('tierFilter').value;
+  const trigOnly = document.getElementById('trigOnly').checked;
+  const fuelOnly = document.getElementById('fuelOnly').checked;
+  const mains = document.querySelectorAll('tr.main');
+  let shown = 0;
+  mains.forEach(tr => {
+    const score = parseFloat(tr.children[5].innerText) || 0;
+    const t = tr.children[4].innerText.trim();
+    const flags = tr.children[17].innerText;
+    const fuel = parseFloat(tr.children[9].innerText) || 0;
+    const hasFlag = flags.trim().length > 0 || flags.includes('TRIGGER') || flags.includes('RAMP') || flags.includes('ACCELER') || flags.includes('X ');
+    let ok = score >= minS;
+    if (tier !== 'ALL' && t !== tier) ok = false;
+    if (trigOnly && !hasFlag) ok = false;
+    if (fuelOnly && fuel < 12) ok = false;
+    tr.style.display = ok ? '' : 'none';
+    const det = tr.nextElementSibling;
+    if (!ok) det.classList.remove('show');
+    det.style.display = ok && det.classList.contains('show') ? 'table-row' : 'none';
+    if (ok) shown++;
+  });
+  document.getElementById('rowCount').textContent = shown + ' shown';
+}
+['minScore','tierFilter','trigOnly','fuelOnly'].forEach(id => {
+  document.getElementById(id).addEventListener('change', applyFilters);
+  document.getElementById(id).addEventListener('input', applyFilters);
+});
+document.querySelectorAll('tr.main').forEach(tr => {
+  tr.addEventListener('click', () => {
+    setTimeout(applyFilters, 0);
+  });
+});
+applyFilters();
+</script>
+</body></html>

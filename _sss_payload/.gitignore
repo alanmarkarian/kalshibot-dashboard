@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.env
+*.env
+data/logs/
+data/history.jsonl
+.deps_ok
+

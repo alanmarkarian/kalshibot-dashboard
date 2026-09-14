@@ -1,0 +1,46 @@
+# Premarket full scan + publish squeeze.html only
+# Secrets: ADANOS_API_KEY, PAGES_GITHUB_TOKEN (PAT with contents:write on alanmarkarian/kalshibot-dashboard)
+# Do NOT use KalshiBot trading keys.
+# Cron is UTC. ET = UTC-4 (EDT, Mar–Nov) or UTC-5 (EST). 11:36 UTC ≈ 7:36 AM EDT / 6:36 AM EST.
+name: Squeeze Premarket
+on:
+  schedule:
+    - cron: "36 11 * * 1-5"  # ~7:36 AM ET during EDT; ~6:36 AM ET during EST
+  workflow_dispatch:
+jobs:
+  scan-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install deps
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install yfinance pandas requests; fi
+      - name: Full Premarket scan
+        env:
+          PYTHONIOENCODING: utf-8
+          PYTHONUTF8: "1"
+          ADANOS_API_KEY: ${{ secrets.ADANOS_API_KEY }}
+        run: python scan.py --no-browser
+      - name: Build dual board
+        run: python _build_full_board.py
+      - name: Publish squeeze.html only
+        env:
+          PAGES_GITHUB_TOKEN: ${{ secrets.PAGES_GITHUB_TOKEN }}
+        run: |
+          python _push_squeeze_only.py
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: squeeze-premarket
+          path: |
+            squeeze.html
+            data/consensus.json
+            data/buyable_full.json
+            data/last_snapshot.json
+            data/positions.csv

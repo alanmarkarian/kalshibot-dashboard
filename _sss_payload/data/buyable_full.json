@@ -1,0 +1,45 @@
+{
+  "source": "full-options",
+  "as_of": "2026-09-09",
+  "as_of_label": "9/9 Wed 6:51 Premarket",
+  "names": [
+    {
+      "ticker": "HTZ",
+      "level": "DUAL TRIGGER",
+      "grok_score": 51.4,
+      "grok_tier": "MONITOR",
+      "grok_fuel": 22.4,
+      "grok_ign": 15.0,
+      "claude_score": 51.4,
+      "claude_tier": "MONITOR",
+      "claude_fuel": 22.4,
+      "claude_ign": 15.0,
+      "fuel": 22.4,
+      "ign": 15.0,
+      "as_of": "2026-09-09",
+      "price": 2.069999933242798,
+      "si": 55.85,
+      "si_pct": 55.85,
+      "why": "gamma ramp \u00b7 X buzz 62"
+    },
+    {
+      "ticker": "PLCE",
+      "level": "DUAL TRIGGER",
+      "grok_score": 44.9,
+      "grok_tier": "MONITOR",
+      "grok_fuel": 22.4,
+      "grok_ign": 12.5,
+      "claude_score": 44.9,
+      "claude_tier": "MONITOR",
+      "claude_fuel": 22.4,
+      "claude_ign": 12.5,
+      "fuel": 22.4,
+      "ign": 12.5,
+      "as_of": "2026-09-09",
+      "price": 2.5399999618530273,
+      "si": 33.73,
+      "si_pct": 33.73,
+      "why": "gamma ramp"
+    }
+  ]
+}

@@ -1,0 +1,1094 @@
+{
+ "as_of": "2026-09-09",
+ "si_universe": [
+  {
+   "ticker": "GRPN",
+   "name": "Groupon",
+   "si_pct": 58.91,
+   "float_m": 19.89
+  },
+  {
+   "ticker": "CHWY",
+   "name": "Chewy, Inc.",
+   "si_pct": 8.89,
+   "float_m": 54.36
+  },
+  {
+   "ticker": "HTZ",
+   "name": "Hertz Global",
+   "si_pct": 55.85,
+   "float_m": 169.11
+  },
+  {
+   "ticker": "FLWS",
+   "name": "1-800-FLOWERS.COM",
+   "si_pct": 37.22,
+   "float_m": 10.38
+  },
+  {
+   "ticker": "PLCE",
+   "name": "Children's Place",
+   "si_pct": 33.73,
+   "float_m": 7.77
+  },
+  {
+   "ticker": "NEGG",
+   "name": "Newegg Commerce",
+   "si_pct": 39.29,
+   "float_m": 0.8
+  },
+  {
+   "ticker": "KPTI",
+   "name": "Karyopharm Therapeutics Inc.",
+   "si_pct": 45.72,
+   "float_m": 15.07
+  },
+  {
+   "ticker": "SPCE",
+   "name": "Virgin Galactic",
+   "si_pct": 41.21,
+   "float_m": 100.13
+  },
+  {
+   "ticker": "AI",
+   "name": "C3.ai",
+   "si_pct": 37.06,
+   "float_m": 139.06
+  },
+  {
+   "ticker": "WGS",
+   "name": "GeneDx Holdings",
+   "si_pct": 39.75,
+   "float_m": 16.94
+  },
+  {
+   "ticker": "SPHR",
+   "name": "Sphere Entertainment",
+   "si_pct": 29.4,
+   "float_m": 24.65
+  },
+  {
+   "ticker": "KOSS",
+   "name": "Koss",
+   "si_pct": 3.84,
+   "float_m": 5.51
+  },
+  {
+   "ticker": "XRX",
+   "name": "Xerox",
+   "si_pct": 30.67,
+   "float_m": 119.09
+  },
+  {
+   "ticker": "BB",
+   "name": "BlackBerry",
+   "si_pct": 6.31,
+   "float_m": 584.64
+  },
+  {
+   "ticker": "CPB",
+   "name": "The Campbell's Company",
+   "si_pct": 27.05,
+   "float_m": 192.18
+  },
+  {
+   "ticker": "BATL",
+   "name": "Battalion Oil",
+   "si_pct": 39.82,
+   "float_m": 9.18
+  },
+  {
+   "ticker": "WYFI",
+   "name": "WhiteFiber",
+   "si_pct": 35.59,
+   "float_m": 11.19
+  },
+  {
+   "ticker": "KSS",
+   "name": "Kohl's",
+   "si_pct": 27.66,
+   "float_m": 111.62
+  },
+  {
+   "ticker": "WEN",
+   "name": "Wendys",
+   "si_pct": 37.54,
+   "float_m": 157.13
+  },
+  {
+   "ticker": "WRLD",
+   "name": "World Acceptance",
+   "si_pct": 27.51,
+   "float_m": 2.17
+  },
+  {
+   "ticker": "LCID",
+   "name": "Lucid Group",
+   "si_pct": 37.3,
+   "float_m": 172.28
+  },
+  {
+   "ticker": "KRUS",
+   "name": "Kura Sushi USA",
+   "si_pct": 30.76,
+   "float_m": 6.97
+  },
+  {
+   "ticker": "XPOF",
+   "name": "Xponential Fitness",
+   "si_pct": 30.35,
+   "float_m": 26.16
+  },
+  {
+   "ticker": "BIRD",
+   "name": "Smartbird, Inc.",
+   "si_pct": 15.23,
+   "float_m": 7.51
+  },
+  {
+   "ticker": "SRPT",
+   "name": "Sarepta Therapeutics",
+   "si_pct": 30.35,
+   "float_m": 94.61
+  },
+  {
+   "ticker": "TTEC",
+   "name": "TTEC Holdings",
+   "si_pct": 27.44,
+   "float_m": 19.76
+  },
+  {
+   "ticker": "SERV",
+   "name": "Serve Robotics",
+   "si_pct": 32.81,
+   "float_m": 70.85
+  },
+  {
+   "ticker": "EVGO",
+   "name": "EVgo",
+   "si_pct": 34.34,
+   "float_m": 133.19
+  },
+  {
+   "ticker": "GME",
+   "name": "GameStop",
+   "si_pct": 13.2,
+   "float_m": 408.81
+  },
+  {
+   "ticker": "METC",
+   "name": "Ramaco Resources, Inc.",
+   "si_pct": 34.68,
+   "float_m": 38.74
+  },
+  {
+   "ticker": "DNUT",
+   "name": "Krispy Kreme, Inc.",
+   "si_pct": 20.07,
+   "float_m": 91.54
+  },
+  {
+   "ticker": "BYND",
+   "name": "Beyond Meat",
+   "si_pct": 24.71,
+   "float_m": 499.35
+  },
+  {
+   "ticker": "SOUN",
+   "name": "SoundHound AI",
+   "si_pct": 38.35,
+   "float_m": 393.21
+  },
+  {
+   "ticker": "OPEN",
+   "name": "Opendoor Technologies Inc",
+   "si_pct": 20.3,
+   "float_m": 953.57
+  },
+  {
+   "ticker": "NVAX",
+   "name": "Novavax",
+   "si_pct": 27.82,
+   "float_m": 141.47
+  },
+  {
+   "ticker": "SPRY",
+   "name": "ARS Pharmaceuticals",
+   "si_pct": 30.94,
+   "float_m": 68.43
+  },
+  {
+   "ticker": "FLNC",
+   "name": "Fluence Energy",
+   "si_pct": 34.44,
+   "float_m": 100.31
+  },
+  {
+   "ticker": "HIMS",
+   "name": "Hims & Hers Health",
+   "si_pct": 30.44,
+   "float_m": 210.59
+  },
+  {
+   "ticker": "RUN",
+   "name": "Sunrun",
+   "si_pct": 30.17,
+   "float_m": 219.96
+  },
+  {
+   "ticker": "VSTM",
+   "name": "Verastem",
+   "si_pct": 29.02,
+   "float_m": 70.38
+  },
+  {
+   "ticker": "PCT",
+   "name": "PureCycle Tech",
+   "si_pct": 33.8,
+   "float_m": 145.24
+  },
+  {
+   "ticker": "UPST",
+   "name": "Upstart Holdings",
+   "si_pct": 31.36,
+   "float_m": 82.19
+  },
+  {
+   "ticker": "INDI",
+   "name": "indie Semiconductor",
+   "si_pct": 33.05,
+   "float_m": 208.21
+  },
+  {
+   "ticker": "RXRX",
+   "name": "Recursion Pharma",
+   "si_pct": 34.1,
+   "float_m": 513.01
+  },
+  {
+   "ticker": "QUBT",
+   "name": "Quantum Computing Inc.",
+   "si_pct": 34.0,
+   "float_m": 190.64
+  },
+  {
+   "ticker": "ONDS",
+   "name": "Ondas Inc",
+   "si_pct": 41.65,
+   "float_m": 533.42
+  },
+  {
+   "ticker": "SLS",
+   "name": "SELLAS Life Sciences",
+   "si_pct": 33.23,
+   "float_m": 185.28
+  },
+  {
+   "ticker": "IBRX",
+   "name": "ImmunityBio, Inc.",
+   "si_pct": 31.8,
+   "float_m": 406.64
+  },
+  {
+   "ticker": "CRML",
+   "name": "Critical Metals",
+   "si_pct": 29.68,
+   "float_m": 68.16
+  },
+  {
+   "ticker": "MARA",
+   "name": "MARA Holdings",
+   "si_pct": 29.15,
+   "float_m": 373.04
+  },
+  {
+   "ticker": "RXT",
+   "name": "Rackspace Technology",
+   "si_pct": 28.45,
+   "float_m": 104.73
+  },
+  {
+   "ticker": "MPT",
+   "name": "Medical Properties Trust",
+   "si_pct": 28.92,
+   "float_m": 490.65
+  },
+  {
+   "ticker": "ENVX",
+   "name": "Enovix",
+   "si_pct": 27.0,
+   "float_m": 188.35
+  },
+  {
+   "ticker": "BBAI",
+   "name": "BigBear.ai",
+   "si_pct": 30.12,
+   "float_m": 474.71
+  },
+  {
+   "ticker": "AMC",
+   "name": "AMC Entertainment",
+   "si_pct": 4.78,
+   "float_m": 835.34
+  },
+  {
+   "ticker": "EOSE",
+   "name": "Eos Energy",
+   "si_pct": 28.15,
+   "float_m": 333.09
+  }
+ ],
+ "watchlist": [
+  {
+   "ticker": "GME",
+   "name": "GameStop",
+   "si_pct": 13.2,
+   "float_m": 408.81
+  },
+  {
+   "ticker": "AMC",
+   "name": "AMC Entertainment",
+   "si_pct": 4.78,
+   "float_m": 835.34
+  },
+  {
+   "ticker": "WEN",
+   "name": "Wendys",
+   "si_pct": 37.54,
+   "float_m": 157.13
+  },
+  {
+   "ticker": "BB",
+   "name": "BlackBerry",
+   "si_pct": 6.31,
+   "float_m": 584.64
+  },
+  {
+   "ticker": "KOSS",
+   "name": "Koss",
+   "si_pct": 3.84,
+   "float_m": 5.51
+  },
+  {
+   "ticker": "GRPN",
+   "name": "Groupon",
+   "si_pct": 58.91,
+   "float_m": 19.89
+  },
+  {
+   "ticker": "FLWS",
+   "name": "1-800-FLOWERS.COM",
+   "si_pct": 37.22,
+   "float_m": 10.38
+  },
+  {
+   "ticker": "BYND",
+   "name": "Beyond Meat",
+   "si_pct": 24.71,
+   "float_m": 499.35
+  },
+  {
+   "ticker": "OPEN",
+   "name": "Opendoor Technologies Inc",
+   "si_pct": 20.3,
+   "float_m": 953.57
+  },
+  {
+   "ticker": "DNUT",
+   "name": "Krispy Kreme, Inc.",
+   "si_pct": 20.07,
+   "float_m": 91.54
+  },
+  {
+   "ticker": "BIRD",
+   "name": "Smartbird, Inc.",
+   "si_pct": 15.23,
+   "float_m": 7.51
+  },
+  {
+   "ticker": "CPB",
+   "name": "The Campbell's Company",
+   "si_pct": 27.05,
+   "float_m": 192.18
+  },
+  {
+   "ticker": "HTZ",
+   "name": "Hertz Global",
+   "si_pct": 55.85,
+   "float_m": 169.11
+  },
+  {
+   "ticker": "SPCE",
+   "name": "Virgin Galactic",
+   "si_pct": 41.21,
+   "float_m": 100.13
+  },
+  {
+   "ticker": "LCID",
+   "name": "Lucid Group",
+   "si_pct": 37.3,
+   "float_m": 172.28
+  },
+  {
+   "ticker": "SOUN",
+   "name": "SoundHound AI",
+   "si_pct": 38.35,
+   "float_m": 393.21
+  },
+  {
+   "ticker": "AI",
+   "name": "C3.ai",
+   "si_pct": 37.06,
+   "float_m": 139.06
+  },
+  {
+   "ticker": "PLCE",
+   "name": "Children's Place",
+   "si_pct": 33.73,
+   "float_m": 7.77
+  },
+  {
+   "ticker": "KSS",
+   "name": "Kohl's",
+   "si_pct": 27.66,
+   "float_m": 111.62
+  },
+  {
+   "ticker": "CHWY",
+   "name": "Chewy, Inc.",
+   "si_pct": 8.89,
+   "float_m": 54.36
+  }
+ ],
+ "stocktwits": [
+  "CHWY",
+  "GME"
+ ],
+ "wsb": [
+  {
+   "ticker": "CHWY",
+   "rank": 44,
+   "mentions": 11,
+   "upvotes": 18,
+   "rank_24h_ago": 217,
+   "mentions_24h": 1
+  },
+  {
+   "ticker": "OPEN",
+   "rank": 78,
+   "mentions": 4,
+   "upvotes": 5,
+   "rank_24h_ago": 50,
+   "mentions_24h": 4
+  },
+  {
+   "ticker": "HTZ",
+   "rank": 79,
+   "mentions": 4,
+   "upvotes": 5,
+   "rank_24h_ago": 428,
+   "mentions_24h": 3
+  },
+  {
+   "ticker": "BB",
+   "rank": 91,
+   "mentions": 3,
+   "upvotes": 4,
+   "rank_24h_ago": 288,
+   "mentions_24h": 1
+  },
+  {
+   "ticker": "AI",
+   "rank": 96,
+   "mentions": 3,
+   "upvotes": 4,
+   "rank_24h_ago": 0,
+   "mentions_24h": null
+  },
+  {
+   "ticker": "GME",
+   "rank": 127,
+   "mentions": 2,
+   "upvotes": 8,
+   "rank_24h_ago": 369,
+   "mentions_24h": null
+  },
+  {
+   "ticker": "CPB",
+   "rank": 171,
+   "mentions": 1,
+   "upvotes": 1,
+   "rank_24h_ago": 117,
+   "mentions_24h": 1
+  }
+ ],
+ "enrichment": [
+  {
+   "ticker": "GRPN",
+   "price": 18.09000015258789,
+   "chg_pct": -5.49,
+   "vol_m": 0.256,
+   "avg_vol_m": 1.466,
+   "mcap_b": 0.736,
+   "borrow_fee_pct": 1.55,
+   "shares_avail_k": 400.0,
+   "earnings_date": "2026-08-06",
+   "x_buzz": 20.0,
+   "x_trend": "falling",
+   "x_mentions": 4,
+   "x_sentiment": 0.074,
+   "x_bullish_pct": 25
+  },
+  {
+   "ticker": "CHWY",
+   "price": 20.91510009765625,
+   "chg_pct": -10.09,
+   "vol_m": 10.181,
+   "avg_vol_m": 8.686,
+   "mcap_b": 8.563,
+   "earnings_date": "2026-09-09",
+   "x_buzz": 81.1,
+   "x_trend": "rising",
+   "x_mentions": 151,
+   "x_sentiment": 0.331,
+   "x_bullish_pct": 63
+  },
+  {
+   "ticker": "HTZ",
+   "price": 2.0882999897003174,
+   "chg_pct": -4.21,
+   "vol_m": 5.95,
+   "avg_vol_m": 32.306,
+   "mcap_b": 0.744,
+   "earnings_date": "2026-08-06",
+   "x_buzz": 61.6,
+   "x_trend": "falling",
+   "x_mentions": 167,
+   "x_sentiment": 0.182,
+   "x_bullish_pct": 53
+  },
+  {
+   "ticker": "FLWS",
+   "price": 3.494999885559082,
+   "chg_pct": -7.03,
+   "vol_m": 0.055,
+   "avg_vol_m": 0.298,
+   "mcap_b": 0.224,
+   "borrow_fee_pct": 1.01,
+   "shares_avail_k": 650.0,
+   "earnings_date": "2026-09-10",
+   "x_buzz": 17.6,
+   "x_trend": "rising",
+   "x_mentions": 2,
+   "x_sentiment": 0.191,
+   "x_bullish_pct": 50
+  },
+  {
+   "ticker": "PLCE",
+   "price": 2.619999885559082,
+   "chg_pct": -6.43,
+   "vol_m": 0.126,
+   "avg_vol_m": 0.267,
+   "mcap_b": 0.058,
+   "earnings_date": "2026-06-12",
+   "x_buzz": 9.4,
+   "x_trend": "stable",
+   "x_mentions": 1,
+   "x_sentiment": -0.04,
+   "x_bullish_pct": 0
+  },
+  {
+   "ticker": "NEGG",
+   "price": 15.239999771118164,
+   "chg_pct": 0.46,
+   "vol_m": 0.022,
+   "avg_vol_m": 0.069,
+   "mcap_b": 0.32,
+   "earnings_date": "2026-08-27",
+   "x_buzz": 0.0,
+   "x_mentions": 0
+  },
+  {
+   "ticker": "KPTI",
+   "price": 1.6699999570846558,
+   "chg_pct": -4.57,
+   "vol_m": 0.304,
+   "avg_vol_m": 1.363,
+   "mcap_b": 0.038,
+   "earnings_date": "2026-08-13",
+   "x_buzz": 14.8,
+   "x_trend": "rising",
+   "x_mentions": 2,
+   "x_sentiment": 0.053,
+   "x_bullish_pct": 0
+  },
+  {
+   "ticker": "SPCE",
+   "price": 3.0,
+   "chg_pct": -4.29,
+   "vol_m": 1.945,
+   "avg_vol_m": 16.968,
+   "mcap_b": 0.455,
+   "earnings_date": "2026-08-12"
+  },
+  {
+   "ticker": "AI",
+   "price": 10.352499961853027,
+   "chg_pct": -1.41,
+   "vol_m": 1.393,
+   "avg_vol_m": 5.55,
+   "mcap_b": 1.657,
+   "earnings_date": "2026-09-02"
+  },
+  {
+   "ticker": "WGS",
+   "price": 88.0999984741211,
+   "chg_pct": 2.6,
+   "vol_m": 0.232,
+   "avg_vol_m": 0.792,
+   "mcap_b": 2.627,
+   "earnings_date": "2026-08-03",
+   "x_buzz": 11.5,
+   "x_trend": "rising",
+   "x_mentions": 1,
+   "x_sentiment": 0.052,
+   "x_bullish_pct": 0
+  },
+  {
+   "ticker": "SPHR",
+   "price": 140.76499938964844,
+   "chg_pct": -0.65,
+   "vol_m": 0.131,
+   "avg_vol_m": 0.721,
+   "mcap_b": 5.055,
+   "earnings_date": "2026-07-30"
+  },
+  {
+   "ticker": "KOSS",
+   "price": 3.4934000968933105,
+   "chg_pct": -1.32,
+   "vol_m": 0.004,
+   "avg_vol_m": 0.019,
+   "mcap_b": 0.033,
+   "earnings_date": "2025-08-28"
+  },
+  {
+   "ticker": "XRX",
+   "price": 3.190000057220459,
+   "chg_pct": -3.04,
+   "vol_m": 1.586,
+   "avg_vol_m": 3.37,
+   "mcap_b": 0.419,
+   "earnings_date": "2026-07-30"
+  },
+  {
+   "ticker": "BB",
+   "price": 7.780099868774414,
+   "chg_pct": -1.2,
+   "vol_m": 2.315,
+   "avg_vol_m": 20.671,
+   "mcap_b": 4.56,
+   "earnings_date": "2026-09-24"
+  },
+  {
+   "ticker": "CPB",
+   "price": 21.825000762939453,
+   "chg_pct": 0.11,
+   "vol_m": 2.91,
+   "avg_vol_m": 8.331,
+   "mcap_b": 6.508,
+   "earnings_date": "2026-09-03"
+  },
+  {
+   "ticker": "BATL",
+   "price": 1.381100058555603,
+   "chg_pct": 3.84,
+   "vol_m": 6.243,
+   "avg_vol_m": 14.706,
+   "mcap_b": 0.079,
+   "earnings_date": "2025-08-12",
+   "x_buzz": 25.4,
+   "x_trend": "falling",
+   "x_mentions": 16,
+   "x_sentiment": 0.042,
+   "x_bullish_pct": 12
+  },
+  {
+   "ticker": "WYFI",
+   "price": 19.489999771118164,
+   "chg_pct": -5.29,
+   "vol_m": 0.532,
+   "avg_vol_m": 2.789,
+   "mcap_b": 0.757,
+   "earnings_date": "2026-08-12",
+   "x_buzz": 59.3,
+   "x_trend": "falling",
+   "x_mentions": 90,
+   "x_sentiment": 0.198,
+   "x_bullish_pct": 44
+  },
+  {
+   "ticker": "KSS",
+   "price": 17.950000762939453,
+   "chg_pct": -3.65,
+   "vol_m": 0.908,
+   "avg_vol_m": 4.345,
+   "mcap_b": 2.035,
+   "earnings_date": "2026-08-26"
+  },
+  {
+   "ticker": "WEN",
+   "price": 7.59499979019165,
+   "chg_pct": -0.2,
+   "vol_m": 1.819,
+   "avg_vol_m": 16.308,
+   "mcap_b": 1.448,
+   "earnings_date": "2026-08-07"
+  },
+  {
+   "ticker": "WRLD",
+   "price": 189.58999633789062,
+   "chg_pct": -1.0,
+   "vol_m": 0.03,
+   "avg_vol_m": 0.111,
+   "mcap_b": 0.884,
+   "earnings_date": "2026-07-24"
+  },
+  {
+   "ticker": "LCID",
+   "price": 4.289999961853027,
+   "chg_pct": -7.34,
+   "vol_m": 7.633,
+   "avg_vol_m": 16.883,
+   "mcap_b": 1.691,
+   "earnings_date": "2026-08-04"
+  },
+  {
+   "ticker": "KRUS",
+   "price": 42.78499984741211,
+   "chg_pct": -3.54,
+   "vol_m": 0.105,
+   "avg_vol_m": 0.291,
+   "mcap_b": 0.52,
+   "earnings_date": "2026-07-07"
+  },
+  {
+   "ticker": "XPOF",
+   "price": 4.300000190734863,
+   "chg_pct": -10.42,
+   "vol_m": 0.334,
+   "avg_vol_m": 0.775,
+   "mcap_b": 0.182,
+   "earnings_date": "2026-08-06"
+  },
+  {
+   "ticker": "BIRD",
+   "price": 2.4700000286102295,
+   "chg_pct": -2.64,
+   "vol_m": 0.054,
+   "avg_vol_m": 1.673,
+   "mcap_b": 0.022,
+   "earnings_date": "2026-11-05"
+  },
+  {
+   "ticker": "SRPT",
+   "price": 22.141399383544922,
+   "chg_pct": 5.74,
+   "vol_m": 2.347,
+   "avg_vol_m": 3.401,
+   "mcap_b": 2.339,
+   "earnings_date": "2026-08-05"
+  },
+  {
+   "ticker": "TTEC",
+   "price": 1.3092000484466553,
+   "chg_pct": -2.35,
+   "vol_m": 0.138,
+   "avg_vol_m": 0.57,
+   "mcap_b": 0.065,
+   "earnings_date": "2026-08-10"
+  },
+  {
+   "ticker": "SERV",
+   "price": 4.78000020980835,
+   "chg_pct": -2.65,
+   "vol_m": 1.702,
+   "avg_vol_m": 4.354,
+   "mcap_b": 0.414,
+   "earnings_date": "2026-08-06"
+  },
+  {
+   "ticker": "EVGO",
+   "price": 1.375,
+   "chg_pct": -2.48,
+   "vol_m": 1.407,
+   "avg_vol_m": 3.75,
+   "mcap_b": 0.432,
+   "earnings_date": "2026-08-05"
+  },
+  {
+   "ticker": "GME",
+   "price": 19.915000915527344,
+   "chg_pct": 5.31,
+   "vol_m": 9.024,
+   "avg_vol_m": 5.677,
+   "mcap_b": 8.936,
+   "earnings_date": "2026-09-08"
+  },
+  {
+   "ticker": "METC",
+   "price": 12.670000076293945,
+   "chg_pct": -0.39,
+   "vol_m": 0.605,
+   "avg_vol_m": 1.938,
+   "mcap_b": 0.803,
+   "earnings_date": "2026-08-04"
+  },
+  {
+   "ticker": "DNUT",
+   "price": 3.2149999141693115,
+   "chg_pct": -3.15,
+   "vol_m": 0.654,
+   "avg_vol_m": 2.89,
+   "mcap_b": 0.558,
+   "earnings_date": "2026-08-06"
+  },
+  {
+   "ticker": "BYND",
+   "price": 11.109999656677246,
+   "chg_pct": -0.98,
+   "vol_m": 0.523,
+   "avg_vol_m": 1.317,
+   "mcap_b": 0.191,
+   "earnings_date": "2026-08-05"
+  },
+  {
+   "ticker": "SOUN",
+   "price": 6.554999828338623,
+   "chg_pct": -0.51,
+   "vol_m": 14.391,
+   "avg_vol_m": 30.365,
+   "mcap_b": 2.911,
+   "earnings_date": "2026-08-05"
+  },
+  {
+   "ticker": "OPEN",
+   "price": 3.015000104904175,
+   "chg_pct": -2.11,
+   "vol_m": 13.049,
+   "avg_vol_m": 55.916,
+   "mcap_b": 2.928,
+   "earnings_date": "2026-08-04"
+  },
+  {
+   "ticker": "NVAX",
+   "price": 9.795000076293945,
+   "chg_pct": -3.88,
+   "vol_m": 2.038,
+   "avg_vol_m": 4.247,
+   "mcap_b": 1.616,
+   "earnings_date": "2026-08-06"
+  },
+  {
+   "ticker": "SPRY",
+   "price": 5.2779998779296875,
+   "chg_pct": -2.26,
+   "vol_m": 0.261,
+   "avg_vol_m": 1.989,
+   "mcap_b": 0.525,
+   "earnings_date": "2026-08-13"
+  },
+  {
+   "ticker": "FLNC",
+   "price": 10.234999656677246,
+   "chg_pct": -6.01,
+   "vol_m": 3.306,
+   "avg_vol_m": 8.39,
+   "mcap_b": 1.465,
+   "earnings_date": "2026-08-05"
+  },
+  {
+   "ticker": "HIMS",
+   "price": 27.48940086364746,
+   "chg_pct": -2.28,
+   "vol_m": 3.892,
+   "avg_vol_m": 14.885,
+   "mcap_b": 6.414,
+   "earnings_date": "2026-08-10"
+  },
+  {
+   "ticker": "RUN",
+   "price": 8.824999809265137,
+   "chg_pct": -4.59,
+   "vol_m": 2.499,
+   "avg_vol_m": 9.873,
+   "mcap_b": 2.105,
+   "earnings_date": "2026-08-05"
+  },
+  {
+   "ticker": "VSTM",
+   "price": 7.969900131225586,
+   "chg_pct": -2.81,
+   "vol_m": 0.91,
+   "avg_vol_m": 2.485,
+   "mcap_b": 0.722,
+   "earnings_date": "2026-08-06"
+  },
+  {
+   "ticker": "PCT",
+   "price": 6.385000228881836,
+   "chg_pct": -3.55,
+   "vol_m": 1.189,
+   "avg_vol_m": 4.992,
+   "mcap_b": 1.283,
+   "earnings_date": "2026-08-06"
+  },
+  {
+   "ticker": "UPST",
+   "price": 26.139999389648438,
+   "chg_pct": -3.44,
+   "vol_m": 2.058,
+   "avg_vol_m": 4.313,
+   "mcap_b": 2.544,
+   "earnings_date": "2026-08-04"
+  },
+  {
+   "ticker": "INDI",
+   "price": 3.3450000286102295,
+   "chg_pct": -4.97,
+   "vol_m": 3.954,
+   "avg_vol_m": 6.198,
+   "mcap_b": 0.775,
+   "earnings_date": "2026-08-06"
+  },
+  {
+   "ticker": "RXRX",
+   "price": 3.241300106048584,
+   "chg_pct": -5.78,
+   "vol_m": 6.471,
+   "avg_vol_m": 19.227,
+   "mcap_b": 1.738,
+   "earnings_date": "2026-08-05"
+  },
+  {
+   "ticker": "QUBT",
+   "price": 8.20989990234375,
+   "chg_pct": 0.37,
+   "vol_m": 2.887,
+   "avg_vol_m": 10.411,
+   "mcap_b": 1.858,
+   "earnings_date": "2026-08-10"
+  },
+  {
+   "ticker": "ONDS",
+   "price": 7.5,
+   "chg_pct": -1.7,
+   "vol_m": 29.035,
+   "avg_vol_m": 80.851,
+   "mcap_b": 4.286,
+   "earnings_date": "2026-08-13"
+  },
+  {
+   "ticker": "SLS",
+   "price": 14.079999923706055,
+   "chg_pct": 0.79,
+   "vol_m": 2.453,
+   "avg_vol_m": 8.248,
+   "mcap_b": 2.769,
+   "borrow_fee_pct": 188.75,
+   "shares_avail_k": 25.0,
+   "earnings_date": "2026-11-11"
+  },
+  {
+   "ticker": "IBRX",
+   "price": 8.04990005493164,
+   "chg_pct": -2.46,
+   "vol_m": 4.022,
+   "avg_vol_m": 10.042,
+   "mcap_b": 8.532,
+   "earnings_date": "2026-08-04"
+  },
+  {
+   "ticker": "CRML",
+   "price": 7.135000228881836,
+   "chg_pct": -2.93,
+   "vol_m": 2.575,
+   "avg_vol_m": 6.246,
+   "mcap_b": 1.048,
+   "earnings_date": "2025-03-19"
+  },
+  {
+   "ticker": "MARA",
+   "price": 11.750100135803223,
+   "chg_pct": -0.93,
+   "vol_m": 20.031,
+   "avg_vol_m": 47.003,
+   "mcap_b": 4.539,
+   "earnings_date": "2026-08-06"
+  },
+  {
+   "ticker": "RXT",
+   "price": 3.184999942779541,
+   "chg_pct": -1.39,
+   "vol_m": 1.336,
+   "avg_vol_m": 13.882,
+   "mcap_b": 0.812,
+   "earnings_date": "2026-08-11"
+  },
+  {
+   "ticker": "MPT",
+   "price": 3.884999990463257,
+   "chg_pct": -2.14,
+   "vol_m": 5.713,
+   "avg_vol_m": 7.018,
+   "mcap_b": 2.32,
+   "earnings_date": "2026-08-10"
+  },
+  {
+   "ticker": "ENVX",
+   "price": 3.2523999214172363,
+   "chg_pct": -7.07,
+   "vol_m": 3.556,
+   "avg_vol_m": 6.649,
+   "mcap_b": 0.71,
+   "earnings_date": "2026-08-12"
+  },
+  {
+   "ticker": "BBAI",
+   "price": 2.875,
+   "chg_pct": -2.16,
+   "vol_m": 6.169,
+   "avg_vol_m": 24.613,
+   "mcap_b": 1.379,
+   "earnings_date": "2026-07-30"
+  },
+  {
+   "ticker": "AMC",
+   "price": 2.559999942779541,
+   "chg_pct": 0.99,
+   "vol_m": 10.524,
+   "avg_vol_m": 40.987,
+   "mcap_b": 2.285,
+   "earnings_date": "2026-10-20"
+  },
+  {
+   "ticker": "EOSE",
+   "price": 4.114999771118164,
+   "chg_pct": -4.52,
+   "vol_m": 11.987,
+   "avg_vol_m": 26.401,
+   "mcap_b": 1.499,
+   "earnings_date": "2026-08-05"
+  }
+ ],
+ "positions": [
+  {
+   "ticker": "HTZ",
+   "entry": 2.29,
+   "shares": 1000.0,
+   "stop": null,
+   "flag_price": null
+  }
+ ],
+ "borrow_watch": []
+}

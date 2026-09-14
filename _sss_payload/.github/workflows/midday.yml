@@ -1,0 +1,42 @@
+# Midday --quick refresh; keep buyable_full.json from morning full-options
+# Cron is UTC. 16:33 UTC ≈ 12:33 PM EDT / 11:33 AM EST.
+name: Squeeze Midday
+on:
+  schedule:
+    - cron: "33 16 * * 1-5"  # ~12:33 PM ET during EDT; ~11:33 AM ET during EST
+  workflow_dispatch:
+jobs:
+  scan-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install deps
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install yfinance pandas requests; fi
+      - name: Midday quick scan
+        env:
+          PYTHONIOENCODING: utf-8
+          PYTHONUTF8: "1"
+          ADANOS_API_KEY: ${{ secrets.ADANOS_API_KEY }}
+        run: python scan.py --no-browser --quick
+      - name: Build dual board
+        run: python _build_full_board.py
+      - name: Publish squeeze.html only
+        env:
+          PAGES_GITHUB_TOKEN: ${{ secrets.PAGES_GITHUB_TOKEN }}
+        run: python _push_squeeze_only.py
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: squeeze-midday
+          path: |
+            squeeze.html
+            data/consensus.json
+            data/buyable_full.json
+            data/positions.csv
