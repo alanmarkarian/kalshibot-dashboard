@@ -1,0 +1,43 @@
+# Interim prove: Actions publishes squeeze.html without MarkarianPC or extra secrets.
+# Uses default GITHUB_TOKEN (same-repo contents:write) + import-branch screener payload.
+name: Squeeze Prove Publish
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout import payload branch
+        uses: actions/checkout@v4
+        with:
+          ref: _import/shortsqueezescreener
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: _sss_payload/requirements.txt
+      - name: Install deps
+        working-directory: _sss_payload
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install yfinance pandas requests; fi
+      - name: Build dual board from checked-in data
+        working-directory: _sss_payload
+        run: python _build_full_board.py
+      - name: Publish squeeze.html only (GITHUB_TOKEN same-repo)
+        working-directory: _sss_payload
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python _push_squeeze_only.py
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: squeeze-prove
+          path: |
+            _sss_payload/squeeze.html
+            _sss_payload/data/consensus.json
+            _sss_payload/data/buyable_full.json
+            _sss_payload/data/positions.csv
