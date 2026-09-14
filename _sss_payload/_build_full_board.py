@@ -8,12 +8,32 @@ from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-ROOT = Path(r"C:\Users\alanm\ShortSqueezeScreener")
+def _resolve_root() -> Path:
+    """Prefer MarkarianPC path when present; else repo root (Actions / box)."""
+    win = Path(r"C:\Users\alanm\ShortSqueezeScreener")
+    if win.exists():
+        return win
+    return Path(__file__).resolve().parent
+
+
+def _resolve_claude(root: Path) -> Path:
+    candidates = [
+        Path(r"C:\Users\alanm\OneDrive\Documents\Claude Meme Screener\snapshot.json"),
+        root / "data" / "claude_engine" / "snapshot.json",
+        root / "data" / "claude_meme_snapshot.json",
+    ]
+    for c in candidates:
+        if c.exists():
+            return c
+    return candidates[0]
+
+
+ROOT = _resolve_root()
 CONS = ROOT / "data" / "consensus.json"
 SNAP = ROOT / "data" / "last_snapshot.json"
 BUYABLE_FULL = ROOT / "data" / "buyable_full.json"
 POS = ROOT / "data" / "positions.csv"
-CLAUDE = Path(r"C:\Users\alanm\OneDrive\Documents\Claude Meme Screener\snapshot.json")
+CLAUDE = _resolve_claude(ROOT)
 OUT = ROOT / "squeeze.html"
 
 WATCH_TIERS = {"WATCH", "RED HOT"}
