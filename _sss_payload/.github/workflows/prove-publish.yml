@@ -1,0 +1,33 @@
+# Minimal prove: build board from checked-in data + publish squeeze.html (no Adanos scan)
+name: Squeeze Prove Publish
+on:
+  workflow_dispatch:
+jobs:
+  build-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install deps
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install yfinance pandas requests; fi
+      - name: Build dual board from checked-in data
+        run: python _build_full_board.py
+      - name: Publish squeeze.html only
+        env:
+          PAGES_GITHUB_TOKEN: ${{ secrets.PAGES_GITHUB_TOKEN }}
+        run: python _push_squeeze_only.py
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: squeeze-prove
+          path: |
+            squeeze.html
+            data/consensus.json
+            data/buyable_full.json
+            data/positions.csv
